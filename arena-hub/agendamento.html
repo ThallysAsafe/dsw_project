@@ -13,10 +13,19 @@
   <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
 
   <!-- ============================ CABEÇALHO ============================ -->
-  <header class="cabecalho">
+  <header class="cabecalho" id="topo">
     <div class="container cabecalho__interno">
+
       <a class="logo" href="index.html">
-        Arena<span class="logo__destaque">Hub</span>
+        <span class="logo__marca">
+          <!-- Marca vetorial: planta baixa de um campo (decorativa) -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
+            <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
+            <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          </svg>
+        </span>
+        ArenaHub
       </a>
 
       <nav class="navbar" aria-label="Navegação principal">
@@ -29,6 +38,7 @@
           </li>
         </ul>
       </nav>
+
     </div>
   </header>
 
@@ -42,23 +52,26 @@
         <p>
           Preencha os dados abaixo para solicitar a reserva de uma quadra
           inteira ou para entrar em um racha aberto. Os campos marcados com
-          <span class="obrigatorio" aria-hidden="true">*</span> são obrigatórios.
+          <span class="obrigatorio">*</span> são obrigatórios. Ainda não
+          escolheu o espaço? Consulte o
+          <a class="link-texto" href="quadras.html#catalogo">catálogo de quadras</a>.
         </p>
       </div>
     </div>
 
-    <section class="secao" aria-labelledby="titulo-formulario">
+    <section class="secao" aria-labelledby="form-reserva">
       <div class="container layout-formulario">
 
         <!-- ------------------- FORMULÁRIO DE RESERVA ----------------- -->
         <article>
-          <div class="secao__cabecalho">
-            <h2 id="titulo-formulario">Solicitação de agendamento</h2>
+          <header class="secao__cabecalho">
+            <p class="secao__numero">01 / Solicitação</p>
+            <h2 id="form-reserva">Dados da reserva</h2>
             <p>
               A validação dos campos é feita pelo próprio navegador, sem
               JavaScript. A confirmação é enviada por e-mail em até 2 horas.
             </p>
-          </div>
+          </header>
 
           <!--
             O formulário usa method="get" apontando para a própria página
@@ -74,7 +87,7 @@
 
               <div class="campo">
                 <label for="nome">
-                  Nome completo <span class="obrigatorio" aria-hidden="true">*</span>
+                  Nome completo <span class="obrigatorio">*</span>
                 </label>
                 <input type="text"
                        id="nome"
@@ -90,7 +103,7 @@
               <div class="campo-duplo">
                 <div class="campo">
                   <label for="email">
-                    E-mail de contato <span class="obrigatorio" aria-hidden="true">*</span>
+                    E-mail de contato <span class="obrigatorio">*</span>
                   </label>
                   <input type="email"
                          id="email"
@@ -121,22 +134,22 @@
 
               <div class="campo">
                 <label for="quadra">
-                  Quadra e modalidade <span class="obrigatorio" aria-hidden="true">*</span>
+                  Quadra e modalidade <span class="obrigatorio">*</span>
                 </label>
                 <select id="quadra" name="quadra" required>
                   <option value="" selected disabled>Selecione uma opção</option>
                   <optgroup label="Futebol">
-                    <option value="arena-jatiuca">Arena Jatiúca &ndash; futebol society</option>
-                    <option value="ginasio-farol-futsal">Ginásio Farol &ndash; futsal</option>
+                    <option value="arena-jatiuca">Arena Jatiúca &mdash; futebol society</option>
+                    <option value="ginasio-farol-futsal">Ginásio Farol &mdash; futsal</option>
                   </optgroup>
                   <optgroup label="Areia">
-                    <option value="arena-ponta-verde">Arena Ponta Verde &ndash; vôlei de praia</option>
-                    <option value="beach-club-pajucara">Beach Club Pajuçara &ndash; beach tennis</option>
+                    <option value="arena-ponta-verde">Arena Ponta Verde &mdash; vôlei de praia</option>
+                    <option value="beach-club-pajucara">Beach Club Pajuçara &mdash; beach tennis</option>
                   </optgroup>
                   <optgroup label="Quadra">
-                    <option value="ginasio-farol-basquete">Ginásio Farol &ndash; basquete</option>
-                    <option value="praca-benedito-bentes">Praça Benedito Bentes &ndash; basquete 3x3</option>
-                    <option value="tennis-park-gruta">Tennis Park Gruta &ndash; tênis</option>
+                    <option value="ginasio-farol-basquete">Ginásio Farol &mdash; basquete</option>
+                    <option value="praca-benedito-bentes">Praça Benedito Bentes &mdash; basquete 3x3</option>
+                    <option value="tennis-park-gruta">Tennis Park Gruta &mdash; tênis</option>
                   </optgroup>
                 </select>
               </div>
@@ -144,7 +157,7 @@
               <div class="campo-duplo">
                 <div class="campo">
                   <label for="data">
-                    Data da partida <span class="obrigatorio" aria-hidden="true">*</span>
+                    Data da partida <span class="obrigatorio">*</span>
                   </label>
                   <input type="date"
                          id="data"
@@ -157,7 +170,7 @@
 
                 <div class="campo">
                   <label for="horario">
-                    Horário de início <span class="obrigatorio" aria-hidden="true">*</span>
+                    Horário de início <span class="obrigatorio">*</span>
                   </label>
                   <input type="time"
                          id="horario"
@@ -172,7 +185,7 @@
               <div class="campo-duplo">
                 <div class="campo">
                   <label for="jogadores">
-                    Quantidade de jogadores <span class="obrigatorio" aria-hidden="true">*</span>
+                    Quantidade de jogadores <span class="obrigatorio">*</span>
                   </label>
                   <input type="number"
                          id="jogadores"
@@ -187,7 +200,7 @@
 
                 <div class="campo">
                   <label for="horas">
-                    Horas de reserva <span class="obrigatorio" aria-hidden="true">*</span>
+                    Horas de reserva <span class="obrigatorio">*</span>
                   </label>
                   <input type="number"
                          id="horas"
@@ -203,7 +216,7 @@
 
               <!-- Botões de rádio: escolha única e obrigatória -->
               <fieldset>
-                <legend>Tipo de reserva <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                <legend>Tipo de reserva <span class="obrigatorio">*</span></legend>
 
                 <div class="grupo-opcoes">
                   <div class="opcao">
@@ -267,7 +280,7 @@
                   <input type="checkbox" id="servico-transmissao" name="servicos" value="transmissao" disabled>
                   <label for="servico-transmissao">
                     Transmissão ao vivo
-                    <small>Em breve &mdash; disponível apenas para quadras cobertas</small>
+                    <small>Em breve &mdash; apenas para quadras cobertas</small>
                   </label>
                 </div>
               </div>
@@ -303,7 +316,7 @@
                 <div class="opcao">
                   <input type="checkbox" id="termos" name="termos" value="aceito" required>
                   <label for="termos">
-                    Li e aceito as regras de uso <span class="obrigatorio" aria-hidden="true">*</span>
+                    Li e aceito as regras de uso <span class="obrigatorio">*</span>
                     <small>Inclui a política de cancelamento com 12 horas de antecedência.</small>
                   </label>
                 </div>
@@ -320,16 +333,17 @@
         </article>
 
         <!-- ------------------ CONTEÚDO COMPLEMENTAR ----------------- -->
-        <aside class="aside-info aside-info--fixo" aria-labelledby="titulo-resumo">
-          <h2 id="titulo-resumo">O que acontece depois</h2>
+        <aside class="aside-info aside-info--fixo" aria-labelledby="resumo">
+          <h2 id="resumo">O que acontece depois</h2>
           <p>Da solicitação até a bola rolando.</p>
-          <ul>
+
+          <!-- Lista ORDENADA: são etapas em sequência -->
+          <ol class="lista-etapas">
             <li>O responsável pela quadra recebe o pedido na hora.</li>
             <li>A confirmação chega por e-mail em até 2 horas.</li>
             <li>O pagamento é feito no local, antes do início da partida.</li>
-            <li>Rachas com vagas encerradas viram lista de espera automática.</li>
-            <li>Dúvidas? Fale com o suporte pelo telefone (82) 3000-0000.</li>
-          </ul>
+            <li>Rachas sem vaga viram lista de espera automática.</li>
+          </ol>
         </aside>
 
       </div>
@@ -347,7 +361,8 @@
           <h2 id="rodape-sobre">ArenaHub</h2>
           <p>
             Catálogo de quadras esportivas e organização de rachas.
-            Projeto acadêmico desenvolvido com HTML5 e CSS3.
+            Projeto Integrador de Desenvolvimento Web, feito com HTML5
+            semântico e CSS3, sem frameworks.
           </p>
         </section>
 
@@ -355,9 +370,9 @@
           <h2 id="rodape-navegacao">Navegação</h2>
           <ul>
             <li><a href="index.html">Início</a></li>
-            <li><a href="quadras.html">Catálogo de quadras</a></li>
-            <li><a href="rachas.html">Rachas abertos</a></li>
-            <li><a href="agendamento.html">Agendamento</a></li>
+            <li><a href="quadras.html#catalogo">Catálogo de quadras</a></li>
+            <li><a href="rachas.html#lista-rachas">Rachas abertos</a></li>
+            <li><a href="agendamento.html#form-reserva">Agendamento</a></li>
           </ul>
         </nav>
 
@@ -365,9 +380,9 @@
           <h2 id="rodape-suporte">Suporte</h2>
           <address>
             <ul>
-              <li>E-mail: <a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
-              <li>Telefone: <a href="tel:+558230000000">(82) 3000-0000</a></li>
-              <li>Atendimento: segunda a sábado, das 8h às 20h</li>
+              <li><a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
+              <li><a href="tel:+558230000000">(82) 3000-0000</a></li>
+              <li>Segunda a sábado, das 8h às 20h</li>
             </ul>
           </address>
         </section>
@@ -376,6 +391,7 @@
 
       <div class="rodape__base">
         <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
+        <p><a href="#topo">Voltar ao topo</a></p>
       </div>
 
     </div>

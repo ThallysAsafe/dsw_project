@@ -13,10 +13,19 @@
   <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
 
   <!-- ============================ CABEÇALHO ============================ -->
-  <header class="cabecalho">
+  <header class="cabecalho" id="topo">
     <div class="container cabecalho__interno">
+
       <a class="logo" href="index.html">
-        Arena<span class="logo__destaque">Hub</span>
+        <span class="logo__marca">
+          <!-- Marca vetorial: planta baixa de um campo (decorativa) -->
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
+            <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
+            <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
+          </svg>
+        </span>
+        ArenaHub
       </a>
 
       <nav class="navbar" aria-label="Navegação principal">
@@ -29,6 +38,7 @@
           <li><a class="navbar__link" href="agendamento.html">Agendamento</a></li>
         </ul>
       </nav>
+
     </div>
   </header>
 
@@ -41,173 +51,194 @@
         <h1>Rachas abertos</h1>
         <p>
           Partidas organizadas por jogadores da comunidade que ainda têm vagas.
-          Escolha uma, garanta seu lugar e apareça na hora marcada.
+          Escolha uma, garanta seu lugar e apareça na hora marcada. Quer a
+          quadra só para o seu grupo? Veja o
+          <a class="link-texto" href="quadras.html#catalogo">catálogo de quadras</a>.
         </p>
       </div>
     </div>
 
     <!-- ----------------- COMO FUNCIONAM OS RACHAS -------------------- -->
-    <section class="secao" aria-labelledby="titulo-como-racha">
+    <section class="secao" aria-labelledby="lista-rachas">
       <div class="container">
 
-        <div class="secao__cabecalho">
-          <h2 id="titulo-como-racha">Como funcionam os rachas da comunidade</h2>
+        <header class="secao__cabecalho">
+          <p class="secao__numero">01 / Partidas da semana</p>
+          <h2 id="lista-rachas">Rachas com vaga aberta</h2>
           <p>
             Um jogador reserva a quadra, define quantas pessoas cabem na partida
-            e abre as vagas restantes para o público do ArenaHub. O valor da
-            quadra é dividido igualmente entre todos os confirmados, e cada
-            participante paga apenas a sua parte no dia do jogo.
+            e abre as vagas restantes para o público do ArenaHub. O valor é
+            dividido igualmente entre os confirmados, e cada participante paga
+            apenas a sua parte no dia do jogo.
           </p>
-        </div>
+        </header>
 
         <!-- Lista de partidas em grade (CSS Grid) -->
         <div class="grade grade--tres">
 
           <!-- Racha 01 -->
           <article class="card">
-            <img class="card__imagem"
-                 src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                 alt="Bolas de futebol apoiadas no gramado sintético de um campo society iluminado.">
+            <figure class="card__figura">
+              <img class="card__imagem"
+                   src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                   alt="Bolas de futebol apoiadas no gramado sintético de um campo society iluminado.">
+            </figure>
             <div class="card__corpo">
               <div class="card__cabecalho">
-                <h3 class="card__titulo">Futebol dos Amigos das Terças</h3>
                 <p class="etiqueta">Society</p>
+                <p class="etiqueta etiqueta--vagas">3 vagas</p>
               </div>
-              <div class="card__detalhes">
-                <p><strong>Local:</strong> Arena Jatiúca &ndash; Jatiúca</p>
-                <p>
-                  <strong>Quando:</strong>
+              <h3 class="card__titulo">Futebol dos Amigos das Terças</h3>
+              <ul class="card__detalhes">
+                <li><strong>Local</strong> Arena Jatiúca, Jatiúca</li>
+                <li>
+                  <strong>Quando</strong>
                   <time datetime="2026-09-22T20:00">Terça, 22/09 às 20h</time>
-                </p>
-                <p><strong>Nível:</strong> recreativo, aberto a iniciantes</p>
-              </div>
+                </li>
+                <li><strong>Nível</strong> Recreativo, aberto a iniciantes</li>
+              </ul>
               <div class="card__rodape">
-                <p class="etiqueta etiqueta--vagas">3 vagas abertas</p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html">Participar</a>
+                <p class="card__preco">R$ 15 <span>por jogador</span></p>
+                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Participar</a>
               </div>
             </div>
           </article>
 
           <!-- Racha 02 -->
           <article class="card">
-            <img class="card__imagem"
-                 src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                 alt="Partida de vôlei de praia ao entardecer, com um jogador saltando para cortar a bola sobre a rede.">
+            <figure class="card__figura">
+              <img class="card__imagem"
+                   src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                   alt="Partida de vôlei de praia ao entardecer, com um jogador saltando para cortar a bola sobre a rede.">
+            </figure>
             <div class="card__corpo">
               <div class="card__cabecalho">
-                <h3 class="card__titulo">Vôlei da Galera</h3>
                 <p class="etiqueta">Vôlei de praia</p>
+                <p class="etiqueta etiqueta--vagas">5 vagas</p>
               </div>
-              <div class="card__detalhes">
-                <p><strong>Local:</strong> Arena Ponta Verde &ndash; Ponta Verde</p>
-                <p>
-                  <strong>Quando:</strong>
+              <h3 class="card__titulo">Vôlei da Galera</h3>
+              <ul class="card__detalhes">
+                <li><strong>Local</strong> Arena Ponta Verde, Ponta Verde</li>
+                <li>
+                  <strong>Quando</strong>
                   <time datetime="2026-09-23T18:30">Quarta, 23/09 às 18h30</time>
-                </p>
-                <p><strong>Nível:</strong> intermediário</p>
-              </div>
+                </li>
+                <li><strong>Nível</strong> Intermediário</li>
+              </ul>
               <div class="card__rodape">
-                <p class="etiqueta etiqueta--vagas">5 vagas abertas</p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html">Participar</a>
+                <p class="card__preco">R$ 12 <span>por jogador</span></p>
+                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Participar</a>
               </div>
             </div>
           </article>
 
           <!-- Racha 03 -->
           <article class="card">
-            <img class="card__imagem"
-                 src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                 alt="Bola de basquete sobre a linha branca de uma quadra externa de piso cinza e laranja.">
+            <figure class="card__figura">
+              <img class="card__imagem"
+                   src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                   alt="Bola de basquete sobre a linha branca de uma quadra externa de piso cinza e laranja.">
+            </figure>
             <div class="card__corpo">
               <div class="card__cabecalho">
-                <h3 class="card__titulo">Basquete 3x3 da Quinta</h3>
                 <p class="etiqueta">Basquete</p>
+                <p class="etiqueta etiqueta--vagas">2 vagas</p>
               </div>
-              <div class="card__detalhes">
-                <p><strong>Local:</strong> Praça Benedito Bentes &ndash; Benedito Bentes</p>
-                <p>
-                  <strong>Quando:</strong>
+              <h3 class="card__titulo">Basquete 3x3 da Quinta</h3>
+              <ul class="card__detalhes">
+                <li><strong>Local</strong> Praça Benedito Bentes</li>
+                <li>
+                  <strong>Quando</strong>
                   <time datetime="2026-09-24T19:00">Quinta, 24/09 às 19h</time>
-                </p>
-                <p><strong>Nível:</strong> livre, times sorteados na hora</p>
-              </div>
+                </li>
+                <li><strong>Nível</strong> Livre, times sorteados na hora</li>
+              </ul>
               <div class="card__rodape">
-                <p class="etiqueta etiqueta--vagas">2 vagas abertas</p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html">Participar</a>
+                <p class="card__preco">R$ 8 <span>por jogador</span></p>
+                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Participar</a>
               </div>
             </div>
           </article>
 
           <!-- Racha 04 -->
           <article class="card">
-            <img class="card__imagem"
-                 src="https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                 alt="Jogadores disputando a bola em uma quadra coberta durante partida de basquete.">
+            <figure class="card__figura">
+              <img class="card__imagem"
+                   src="https://images.unsplash.com/photo-1577471488278-16eec37ffcc2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                   alt="Jogadores disputando a bola em uma quadra coberta durante partida de basquete.">
+            </figure>
             <div class="card__corpo">
               <div class="card__cabecalho">
-                <h3 class="card__titulo">Racha Misto de Futsal</h3>
                 <p class="etiqueta">Futsal</p>
+                <p class="etiqueta etiqueta--vagas">4 vagas</p>
               </div>
-              <div class="card__detalhes">
-                <p><strong>Local:</strong> Ginásio Farol &ndash; Farol</p>
-                <p>
-                  <strong>Quando:</strong>
+              <h3 class="card__titulo">Racha Misto de Futsal</h3>
+              <ul class="card__detalhes">
+                <li><strong>Local</strong> Ginásio Farol, Farol</li>
+                <li>
+                  <strong>Quando</strong>
                   <time datetime="2026-09-25T21:00">Sexta, 25/09 às 21h</time>
-                </p>
-                <p><strong>Nível:</strong> recreativo, times mistos</p>
-              </div>
+                </li>
+                <li><strong>Nível</strong> Recreativo, times mistos</li>
+              </ul>
               <div class="card__rodape">
-                <p class="etiqueta etiqueta--vagas">4 vagas abertas</p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html">Participar</a>
+                <p class="card__preco">R$ 14 <span>por jogador</span></p>
+                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Participar</a>
               </div>
             </div>
           </article>
 
           <!-- Racha 05 -->
           <article class="card">
-            <img class="card__imagem"
-                 src="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                 alt="Bola apoiada na areia de uma quadra de praia, com a rede esticada ao fundo.">
+            <figure class="card__figura">
+              <img class="card__imagem"
+                   src="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                   alt="Bola apoiada na areia de uma quadra de praia, com a rede esticada ao fundo.">
+            </figure>
             <div class="card__corpo">
               <div class="card__cabecalho">
-                <h3 class="card__titulo">Beach Tennis para Iniciantes</h3>
                 <p class="etiqueta">Beach tennis</p>
+                <p class="etiqueta etiqueta--vagas">6 vagas</p>
               </div>
-              <div class="card__detalhes">
-                <p><strong>Local:</strong> Beach Club Pajuçara &ndash; Pajuçara</p>
-                <p>
-                  <strong>Quando:</strong>
+              <h3 class="card__titulo">Beach Tennis para Iniciantes</h3>
+              <ul class="card__detalhes">
+                <li><strong>Local</strong> Beach Club Pajuçara, Pajuçara</li>
+                <li>
+                  <strong>Quando</strong>
                   <time datetime="2026-09-26T08:00">Sábado, 26/09 às 8h</time>
-                </p>
-                <p><strong>Nível:</strong> iniciante, raquetes emprestadas</p>
-              </div>
+                </li>
+                <li><strong>Nível</strong> Iniciante, raquetes emprestadas</li>
+              </ul>
               <div class="card__rodape">
-                <p class="etiqueta etiqueta--vagas">6 vagas abertas</p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html">Participar</a>
+                <p class="card__preco">R$ 10 <span>por jogador</span></p>
+                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Participar</a>
               </div>
             </div>
           </article>
 
           <!-- Racha 06 (sem vagas: botão desabilitado) -->
           <article class="card">
-            <img class="card__imagem"
-                 src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                 alt="Quadra de tênis de saibro vista de cima, com um jogador sozinho preparando o saque.">
+            <figure class="card__figura">
+              <img class="card__imagem"
+                   src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                   alt="Quadra de tênis de saibro vista de cima, com um jogador sozinho preparando o saque.">
+            </figure>
             <div class="card__corpo">
               <div class="card__cabecalho">
-                <h3 class="card__titulo">Tênis em Duplas de Domingo</h3>
                 <p class="etiqueta">Tênis</p>
-              </div>
-              <div class="card__detalhes">
-                <p><strong>Local:</strong> Tennis Park Gruta &ndash; Gruta de Lourdes</p>
-                <p>
-                  <strong>Quando:</strong>
-                  <time datetime="2026-09-27T07:30">Domingo, 27/09 às 7h30</time>
-                </p>
-                <p><strong>Nível:</strong> avançado</p>
-              </div>
-              <div class="card__rodape">
                 <p class="etiqueta etiqueta--neutra">Sem vagas</p>
+              </div>
+              <h3 class="card__titulo">Tênis em Duplas de Domingo</h3>
+              <ul class="card__detalhes">
+                <li><strong>Local</strong> Tennis Park Gruta, Gruta de Lourdes</li>
+                <li>
+                  <strong>Quando</strong>
+                  <time datetime="2026-09-27T07:30">Domingo, 27/09 às 7h30</time>
+                </li>
+                <li><strong>Nível</strong> Avançado</li>
+              </ul>
+              <div class="card__rodape">
+                <p class="card__preco">R$ 23 <span>por jogador</span></p>
                 <button class="botao botao--primario botao--bloco" type="button" disabled>Partida lotada</button>
               </div>
             </div>
@@ -218,19 +249,25 @@
     </section>
 
     <!-- --------------------- REGRAS DA COMUNIDADE -------------------- -->
-    <section class="secao secao--alternada" aria-labelledby="titulo-regras-racha">
+    <section class="secao secao--papel" aria-labelledby="regras-racha">
       <div class="container">
-        <aside class="aside-info" aria-labelledby="titulo-regras-racha">
-          <h2 id="titulo-regras-racha">Combinados da comunidade</h2>
+
+        <header class="secao__cabecalho">
+          <p class="secao__numero">02 / Combinados</p>
+        </header>
+
+        <aside class="aside-info" aria-labelledby="regras-racha">
+          <h2 id="regras-racha">Combinados da comunidade</h2>
           <p>Poucas regras, respeitadas por todo mundo, mantêm o racha divertido.</p>
           <ul>
-            <li>Confirmou presença e não pode ir? Cancele com até 4 horas de antecedência.</li>
-            <li>Duas ausências sem aviso no mês bloqueiam novas participações por 15 dias.</li>
-            <li>O rateio da quadra é informado no card e pago direto ao organizador.</li>
+            <li>Confirmou e não pode ir? Cancele com até 4 horas de antecedência.</li>
+            <li>Duas ausências sem aviso no mês bloqueiam novas vagas por 15 dias.</li>
+            <li>O rateio da quadra é informado no card e pago ao organizador.</li>
             <li>Leve camisa clara e camisa escura para facilitar a divisão dos times.</li>
             <li>Rachas marcados como iniciantes priorizam quem está começando agora.</li>
           </ul>
         </aside>
+
       </div>
     </section>
 
@@ -246,7 +283,8 @@
           <h2 id="rodape-sobre">ArenaHub</h2>
           <p>
             Catálogo de quadras esportivas e organização de rachas.
-            Projeto acadêmico desenvolvido com HTML5 e CSS3.
+            Projeto Integrador de Desenvolvimento Web, feito com HTML5
+            semântico e CSS3, sem frameworks.
           </p>
         </section>
 
@@ -254,9 +292,9 @@
           <h2 id="rodape-navegacao">Navegação</h2>
           <ul>
             <li><a href="index.html">Início</a></li>
-            <li><a href="quadras.html">Catálogo de quadras</a></li>
-            <li><a href="rachas.html">Rachas abertos</a></li>
-            <li><a href="agendamento.html">Agendamento</a></li>
+            <li><a href="quadras.html#catalogo">Catálogo de quadras</a></li>
+            <li><a href="rachas.html#lista-rachas">Rachas abertos</a></li>
+            <li><a href="agendamento.html#form-reserva">Agendamento</a></li>
           </ul>
         </nav>
 
@@ -264,9 +302,9 @@
           <h2 id="rodape-suporte">Suporte</h2>
           <address>
             <ul>
-              <li>E-mail: <a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
-              <li>Telefone: <a href="tel:+558230000000">(82) 3000-0000</a></li>
-              <li>Atendimento: segunda a sábado, das 8h às 20h</li>
+              <li><a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
+              <li><a href="tel:+558230000000">(82) 3000-0000</a></li>
+              <li>Segunda a sábado, das 8h às 20h</li>
             </ul>
           </address>
         </section>
@@ -275,6 +313,7 @@
 
       <div class="rodape__base">
         <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
+        <p><a href="#topo">Voltar ao topo</a></p>
       </div>
 
     </div>
