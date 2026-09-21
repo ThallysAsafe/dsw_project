@@ -1,0 +1,270 @@
+/* =====================================================================
+   ArenaHub — Estilos da Página Inicial (index.css)
+   Projeto Integrador de Desenvolvimento Web (HTML5 + CSS3, sem JS).
+
+   Contém:
+   01. Seletores de âncora específicos da Home
+   02. Seção Hero
+   03. Passos numerados (<ol class="passos">)
+   04. Painel de destaque para donos de quadras
+   05. Media Queries específicas da Home (Tablet e Desktop)
+   ===================================================================== */
+
+
+/* =====================================================================
+   01. SELETORES DE ÂNCORA DA HOME
+   Como o cabeçalho é fixo (sticky), reserva espaço acima.
+   ===================================================================== */
+#como-funciona {
+  scroll-margin-top: var(--altura-cabecalho);
+}
+
+
+/* =====================================================================
+   02. SEÇÃO HERO
+   ===================================================================== */
+.hero {
+  padding: var(--espaco-xl) 0;
+  background-color: var(--cor-superficie);
+  border-bottom: var(--borda-forte);
+}
+
+.hero__conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-lg);
+}
+
+/* Rótulo acima do título principal */
+.hero__rotulo {
+  display: inline-block;
+  margin-bottom: var(--espaco-sm);
+  padding: 2px var(--espaco-xs);
+  background-color: var(--cor-tinta);
+  color: var(--cor-papel);
+  font-family: var(--fonte-display);
+  font-size: var(--tamanho-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--espacamento-rotulo);
+}
+
+.hero__titulo {
+  font-size: var(--tamanho-h1);
+}
+
+/* Régua espessa separando título e texto de apoio */
+.hero__regua {
+  margin: var(--espaco-md) 0;
+  border-top: var(--borda-grossa);
+  max-width: 200px;
+}
+
+.hero__texto p {
+  font-size: var(--tamanho-medio);
+  color: var(--cor-tinta-media);
+}
+
+.hero__texto .grupo-botoes {
+  margin-top: var(--espaco-lg);
+}
+
+.hero__figura {
+  border: var(--borda-forte);
+  background-color: var(--cor-papel);
+}
+
+.hero__imagem {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;             /* recorta sem distorcer a foto */
+}
+
+.hero__legenda {
+  padding: var(--espaco-xs) var(--espaco-sm);
+  border-top: var(--borda-forte);
+  font-size: var(--tamanho-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--espacamento-rotulo);
+  color: var(--cor-tinta-media);
+  max-width: none;
+}
+
+/* --- Indicadores numéricos --- */
+.hero__indicadores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-lg);
+  margin-top: var(--espaco-lg);
+  padding-top: var(--espaco-md);
+  border-top: var(--borda-forte);
+}
+
+.hero__indicadores strong {
+  display: block;
+  font-family: var(--fonte-display);
+  font-size: var(--tamanho-numero);
+  line-height: 1;
+  color: var(--cor-primaria);
+}
+
+.hero__indicadores span {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--tamanho-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--espacamento-rotulo);
+  color: var(--cor-tinta-media);
+}
+
+
+/* =====================================================================
+   03. PASSOS NUMERADOS — <ol class="passos">
+   A ordem importa (1, depois 2, depois 3), por isso lista ORDENADA.
+   O numeral vem de um contador CSS, e não de texto digitado no HTML.
+   ===================================================================== */
+.passos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espaco-md);
+  counter-reset: passo;          /* inicia o contador na lista */
+}
+
+.passo {
+  counter-increment: passo;      /* +1 a cada item */
+  padding: var(--espaco-md);
+  background-color: var(--cor-papel);
+  border: var(--borda-forte);
+  transition: var(--transicao);
+}
+
+/* Numeral gerado pelo contador, exibido como bloco sólido */
+.passo::before {
+  content: counter(passo, decimal-leading-zero);
+  display: inline-block;
+  margin-bottom: var(--espaco-sm);
+  padding: 2px var(--espaco-xs);
+  background-color: var(--cor-tinta);
+  color: var(--cor-papel);
+  font-family: var(--fonte-display);
+  font-size: var(--tamanho-micro);
+  letter-spacing: var(--espacamento-rotulo);
+}
+
+.passo:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--sombra-solida);
+}
+
+.passo h3 {
+  margin-bottom: var(--espaco-xs);
+}
+
+.passo p {
+  color: var(--cor-tinta-media);
+  font-size: var(--tamanho-pequeno);
+}
+
+
+/* =====================================================================
+   04. PAINÉIS DE DESTAQUE (CHAMADA PARA PROPRIETÁRIOS)
+   ===================================================================== */
+.painel-destaque {
+  padding: var(--espaco-lg);
+  background-color: var(--cor-tinta);
+  color: var(--cor-papel);
+  border-left: 8px solid var(--cor-destaque);
+}
+
+.painel-destaque h2 {
+  color: var(--cor-papel);
+}
+
+.painel-destaque p {
+  margin-top: var(--espaco-sm);
+  color: var(--cor-linha);
+}
+
+.painel-destaque ul {
+  margin-top: var(--espaco-md);
+}
+
+.painel-destaque li {
+  padding: var(--espaco-xs) 0;
+  border-top: 1px solid rgba(242, 240, 234, 0.25);
+  font-size: var(--tamanho-pequeno);
+  color: var(--cor-linha);
+}
+
+.painel-destaque .botao--secundario,
+.painel-destaque .botao--secundario:visited {
+  margin-top: var(--espaco-md);
+  background-color: var(--cor-papel);
+  border-color: var(--cor-papel);
+  color: var(--cor-tinta);
+}
+
+.painel-destaque .botao--secundario:hover {
+  background-color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+  color: var(--cor-superficie);
+  box-shadow: 5px 5px 0 var(--cor-papel);
+}
+
+
+/* =====================================================================
+   05. MEDIA QUERIES DA HOME — TABLET (min-width: 768px)
+   ===================================================================== */
+@media (min-width: 768px) {
+
+  .passos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espaco-lg);
+  }
+
+  .hero__imagem {
+    height: 340px;
+  }
+}
+
+
+/* =====================================================================
+   06. MEDIA QUERIES DA HOME — DESKTOP (min-width: 1024px)
+   ===================================================================== */
+@media (min-width: 1024px) {
+
+  /* Hero em duas colunas: texto e imagem lado a lado */
+  .hero__conteudo {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .hero__texto {
+    flex: 1.2;
+  }
+
+  .hero__figura {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__imagem {
+    flex: 1;
+    height: auto;
+    min-height: 420px;
+  }
+
+  /* Três colunas nos passos */
+  .passos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Conteúdo principal + coluna lateral */
+  .layout-conteudo {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--espaco-lg);
+    align-items: start;
+  }
+}
+

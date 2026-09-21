@@ -1,0 +1,30 @@
+/* =====================================================================
+   ArenaHub — Estilos da Página de Quadras (quadras.css)
+   Projeto Integrador de Desenvolvimento Web (HTML5 + CSS3, sem JS).
+
+   Contém:
+   01. Âncora do catálogo de quadras
+   02. Elementos específicos dos cards de quadras parceiras
+   ===================================================================== */
+
+
+/* =====================================================================
+   01. ÂNCORA DO CATÁLOGO
+   Compensa a altura do cabeçalho fixo (sticky).
+   ===================================================================== */
+#catalogo {
+  scroll-margin-top: var(--altura-cabecalho);
+}
+
+
+/* =====================================================================
+   02. CARDS DE QUADRAS PARCEIRAS
+   Estilos específicos para exibição de localização da arena.
+   ===================================================================== */
+.card__endereco {
+  font-size: var(--tamanho-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cor-tinta-media);
+}
+

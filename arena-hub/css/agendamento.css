@@ -1,0 +1,351 @@
+/* =====================================================================
+   ArenaHub — Estilos da Página de Agendamento (agendamento.css)
+   Projeto Integrador de Desenvolvimento Web (HTML5 + CSS3, sem JS).
+
+   Contém:
+   01. Âncora do formulário de reserva
+   02. Estrutura do formulário (<form>, <fieldset>, <legend>)
+   03. Campos e controles (<input>, <select>, <textarea>)
+   04. Validação nativa HTML5/CSS (:invalid, :valid, :user-invalid)
+   05. Opções de seleção (rádios e checkboxes customizados)
+   06. Ações do formulário
+   07. Lista ordenada de etapas do aside (<ol class="lista-etapas">)
+   08. Media Queries específicas de Agendamento (Tablet e Desktop)
+   ===================================================================== */
+
+
+/* =====================================================================
+   01. ÂNCORA DO FORMULÁRIO
+   Compensa a altura do cabeçalho fixo (sticky).
+   ===================================================================== */
+#form-reserva {
+  scroll-margin-top: var(--altura-cabecalho);
+}
+
+
+/* =====================================================================
+   02. ESTRUTURA DO FORMULÁRIO
+   ===================================================================== */
+.formulario {
+  padding: var(--espaco-md);
+  background-color: var(--cor-superficie);
+  border: var(--borda-forte);
+}
+
+.formulario fieldset {
+  border: none;
+  margin-bottom: var(--espaco-lg);
+}
+
+/* A régua fica na própria legend (display: block ocupando a linha toda).
+   Se ficasse no border-top do fieldset, o navegador abriria um vão na
+   borda para encaixar a legend e a linha apareceria cortada ao lado. */
+.formulario legend {
+  display: block;
+  width: 100%;
+  padding: var(--espaco-md) 0 var(--espaco-xs);
+  border-top: var(--borda-forte);
+  font-family: var(--fonte-display);
+  font-size: var(--tamanho-h3);
+  text-transform: uppercase;
+  color: var(--cor-tinta);
+}
+
+.formulario fieldset:first-of-type > legend {
+  padding-top: 0;
+  border-top: none;
+}
+
+.formulario legend + p {
+  margin-bottom: var(--espaco-md);
+  font-size: var(--tamanho-pequeno);
+  color: var(--cor-tinta-media);
+}
+
+/* Fieldset aninhado: grupo de rádios dentro de um agrupamento maior */
+.formulario fieldset fieldset {
+  border-top: none;
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.formulario fieldset fieldset legend {
+  padding-top: 0;
+  border-top: none;
+  font-size: var(--tamanho-micro);
+  letter-spacing: var(--espacamento-rotulo);
+  color: var(--cor-tinta-media);
+}
+
+
+/* =====================================================================
+   03. CAMPOS E CONTROLES
+   ===================================================================== */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-xs);
+  margin-bottom: var(--espaco-md);
+}
+
+.campo label {
+  font-family: var(--fonte-display);
+  font-size: var(--tamanho-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--espacamento-rotulo);
+  color: var(--cor-tinta);
+}
+
+.campo__dica {
+  font-size: var(--tamanho-micro);
+  color: var(--cor-tinta-media);
+}
+
+.obrigatorio {
+  color: var(--cor-destaque);
+}
+
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="tel"],
+.campo input[type="number"],
+.campo input[type="date"],
+.campo input[type="time"],
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: var(--espaco-sm);
+  border: var(--borda-fina);
+  border-bottom: var(--borda-forte);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
+  color: var(--cor-tinta);
+  font-family: inherit;
+  font-size: var(--tamanho-base);
+  transition: var(--transicao);
+}
+
+.campo textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+  border-color: var(--cor-tinta-media);
+  border-bottom-color: var(--cor-tinta);
+}
+
+/* :focus — o campo ativo fica claramente destacado */
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  border-color: var(--cor-primaria);
+  background-color: var(--cor-primaria-clara);
+}
+
+
+/* =====================================================================
+   04. VALIDAÇÃO NATIVA — :invalid e :valid
+   Feedback imediato, porém só DEPOIS da interação: :not(:placeholder-shown)
+   impede que os obrigatórios apareçam vermelhos assim que a página abre.
+   A regra lista os tipos que têm placeholder; date, time e <select> são
+   cobertos logo abaixo por :user-invalid.
+   ===================================================================== */
+.campo input[type="text"]:invalid:not(:placeholder-shown),
+.campo input[type="email"]:invalid:not(:placeholder-shown),
+.campo input[type="tel"]:invalid:not(:placeholder-shown),
+.campo input[type="number"]:invalid:not(:placeholder-shown),
+.campo textarea:invalid:not(:placeholder-shown) {
+  border-color: var(--cor-erro);
+  background-color: var(--cor-destaque-clara);
+}
+
+.campo input[type="text"]:valid:not(:placeholder-shown),
+.campo input[type="email"]:valid:not(:placeholder-shown),
+.campo input[type="tel"]:valid:not(:placeholder-shown),
+.campo input[type="number"]:valid:not(:placeholder-shown),
+.campo textarea:valid:not(:placeholder-shown) {
+  border-bottom-color: var(--cor-sucesso);
+}
+
+.campo input:focus:invalid,
+.campo select:focus:invalid,
+.campo textarea:focus:invalid {
+  border-color: var(--cor-erro);
+  background-color: var(--cor-destaque-clara);
+}
+
+/* Reforço para navegadores modernos: :user-invalid / :user-valid só valem
+   após a interação, e cobrem também <select>, date e time. */
+.campo input:user-invalid,
+.campo select:user-invalid,
+.campo textarea:user-invalid {
+  border-color: var(--cor-erro);
+  background-color: var(--cor-destaque-clara);
+}
+
+.campo input:user-valid,
+.campo select:user-valid,
+.campo textarea:user-valid {
+  border-bottom-color: var(--cor-sucesso);
+}
+
+/* :disabled — campo indisponível */
+.campo input:disabled,
+.campo select:disabled,
+.campo textarea:disabled {
+  background-color: var(--cor-papel);
+  border-color: var(--cor-linha);
+  border-bottom-color: var(--cor-linha);
+  color: var(--cor-tinta-media);
+  cursor: not-allowed;
+}
+
+
+/* =====================================================================
+   05. OPÇÕES DE SELEÇÃO (RADIO E CHECKBOX)
+   ===================================================================== */
+.grupo-opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-xs);
+  margin-bottom: var(--espaco-md);
+}
+
+.opcao {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaco-sm);
+  padding: var(--espaco-sm);
+  border: var(--borda-fina);
+  cursor: pointer;
+  transition: var(--transicao);
+}
+
+.opcao:hover {
+  border-color: var(--cor-tinta);
+  background-color: var(--cor-primaria-clara);
+}
+
+.opcao input[type="radio"],
+.opcao input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.opcao label {
+  font-family: var(--fonte-base);
+  font-size: var(--tamanho-pequeno);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.opcao label small {
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+  font-size: var(--tamanho-micro);
+  color: var(--cor-tinta-media);
+}
+
+/* :disabled dentro do grupo de opções */
+.opcao input:disabled,
+.opcao input:disabled + label {
+  cursor: not-allowed;
+  color: var(--cor-tinta-media);
+}
+
+.opcao:has(input:disabled) {
+  background-color: var(--cor-papel);
+  border-style: dashed;
+}
+
+
+/* =====================================================================
+   06. AÇÕES DO FORMULÁRIO
+   ===================================================================== */
+.formulario__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-sm);
+  padding-top: var(--espaco-md);
+  border-top: var(--borda-forte);
+}
+
+.formulario__acoes p {
+  font-size: var(--tamanho-micro);
+  color: var(--cor-tinta-media);
+}
+
+
+/* =====================================================================
+   07. LISTA ORDENADA DE ETAPAS — <ol class="lista-etapas">
+   Numeral gerado por contador no aside complementar.
+   ===================================================================== */
+.lista-etapas {
+  counter-reset: etapa;
+}
+
+.lista-etapas li {
+  counter-increment: etapa;
+  display: flex;
+  gap: var(--espaco-xs);
+}
+
+.lista-etapas li::before {
+  content: counter(etapa) ".";
+  font-family: var(--fonte-display);
+  color: var(--cor-primaria);
+  flex-shrink: 0;
+}
+
+
+/* =====================================================================
+   08. MEDIA QUERIES DE AGENDAMENTO — TABLET (min-width: 768px)
+   ===================================================================== */
+@media (min-width: 768px) {
+
+  .formulario {
+    padding: var(--espaco-lg);
+  }
+
+  .campo-duplo,
+  .grupo-opcoes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 var(--espaco-md);
+  }
+
+  .grupo-opcoes {
+    gap: var(--espaco-xs) var(--espaco-md);
+  }
+
+  .formulario__acoes {
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+/* =====================================================================
+   09. MEDIA QUERIES DE AGENDAMENTO — DESKTOP (min-width: 1024px)
+   ===================================================================== */
+@media (min-width: 1024px) {
+
+  .layout-formulario {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: var(--espaco-lg);
+    align-items: start;
+  }
+}
+

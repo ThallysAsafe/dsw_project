@@ -1,0 +1,64 @@
+/* =====================================================================
+   ArenaHub — Estilos da Página de Rachas (rachas.css)
+   Projeto Integrador de Desenvolvimento Web (HTML5 + CSS3, sem JS).
+
+   Contém:
+   01. Âncora da lista de rachas
+   02. Detalhes da partida em lista/grid (.card__detalhes)
+   03. Etiquetas de status de vagas (.etiqueta--vagas, .etiqueta--neutra)
+   ===================================================================== */
+
+
+/* =====================================================================
+   01. ÂNCORA DA LISTA DE RACHAS
+   Compensa a altura do cabeçalho fixo (sticky).
+   ===================================================================== */
+#lista-rachas {
+  scroll-margin-top: var(--altura-cabecalho);
+}
+
+
+/* =====================================================================
+   02. DETALHES DO RACHA NO CARD
+   Lista de detalhes do racha (local, data e nível) com rótulo fixo.
+   ===================================================================== */
+.card__detalhes {
+  margin: var(--espaco-xs) 0;
+  font-size: var(--tamanho-pequeno);
+  color: var(--cor-tinta-media);
+}
+
+.card__detalhes li {
+  display: grid;                 /* rótulo fixo + valor flexível */
+  grid-template-columns: 5rem 1fr;
+  gap: var(--espaco-xs);
+  padding: var(--espaco-xs) 0;
+  border-top: var(--borda-fina);
+}
+
+.card__detalhes strong {
+  font-family: var(--fonte-display);
+  font-size: var(--tamanho-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--espacamento-rotulo);
+  color: var(--cor-tinta);
+}
+
+
+/* =====================================================================
+   03. ETIQUETAS DE STATUS DE VAGAS
+   ===================================================================== */
+/* Vagas restantes: contraste conferido em 4.82:1 sobre o fundo claro */
+.etiqueta--vagas {
+  background-color: var(--cor-destaque-clara);
+  color: var(--cor-destaque);
+  border-left: 4px solid var(--cor-destaque);
+}
+
+/* Partida lotada: estado neutro, sem apelo visual */
+.etiqueta--neutra {
+  background-color: var(--cor-papel);
+  color: var(--cor-tinta-media);
+  border-left: 4px solid var(--cor-linha);
+}
+
