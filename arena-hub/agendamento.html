@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulário de agendamento do ArenaHub: reserve a quadra inteira ou garanta sua vaga em um racha aberto da comunidade.">
+  <title>Agendamento e reserva | ArenaHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Link de acessibilidade: visível apenas ao navegar por teclado (Tab) -->
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
+
+  <!-- ============================ CABEÇALHO ============================ -->
+  <header class="cabecalho">
+    <div class="container cabecalho__interno">
+      <a class="logo" href="index.html">
+        Arena<span class="logo__destaque">Hub</span>
+      </a>
+
+      <nav class="navbar" aria-label="Navegação principal">
+        <ul class="navbar__lista">
+          <li><a class="navbar__link" href="index.html">Início</a></li>
+          <li><a class="navbar__link" href="quadras.html">Quadras</a></li>
+          <li><a class="navbar__link" href="rachas.html">Rachas</a></li>
+          <li>
+            <a class="navbar__link navbar__link--ativo" href="agendamento.html" aria-current="page">Agendamento</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================= CONTEÚDO PRINCIPAL ====================== -->
+  <main id="conteudo">
+
+    <!-- ------------------------ TÍTULO DA PÁGINA --------------------- -->
+    <div class="pagina-titulo">
+      <div class="container">
+        <h1>Agendamento e reserva</h1>
+        <p>
+          Preencha os dados abaixo para solicitar a reserva de uma quadra
+          inteira ou para entrar em um racha aberto. Os campos marcados com
+          <span class="obrigatorio" aria-hidden="true">*</span> são obrigatórios.
+        </p>
+      </div>
+    </div>
+
+    <section class="secao" aria-labelledby="titulo-formulario">
+      <div class="container layout-formulario">
+
+        <!-- ------------------- FORMULÁRIO DE RESERVA ----------------- -->
+        <article>
+          <div class="secao__cabecalho">
+            <h2 id="titulo-formulario">Solicitação de agendamento</h2>
+            <p>
+              A validação dos campos é feita pelo próprio navegador, sem
+              JavaScript. A confirmação é enviada por e-mail em até 2 horas.
+            </p>
+          </div>
+
+          <!--
+            O formulário usa method="get" apontando para a própria página
+            apenas para demonstrar a validação nativa do HTML5 em um projeto
+            estático, sem servidor de back-end.
+          -->
+          <form class="formulario" action="agendamento.html" method="get">
+
+            <!-- ============ GRUPO 1: DADOS DO SOLICITANTE ============ -->
+            <fieldset>
+              <legend>Dados do solicitante</legend>
+              <p>Usamos esses dados apenas para confirmar a reserva.</p>
+
+              <div class="campo">
+                <label for="nome">
+                  Nome completo <span class="obrigatorio" aria-hidden="true">*</span>
+                </label>
+                <input type="text"
+                       id="nome"
+                       name="nome"
+                       placeholder="Ex.: Ana Beatriz Correia"
+                       minlength="5"
+                       maxlength="80"
+                       autocomplete="name"
+                       required>
+                <small class="campo__dica">Informe nome e sobrenome (mínimo de 5 caracteres).</small>
+              </div>
+
+              <div class="campo-duplo">
+                <div class="campo">
+                  <label for="email">
+                    E-mail de contato <span class="obrigatorio" aria-hidden="true">*</span>
+                  </label>
+                  <input type="email"
+                         id="email"
+                         name="email"
+                         placeholder="voce@email.com"
+                         autocomplete="email"
+                         required>
+                  <small class="campo__dica">A confirmação da reserva chega neste endereço.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="telefone">Telefone com DDD</label>
+                  <input type="tel"
+                         id="telefone"
+                         name="telefone"
+                         placeholder="(82) 90000-0000"
+                         pattern="\(?[0-9]{2}\)?[\s-]?[0-9]{4,5}-?[0-9]{4}"
+                         autocomplete="tel">
+                  <small class="campo__dica">Opcional. Usado só em caso de imprevisto na quadra.</small>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- ============ GRUPO 2: DETALHES DA PARTIDA ============= -->
+            <fieldset>
+              <legend>Detalhes da partida</legend>
+              <p>Escolha o espaço, a data e o tamanho do grupo.</p>
+
+              <div class="campo">
+                <label for="quadra">
+                  Quadra e modalidade <span class="obrigatorio" aria-hidden="true">*</span>
+                </label>
+                <select id="quadra" name="quadra" required>
+                  <option value="" selected disabled>Selecione uma opção</option>
+                  <optgroup label="Futebol">
+                    <option value="arena-jatiuca">Arena Jatiúca &ndash; futebol society</option>
+                    <option value="ginasio-farol-futsal">Ginásio Farol &ndash; futsal</option>
+                  </optgroup>
+                  <optgroup label="Areia">
+                    <option value="arena-ponta-verde">Arena Ponta Verde &ndash; vôlei de praia</option>
+                    <option value="beach-club-pajucara">Beach Club Pajuçara &ndash; beach tennis</option>
+                  </optgroup>
+                  <optgroup label="Quadra">
+                    <option value="ginasio-farol-basquete">Ginásio Farol &ndash; basquete</option>
+                    <option value="praca-benedito-bentes">Praça Benedito Bentes &ndash; basquete 3x3</option>
+                    <option value="tennis-park-gruta">Tennis Park Gruta &ndash; tênis</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="campo-duplo">
+                <div class="campo">
+                  <label for="data">
+                    Data da partida <span class="obrigatorio" aria-hidden="true">*</span>
+                  </label>
+                  <input type="date"
+                         id="data"
+                         name="data"
+                         min="2026-09-21"
+                         max="2026-12-31"
+                         required>
+                  <small class="campo__dica">Agendamentos abertos até 31/12/2026.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="horario">
+                    Horário de início <span class="obrigatorio" aria-hidden="true">*</span>
+                  </label>
+                  <input type="time"
+                         id="horario"
+                         name="horario"
+                         min="06:00"
+                         max="22:00"
+                         required>
+                  <small class="campo__dica">As quadras funcionam das 6h às 23h.</small>
+                </div>
+              </div>
+
+              <div class="campo-duplo">
+                <div class="campo">
+                  <label for="jogadores">
+                    Quantidade de jogadores <span class="obrigatorio" aria-hidden="true">*</span>
+                  </label>
+                  <input type="number"
+                         id="jogadores"
+                         name="jogadores"
+                         placeholder="10"
+                         min="2"
+                         max="22"
+                         step="1"
+                         required>
+                  <small class="campo__dica">De 2 a 22 pessoas, incluindo você.</small>
+                </div>
+
+                <div class="campo">
+                  <label for="horas">
+                    Horas de reserva <span class="obrigatorio" aria-hidden="true">*</span>
+                  </label>
+                  <input type="number"
+                         id="horas"
+                         name="horas"
+                         placeholder="1"
+                         min="1"
+                         max="4"
+                         step="1"
+                         required>
+                  <small class="campo__dica">Máximo de 4 horas seguidas por reserva.</small>
+                </div>
+              </div>
+
+              <!-- Botões de rádio: escolha única e obrigatória -->
+              <fieldset>
+                <legend>Tipo de reserva <span class="obrigatorio" aria-hidden="true">*</span></legend>
+
+                <div class="grupo-opcoes">
+                  <div class="opcao">
+                    <input type="radio"
+                           id="tipo-quadra-inteira"
+                           name="tipo-reserva"
+                           value="quadra-inteira"
+                           required>
+                    <label for="tipo-quadra-inteira">
+                      Quadra inteira
+                      <small>Você leva o grupo completo e paga o valor cheio da hora.</small>
+                    </label>
+                  </div>
+
+                  <div class="opcao">
+                    <input type="radio"
+                           id="tipo-entrada-racha"
+                           name="tipo-reserva"
+                           value="entrada-racha">
+                    <label for="tipo-entrada-racha">
+                      Entrada em racha
+                      <small>Você ocupa uma vaga aberta e divide o valor com o grupo.</small>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </fieldset>
+
+            <!-- ============ GRUPO 3: SERVIÇOS ADICIONAIS ============= -->
+            <fieldset>
+              <legend>Serviços adicionais</legend>
+              <p>Opcional. Marque apenas o que a sua partida precisa.</p>
+
+              <div class="grupo-opcoes">
+                <div class="opcao">
+                  <input type="checkbox" id="servico-colete" name="servicos" value="colete">
+                  <label for="servico-colete">
+                    Coletes
+                    <small>Jogo de 10 coletes lavados &mdash; R$ 15</small>
+                  </label>
+                </div>
+
+                <div class="opcao">
+                  <input type="checkbox" id="servico-bola" name="servicos" value="bola-oficial">
+                  <label for="servico-bola">
+                    Bola oficial
+                    <small>Bola calibrada da modalidade escolhida &mdash; R$ 10</small>
+                  </label>
+                </div>
+
+                <div class="opcao">
+                  <input type="checkbox" id="servico-arbitro" name="servicos" value="arbitro">
+                  <label for="servico-arbitro">
+                    Árbitro
+                    <small>Profissional credenciado por partida &mdash; R$ 60</small>
+                  </label>
+                </div>
+
+                <!-- Serviço indisponível: demonstra o estado :disabled -->
+                <div class="opcao">
+                  <input type="checkbox" id="servico-transmissao" name="servicos" value="transmissao" disabled>
+                  <label for="servico-transmissao">
+                    Transmissão ao vivo
+                    <small>Em breve &mdash; disponível apenas para quadras cobertas</small>
+                  </label>
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="cupom">Cupom de desconto</label>
+                <input type="text"
+                       id="cupom"
+                       name="cupom"
+                       placeholder="Disponível em breve"
+                       disabled>
+                <small class="campo__dica">Os cupons entram no ar na próxima temporada.</small>
+              </div>
+            </fieldset>
+
+            <!-- ============ GRUPO 4: OBSERVAÇÕES ==================== -->
+            <fieldset>
+              <legend>Observações</legend>
+              <p>Conte o que for importante para o responsável pela quadra.</p>
+
+              <div class="campo">
+                <label for="observacoes">Observações especiais</label>
+                <textarea id="observacoes"
+                          name="observacoes"
+                          rows="5"
+                          minlength="10"
+                          maxlength="400"
+                          placeholder="Ex.: somos um grupo iniciante e vamos precisar de dois coletes extras."></textarea>
+                <small class="campo__dica">Se preenchido, escreva no mínimo 10 caracteres (limite de 400).</small>
+              </div>
+
+              <div class="grupo-opcoes">
+                <div class="opcao">
+                  <input type="checkbox" id="termos" name="termos" value="aceito" required>
+                  <label for="termos">
+                    Li e aceito as regras de uso <span class="obrigatorio" aria-hidden="true">*</span>
+                    <small>Inclui a política de cancelamento com 12 horas de antecedência.</small>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- ==================== AÇÕES DO FORMULÁRIO ============== -->
+            <div class="formulario__acoes">
+              <button class="botao botao--primario" type="submit">Confirmar agendamento</button>
+              <button class="botao botao--secundario" type="reset">Limpar formulário</button>
+            </div>
+
+          </form>
+        </article>
+
+        <!-- ------------------ CONTEÚDO COMPLEMENTAR ----------------- -->
+        <aside class="aside-info aside-info--fixo" aria-labelledby="titulo-resumo">
+          <h2 id="titulo-resumo">O que acontece depois</h2>
+          <p>Da solicitação até a bola rolando.</p>
+          <ul>
+            <li>O responsável pela quadra recebe o pedido na hora.</li>
+            <li>A confirmação chega por e-mail em até 2 horas.</li>
+            <li>O pagamento é feito no local, antes do início da partida.</li>
+            <li>Rachas com vagas encerradas viram lista de espera automática.</li>
+            <li>Dúvidas? Fale com o suporte pelo telefone (82) 3000-0000.</li>
+          </ul>
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================= RODAPÉ ============================== -->
+  <footer class="rodape">
+    <div class="container">
+
+      <div class="rodape__colunas">
+
+        <section aria-labelledby="rodape-sobre">
+          <h2 id="rodape-sobre">ArenaHub</h2>
+          <p>
+            Catálogo de quadras esportivas e organização de rachas.
+            Projeto acadêmico desenvolvido com HTML5 e CSS3.
+          </p>
+        </section>
+
+        <nav aria-labelledby="rodape-navegacao">
+          <h2 id="rodape-navegacao">Navegação</h2>
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="quadras.html">Catálogo de quadras</a></li>
+            <li><a href="rachas.html">Rachas abertos</a></li>
+            <li><a href="agendamento.html">Agendamento</a></li>
+          </ul>
+        </nav>
+
+        <section aria-labelledby="rodape-suporte">
+          <h2 id="rodape-suporte">Suporte</h2>
+          <address>
+            <ul>
+              <li>E-mail: <a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
+              <li>Telefone: <a href="tel:+558230000000">(82) 3000-0000</a></li>
+              <li>Atendimento: segunda a sábado, das 8h às 20h</li>
+            </ul>
+          </address>
+        </section>
+
+      </div>
+
+      <div class="rodape__base">
+        <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
