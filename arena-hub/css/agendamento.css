@@ -1,45 +1,43 @@
 /* =====================================================================
-   ArenaHub — Estilos da Página de Agendamento (agendamento.css)
-   Projeto Integrador de Desenvolvimento Web (HTML5 + CSS3, sem JS).
+   ArenaHub — agendamento.css (estilos do formulário de reserva)
 
-   Contém:
-   01. Âncora do formulário de reserva
-   02. Estrutura do formulário (<form>, <fieldset>, <legend>)
-   03. Campos e controles (<input>, <select>, <textarea>)
-   04. Validação nativa HTML5/CSS (:invalid, :valid, :user-invalid)
-   05. Opções de seleção (rádios e checkboxes customizados)
-   06. Ações do formulário
-   07. Lista ordenada de etapas do aside (<ol class="lista-etapas">)
-   08. Media Queries específicas de Agendamento (Tablet e Desktop)
+   Carregado DEPOIS de style.css, então pode ajustar o que vem de lá.
+   A âncora #form-reserva está em style.css, seção 05.
+
+   ÍNDICE
+   01. Moldura do formulário e agrupamentos (<fieldset> / <legend>)
+   02. Campos e controles (<input>, <select>, <textarea>)
+   03. Validação nativa (:invalid, :valid, :disabled)
+   04. Opções de escolha (rádio e checkbox)
+   05. Ações do formulário (enviar e limpar)
+   06. Lista de etapas do <aside>
+   07. Media Query — Tablet  (min-width: 768px)
+   08. Media Query — Desktop (min-width: 1024px)
    ===================================================================== */
 
 
 /* =====================================================================
-   01. ÂNCORA DO FORMULÁRIO
-   Compensa a altura do cabeçalho fixo (sticky).
-   ===================================================================== */
-#form-reserva {
-  scroll-margin-top: var(--altura-cabecalho);
-}
+   01. MOLDURA DO FORMULÁRIO E AGRUPAMENTOS
 
-
-/* =====================================================================
-   02. ESTRUTURA DO FORMULÁRIO
+   O <fieldset> agrupa campos que tratam do mesmo assunto e a <legend>
+   é o título desse grupo — os dois são semânticos, não decorativos.
    ===================================================================== */
 .formulario {
   padding: var(--espaco-md);
-  background-color: var(--cor-superficie);
   border: var(--borda-forte);
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
 }
 
 .formulario fieldset {
-  border: none;
+  border: none;                  /* tira a moldura padrão do navegador */
   margin-bottom: var(--espaco-lg);
 }
 
-/* A régua fica na própria legend (display: block ocupando a linha toda).
-   Se ficasse no border-top do fieldset, o navegador abriria um vão na
-   borda para encaixar a legend e a linha apareceria cortada ao lado. */
+/* A régua de separação fica na LEGEND, não no fieldset.
+   Motivo: se a borda ficasse no <fieldset>, o navegador abriria um vão
+   nela para encaixar a legend e a linha apareceria cortada ao lado do
+   texto. Com display: block a legend ocupa a linha inteira. */
 .formulario legend {
   display: block;
   width: 100%;
@@ -51,25 +49,33 @@
   color: var(--cor-tinta);
 }
 
+/* O primeiro grupo não precisa de régua: já está no topo da caixa */
 .formulario fieldset:first-of-type > legend {
   padding-top: 0;
   border-top: none;
 }
 
+/* Frase explicativa logo abaixo da legend */
 .formulario legend + p {
   margin-bottom: var(--espaco-md);
   font-size: var(--tamanho-pequeno);
   color: var(--cor-tinta-media);
 }
 
-/* Fieldset aninhado: grupo de rádios dentro de um agrupamento maior */
-.formulario fieldset fieldset {
-  border-top: none;
-  padding-top: 0;
+/* Subgrupo: fieldset menor DENTRO de outro (o "Tipo de agendamento",
+   com os rádios). Recebe visual mais leve para não competir com o
+   título do grupo maior.
+
+   ESPECIFICIDADE: as duas regras abaixo precisam do .formulario na
+   frente. Sem ele, ".subgrupo" (1 classe) perderia para a regra
+   ".formulario fieldset" (1 classe + 1 elemento) escrita mais acima, e
+   o margin-bottom: 0 seria ignorado. Quem vence na cascata é a regra
+   mais específica, não a que está por último. */
+.formulario .subgrupo {
   margin-bottom: 0;
 }
 
-.formulario fieldset fieldset legend {
+.formulario .subgrupo legend {
   padding-top: 0;
   border-top: none;
   font-size: var(--tamanho-micro);
@@ -79,7 +85,12 @@
 
 
 /* =====================================================================
-   03. CAMPOS E CONTROLES
+   02. CAMPOS E CONTROLES
+
+   Cada campo é um <div class="campo"> com rótulo em cima e controle
+   embaixo. A <label> é ligada ao campo por for="id", o que permite
+   clicar no rótulo para focar no campo e faz o leitor de tela
+   anunciar os dois juntos.
    ===================================================================== */
 .campo {
   display: flex;
@@ -96,38 +107,38 @@
   color: var(--cor-tinta);
 }
 
+/* Texto de ajuda abaixo do campo */
 .campo__dica {
   font-size: var(--tamanho-micro);
   color: var(--cor-tinta-media);
 }
 
+/* Asterisco de campo obrigatório */
 .obrigatorio {
   color: var(--cor-destaque);
 }
 
-.campo input[type="text"],
-.campo input[type="email"],
-.campo input[type="tel"],
-.campo input[type="number"],
-.campo input[type="date"],
-.campo input[type="time"],
+/* Forma de TODOS os controles de texto do formulário.
+   Rádios e checkboxes não entram aqui porque ficam dentro de .opcao,
+   e não dentro de .campo — por isso a regra pode ser tão curta. */
+.campo input,
 .campo select,
 .campo textarea {
   width: 100%;
   padding: var(--espaco-sm);
   border: var(--borda-fina);
-  border-bottom: var(--borda-forte);
+  border-bottom: var(--borda-forte);   /* linha de base mais marcada */
   border-radius: var(--raio);
   background-color: var(--cor-superficie);
   color: var(--cor-tinta);
-  font-family: inherit;
+  font-family: inherit;          /* herda a fonte do site */
   font-size: var(--tamanho-base);
   transition: var(--transicao);
 }
 
 .campo textarea {
   min-height: 130px;
-  resize: vertical;
+  resize: vertical;              /* o usuário só estica para baixo */
 }
 
 .campo input:hover,
@@ -137,7 +148,7 @@
   border-bottom-color: var(--cor-tinta);
 }
 
-/* :focus — o campo ativo fica claramente destacado */
+/* :focus — o campo em uso ganha fundo verde-claro */
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
@@ -147,29 +158,35 @@
 
 
 /* =====================================================================
-   04. VALIDAÇÃO NATIVA — :invalid e :valid
-   Feedback imediato, porém só DEPOIS da interação: :not(:placeholder-shown)
-   impede que os obrigatórios apareçam vermelhos assim que a página abre.
-   A regra lista os tipos que têm placeholder; date, time e <select> são
-   cobertos logo abaixo por :user-invalid.
+   03. VALIDAÇÃO NATIVA
+
+   Quem valida é o próprio navegador, a partir dos atributos do HTML
+   (required, min, max, minlength, maxlength, pattern). Não há JS.
+
+   O cuidado principal é QUANDO mostrar o erro. Marcar tudo de vermelho
+   assim que a página abre confunde quem nem começou a preencher, então
+   o aviso só aparece depois da interação. São três situações:
    ===================================================================== */
-.campo input[type="text"]:invalid:not(:placeholder-shown),
-.campo input[type="email"]:invalid:not(:placeholder-shown),
-.campo input[type="tel"]:invalid:not(:placeholder-shown),
-.campo input[type="number"]:invalid:not(:placeholder-shown),
-.campo textarea:invalid:not(:placeholder-shown) {
+
+/* (a) Campo com conteúdo digitado que ainda está inválido.
+       O seletor [placeholder] pega exatamente os campos que têm dica
+       escrita dentro (texto, e-mail, telefone, número e observações);
+       data, hora e o <select> não têm placeholder e ficam de fora, o
+       que evita que apareçam vermelhos sem o usuário ter tocado neles.
+       :not(:placeholder-shown) = "a dica sumiu, ou seja, já digitaram". */
+.campo input[placeholder]:invalid:not(:placeholder-shown),
+.campo textarea[placeholder]:invalid:not(:placeholder-shown) {
   border-color: var(--cor-erro);
   background-color: var(--cor-destaque-clara);
 }
 
-.campo input[type="text"]:valid:not(:placeholder-shown),
-.campo input[type="email"]:valid:not(:placeholder-shown),
-.campo input[type="tel"]:valid:not(:placeholder-shown),
-.campo input[type="number"]:valid:not(:placeholder-shown),
-.campo textarea:valid:not(:placeholder-shown) {
+/* Preenchido e válido: a linha de baixo fica verde */
+.campo input[placeholder]:valid:not(:placeholder-shown),
+.campo textarea[placeholder]:valid:not(:placeholder-shown) {
   border-bottom-color: var(--cor-sucesso);
 }
 
+/* (b) Campo inválido enquanto está em uso */
 .campo input:focus:invalid,
 .campo select:focus:invalid,
 .campo textarea:focus:invalid {
@@ -177,8 +194,8 @@
   background-color: var(--cor-destaque-clara);
 }
 
-/* Reforço para navegadores modernos: :user-invalid / :user-valid só valem
-   após a interação, e cobrem também <select>, date e time. */
+/* (c) :user-invalid — o navegador só aplica DEPOIS que a pessoa mexeu
+       no campo e saiu dele. Cobre também data, hora e <select>. */
 .campo input:user-invalid,
 .campo select:user-invalid,
 .campo textarea:user-invalid {
@@ -192,7 +209,7 @@
   border-bottom-color: var(--cor-sucesso);
 }
 
-/* :disabled — campo indisponível */
+/* :disabled — campo indisponível (o cupom de desconto) */
 .campo input:disabled,
 .campo select:disabled,
 .campo textarea:disabled {
@@ -205,7 +222,12 @@
 
 
 /* =====================================================================
-   05. OPÇÕES DE SELEÇÃO (RADIO E CHECKBOX)
+   04. OPÇÕES DE ESCOLHA (RÁDIO E CHECKBOX)
+
+   rádio  = escolher UMA opção entre várias (tipo de agendamento)
+   checkbox = escolher QUANTAS quiser (serviços adicionais)
+
+   Cada opção vira uma caixa clicável inteira, não só o quadradinho.
    ===================================================================== */
 .grupo-opcoes {
   display: flex;
@@ -220,6 +242,7 @@
   gap: var(--espaco-sm);
   padding: var(--espaco-sm);
   border: var(--borda-fina);
+  border-radius: var(--raio);
   cursor: pointer;
   transition: var(--transicao);
 }
@@ -234,11 +257,12 @@
   width: 18px;
   height: 18px;
   margin-top: 3px;
-  flex-shrink: 0;
-  accent-color: var(--cor-primaria);
+  flex-shrink: 0;                /* não encolhe quando o texto é longo */
+  accent-color: var(--cor-primaria);   /* pinta a marca de selecionado */
   cursor: pointer;
 }
 
+/* Aqui a label é o texto da opção, então não usa o estilo de rótulo */
 .opcao label {
   font-family: var(--fonte-base);
   font-size: var(--tamanho-pequeno);
@@ -256,13 +280,15 @@
   color: var(--cor-tinta-media);
 }
 
-/* :disabled dentro do grupo de opções */
+/* :disabled — opção indisponível (transmissão ao vivo) */
 .opcao input:disabled,
 .opcao input:disabled + label {
   cursor: not-allowed;
   color: var(--cor-tinta-media);
 }
 
+/* :has() = "a opção QUE CONTÉM um campo desabilitado".
+   A caixa inteira ganha borda tracejada para deixar claro. */
 .opcao:has(input:disabled) {
   background-color: var(--cor-papel);
   border-style: dashed;
@@ -270,7 +296,7 @@
 
 
 /* =====================================================================
-   06. AÇÕES DO FORMULÁRIO
+   05. AÇÕES DO FORMULÁRIO
    ===================================================================== */
 .formulario__acoes {
   display: flex;
@@ -287,8 +313,9 @@
 
 
 /* =====================================================================
-   07. LISTA ORDENADA DE ETAPAS — <ol class="lista-etapas">
-   Numeral gerado por contador no aside complementar.
+   06. LISTA DE ETAPAS DO <aside>
+
+   Mesma ideia dos passos da home: o número vem de um contador do CSS.
    ===================================================================== */
 .lista-etapas {
   counter-reset: etapa;
@@ -301,15 +328,15 @@
 }
 
 .lista-etapas li::before {
-  content: counter(etapa) ".";
+  content: counter(etapa) ".";   /* 1. 2. 3. */
+  flex-shrink: 0;
   font-family: var(--fonte-display);
   color: var(--cor-primaria);
-  flex-shrink: 0;
 }
 
 
 /* =====================================================================
-   08. MEDIA QUERIES DE AGENDAMENTO — TABLET (min-width: 768px)
+   07. MEDIA QUERY — TABLET (min-width: 768px)
    ===================================================================== */
 @media (min-width: 768px) {
 
@@ -317,6 +344,9 @@
     padding: var(--espaco-lg);
   }
 
+  /* Pares de campos e listas de opções passam a duas colunas.
+     .campo-duplo é a <div> que envolve dois campos relacionados,
+     como "Data da partida" e "Horário de início". */
   .campo-duplo,
   .grupo-opcoes {
     display: grid;
@@ -328,6 +358,8 @@
     gap: var(--espaco-xs) var(--espaco-md);
   }
 
+  /* row-reverse põe o botão de enviar à direita, sem mudar o HTML
+     (no código o <button type="submit"> continua vindo primeiro). */
   .formulario__acoes {
     flex-direction: row-reverse;
     align-items: center;
@@ -337,10 +369,11 @@
 
 
 /* =====================================================================
-   09. MEDIA QUERIES DE AGENDAMENTO — DESKTOP (min-width: 1024px)
+   08. MEDIA QUERY — DESKTOP (min-width: 1024px)
    ===================================================================== */
 @media (min-width: 1024px) {
 
+  /* Formulário à esquerda e <aside> de apoio à direita */
   .layout-formulario {
     display: grid;
     grid-template-columns: 1.7fr 1fr;
@@ -348,4 +381,3 @@
     align-items: start;
   }
 }
-
