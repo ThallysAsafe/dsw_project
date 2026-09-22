@@ -1,30 +1,63 @@
 /* =====================================================================
-   ArenaHub — Estilos Globais e Arquivo Principal (style.css)
-   Projeto Integrador de Desenvolvimento Web (HTML5 + CSS3, sem JS).
+   ArenaHub — style.css (estilos globais)
+   Projeto Integrador de Desenvolvimento Web — HTML5 + CSS3, sem JS.
+   =====================================================================
 
-   Contém:
+   MAPA DOS ARQUIVOS — onde procurar cada coisa
+   ---------------------------------------------------------------------
+   Toda página carrega DOIS arquivos, nesta ordem:
+
+       <link rel="stylesheet" href="css/style.css">      (este arquivo)
+       <link rel="stylesheet" href="css/<pagina>.css">   (o da página)
+
+   A ordem importa: o arquivo da página vem depois e, por isso, pode
+   ajustar o que foi definido aqui (cascata).
+
+   | Arquivo          | Guarda                                          |
+   |------------------|-------------------------------------------------|
+   | style.css        | Variáveis, reset, tipografia, cabeçalho, botões,|
+   |                  | cards, etiquetas, aside e rodapé — tudo que     |
+   |                  | aparece em MAIS DE UMA página.                  |
+   | index.css        | Hero, passos numerados e painel de proprietários|
+   | quadras.css      | Endereço da quadra no card                      |
+   | rachas.css       | Detalhes da partida e etiquetas de vagas        |
+   | agendamento.css  | Formulário inteiro                              |
+
+   ÍNDICE DESTE ARQUIVO
+   ---------------------------------------------------------------------
    01. Fontes locais (@font-face)
-   02. Variáveis globais (:root)
+   02. Variáveis globais (:root)  <- cores, fontes e espaçamentos
    03. Reset básico
    04. Elementos base e tipografia
-   05. Seletores de âncora globais
-   06. Utilitários de layout
+   05. Âncoras de navegação (seletores de ID)
+   06. Utilitários de layout (container e seções)
    07. Cabeçalho e navegação (Flexbox)
    08. Botões (Flexbox)
-   09. Componentes base: Cards e Grades (CSS Grid)
-   10. Componentes base: Etiquetas
-   11. Painéis complementares (<aside>)
+   09. Cards e grades (CSS Grid)
+   10. Etiquetas
+   11. Painel complementar <aside>
    12. Rodapé
-   13. Media Queries Globais (Tablet e Desktop)
-   15. Refinamentos para toque, telas baixas e movimento reduzido
+   13. Media Query — Tablet (min-width: 768px)
+   14. Media Query — Desktop (min-width: 1024px)
+   15. Toque, telas baixas e movimento reduzido
+
+   MOBILE FIRST: o bloco principal é escrito para telas pequenas.
+   As media queries (13 e 14) só AMPLIAM o layout em telas maiores.
    ===================================================================== */
 
 
 /* =====================================================================
    01. FONTES LOCAIS (@font-face)
-   As fontes ficam em assets/fonts/ para que o site funcione offline,
-   sem depender de CDN. "Archivo Black" é usada só em títulos e rótulos;
-   "Archivo" (variável, pesos 400–700) cobre todo o texto corrido.
+
+   As fontes ficam em assets/fonts/ para o site funcionar offline, sem
+   depender de CDN. São duas famílias:
+     "Archivo Black" -> títulos e rótulos
+     "Archivo"       -> todo o texto corrido
+
+   Cada família tem 2 arquivos. O "unicode-range" diz ao navegador quais
+   letras existem em cada um: o arquivo "latin" traz o alfabeto normal
+   (inclui á, ç, ã) e o "latin-ext" traz acentos raros. Assim o navegador
+   baixa só o que a página realmente usa.
    ===================================================================== */
 @font-face {
   font-family: "Archivo";
@@ -75,79 +108,97 @@
 
 /* =====================================================================
    02. VARIÁVEIS GLOBAIS (:root)
-   Todos os valores recorrentes do projeto em um único lugar.
-   Os contrastes foram conferidos: todos os pares texto/fundo usados
-   atingem no mínimo 4.5:1 (WCAG AA).
+
+   ESTE É O PAINEL DE CONTROLE DO PROJETO.
+   Mudar um valor aqui muda o site inteiro de uma vez. Use sempre
+   var(--nome) no lugar de repetir cores e medidas pelo CSS.
+
+   ATENÇÃO: três tamanhos de texto (--tamanho-h1, --tamanho-h2 e
+   --tamanho-numero) são REDEFINIDOS nas seções 13 e 14 para crescerem em
+   telas maiores. Se um título não mudar de tamanho como você esperava,
+   confira também lá embaixo.
    ===================================================================== */
 :root {
-  /* --- Paleta: neutros --- */
+
+  /* --- CORES: neutros ------------------------------------------------
+     O contraste de todos os pares usados foi conferido e atinge no
+     mínimo 4.5:1, o mínimo exigido pela WCAG AA.                      */
   --cor-tinta: #14150f;          /* texto, bordas e fundo do rodapé  16.1:1 */
   --cor-tinta-media: #55584b;    /* textos de apoio                   6.4:1 */
   --cor-papel: #f2f0ea;          /* fundo geral (off-white quente)          */
   --cor-superficie: #ffffff;     /* fundo de cards e formulário             */
   --cor-linha: #d5d1c4;          /* traços discretos                        */
+  --cor-linha-clara: rgba(242, 240, 234, 0.25);  /* traço sobre fundo escuro */
 
-  /* --- Paleta: cor primária (verde de campo) --- */
+  /* --- CORES: primária (verde de campo) --- */
   --cor-primaria: #14513a;       /* ações principais e links          8.1:1 */
   --cor-primaria-escura: #0d3927;
   --cor-primaria-clara: #dce8e0;
 
-  /* --- Paleta: cor secundária (laranja de destaque) --- */
+  /* --- CORES: destaque (laranja) --- */
   --cor-destaque: #b23a10;       /* vagas, alertas e detalhes         5.3:1 */
   --cor-destaque-clara: #f7e3d6;
 
-  /* --- Paleta: validação --- */
+  /* --- CORES: validação do formulário --- */
   --cor-erro: #a8200f;
   --cor-sucesso: #14513a;
 
-  /* --- Tipografia --- */
+  /* --- FONTES --- */
   --fonte-display: "Archivo Black", "Archivo", "Arial Black", Impact, sans-serif;
   --fonte-base: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
+  /* --- TAMANHOS DE TEXTO (1rem = 16px) --- */
   --tamanho-micro: 0.75rem;      /* 12px — rótulos em caixa-alta */
   --tamanho-pequeno: 0.875rem;   /* 14px */
-  --tamanho-base: 1rem;          /* 16px */
+  --tamanho-base: 1rem;          /* 16px — texto corrido */
   --tamanho-medio: 1.125rem;     /* 18px */
   --tamanho-h3: 1.25rem;         /* 20px */
-  --tamanho-h2: 1.75rem;         /* 28px */
-  --tamanho-h1: 2.25rem;         /* 36px */
-  --tamanho-numero: 2.5rem;      /* 40px — numerais de destaque */
+  --tamanho-h2: 1.75rem;         /* 28px — cresce nas media queries */
+  --tamanho-h1: 2.25rem;         /* 36px — cresce nas media queries */
+  --tamanho-numero: 2.5rem;      /* 40px — cresce nas media queries */
 
-  --altura-linha: 1.6;
-  --altura-linha-titulo: 1.05;
+  --altura-linha: 1.6;           /* espaço entre linhas do texto  */
+  --altura-linha-titulo: 1.05;   /* títulos com linhas bem juntas */
   --espacamento-rotulo: 0.12em;  /* letter-spacing das caixas-altas */
 
-  /* --- Espaçamentos --- */
-  --espaco-xs: 0.5rem;
-  --espaco-sm: 0.75rem;
-  --espaco-md: 1.25rem;
-  --espaco-lg: 2rem;
-  --espaco-xl: 3.5rem;
+  /* --- ESPAÇAMENTOS ---------------------------------------------------
+     Escala única usada em todo padding, margin e gap do projeto.      */
+  --espaco-xs: 0.5rem;           /*  8px */
+  --espaco-sm: 0.75rem;          /* 12px */
+  --espaco-md: 1.25rem;          /* 20px */
+  --espaco-lg: 2rem;             /* 32px */
+  --espaco-xl: 3.5rem;           /* 56px */
 
-  /* --- Bordas e traços (sem arredondamento: identidade editorial) --- */
+  /* --- BORDAS ---------------------------------------------------------
+     --raio vale 0 porque a identidade do projeto é de cantos retos.
+     Troque para 8px e TODAS as caixas ficam arredondadas de uma vez.  */
   --raio: 0;
   --borda-fina: 1px solid var(--cor-linha);
   --borda-forte: 2px solid var(--cor-tinta);
   --borda-grossa: 4px solid var(--cor-tinta);
 
-  /* Sombra SÓLIDA deslocada — nunca desfocada */
+  /* --- SOMBRAS --------------------------------------------------------
+     Sombra SÓLIDA e deslocada (o último valor é 0, ou seja, sem
+     desfoque). É o efeito de cartaz impresso da identidade visual.    */
   --sombra-solida: 5px 5px 0 var(--cor-tinta);
   --sombra-solida-grande: 8px 8px 0 var(--cor-tinta);
 
-  /* --- Medidas --- */
-  --largura-container: 1120px;
-  --largura-leitura: 62ch;
-  --altura-cabecalho: 7rem;      /* usada no scroll-margin das âncoras */
+  /* --- MEDIDAS --- */
+  --largura-container: 1120px;   /* largura máxima do conteúdo   */
+  --largura-leitura: 62ch;       /* largura confortável de leitura */
+  --altura-cabecalho: 7rem;      /* usada pelas âncoras (seção 05) */
 
-  /* --- Microinterações --- */
-  --transicao: all 0.2s ease;
+  /* --- ANIMAÇÃO --- */
+  --transicao: all 0.2s ease;    /* suaviza :hover, :focus e :active */
 }
 
 
 /* =====================================================================
    03. RESET BÁSICO
-   Zera margens/paddings herdados e torna o box model previsível:
-   a largura declarada passa a incluir padding e border.
+
+   Zera margens e paddings que o navegador aplica sozinho e troca o
+   cálculo de largura: com box-sizing: border-box, a largura declarada
+   JÁ INCLUI padding e border, o que evita surpresas de layout.
    ===================================================================== */
 * {
   box-sizing: border-box;
@@ -158,10 +209,13 @@
 
 /* =====================================================================
    04. ELEMENTOS BASE E TIPOGRAFIA
-   Seletores de ELEMENTO — a base da cascata, com a menor especificidade.
+
+   Aqui usamos SELETORES DE ELEMENTO (body, h1, a...), que têm a menor
+   especificidade possível. Eles definem o padrão do site; qualquer
+   classe criada depois consegue sobrescrevê-los sem esforço.
    ===================================================================== */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth;       /* rolagem suave ao clicar nas âncoras */
 }
 
 body {
@@ -173,8 +227,8 @@ body {
   overflow-x: hidden;            /* trava qualquer rolagem horizontal */
 }
 
-/* Hierarquia de títulos: um h1 por página, seguido de h2 e h3.
-   Títulos em caixa-alta e entrelinha fechada, como em cartaz. */
+/* Um h1 por página, depois h2 e h3. Todos em caixa-alta e com as linhas
+   bem juntas, como em um cartaz. */
 h1,
 h2,
 h3 {
@@ -198,6 +252,7 @@ h3 {
   letter-spacing: 0;
 }
 
+/* Limita a linha de texto para não ficar larga demais e cansar a leitura */
 p {
   max-width: var(--largura-leitura);
 }
@@ -213,65 +268,71 @@ a:hover {
   color: var(--cor-destaque);
 }
 
-/* :visited — links de conteúdo já abertos ganham um tom mais fechado,
-   mantendo contraste suficiente sobre o papel. */
+/* :visited — link já aberto fica num verde mais fechado */
 a:visited {
   color: var(--cor-primaria-escura);
 }
 
 ul,
 ol {
-  list-style: none;
+  list-style: none;              /* as marcas vêm do CSS de cada lista */
 }
 
 img {
   display: block;
-  max-width: 100%;
+  max-width: 100%;               /* a imagem nunca estoura o container */
   height: auto;
 }
 
-/* Régua horizontal usada como divisor editorial */
+/* Régua horizontal usada como divisor */
 hr {
   border: none;
   border-top: var(--borda-grossa);
   margin: var(--espaco-md) 0;
 }
 
-/* ---------------------------------------------------------------------
-   FOCO VISÍVEL — navegação por teclado.
-   Bloco amarelado de alto contraste, coerente com a identidade.
-   --------------------------------------------------------------------- */
-a:focus,
-a:focus-visible,
-button:focus,
-button:focus-visible,
-input:focus,
-input:focus-visible,
-select:focus,
-select:focus-visible,
-textarea:focus,
-textarea:focus-visible {
+/* FOCO VISÍVEL — acessibilidade por teclado.
+   Sem seletor de elemento na frente, a regra vale para QUALQUER coisa
+   que receba foco: links, botões e todos os campos do formulário. */
+:focus,
+:focus-visible {
   outline: 3px solid var(--cor-destaque);
   outline-offset: 3px;
 }
 
 
 /* =====================================================================
-   05. SELETORES DE ID GLOBAIS — marcos de navegação
-   O id identifica um ponto único do documento (alvo de âncora).
+   05. ÂNCORAS DE NAVEGAÇÃO (seletores de ID)
+
+   O id marca um ponto ÚNICO da página, usado como destino de link
+   (href="#catalogo"). A class, ao contrário, é para estilo repetido.
+
+   Como o cabeçalho é fixo (position: sticky), ele cobriria o destino ao
+   rolar. O scroll-margin-top reserva essa altura acima do alvo.
+   Todas as âncoras do site estão reunidas aqui, em um lugar só.
    ===================================================================== */
-#topo {
-  scroll-margin-top: 0;
+#conteudo,          /* início do <main>, usado pelo link "pular"     */
+#como-funciona,     /* index.html   — seção dos 3 passos            */
+#catalogo,          /* quadras.html — grade de quadras              */
+#lista-rachas,      /* rachas.html  — grade de partidas             */
+#form-reserva {     /* agendamento.html — formulário                */
+  scroll-margin-top: var(--altura-cabecalho);
 }
 
-#conteudo {
-  scroll-margin-top: var(--altura-cabecalho);
+/* O topo da página não precisa de reserva: já é o começo do documento */
+#topo {
+  scroll-margin-top: 0;
 }
 
 
 /* =====================================================================
    06. UTILITÁRIOS DE LAYOUT
+
+   Classes reaproveitadas por todas as páginas para centralizar o
+   conteúdo e dar ritmo vertical às seções.
    ===================================================================== */
+
+/* Centraliza o conteúdo e cria a margem lateral no celular */
 .container {
   width: 100%;
   max-width: var(--largura-container);
@@ -279,49 +340,51 @@ textarea:focus-visible {
   padding: 0 var(--espaco-md);
 }
 
+/* Espaço vertical padrão de cada seção */
 .secao {
   padding: var(--espaco-xl) 0;
 }
 
+/* Variação da seção com fundo branco e filetes em cima e embaixo */
 .secao--papel {
   background-color: var(--cor-superficie);
   border-top: var(--borda-forte);
   border-bottom: var(--borda-forte);
 }
 
-/* --- Cabeçalho de seção: numeral + régua + título --- */
+/* --- Cabeçalho de seção: rótulo numerado + título + texto de apoio --- */
 .secao__cabecalho {
   margin-bottom: var(--espaco-lg);
 }
 
-/* Rótulo com régua preenchendo o espaço restante.
-   Flexbox unidimensional: o ::after cresce (flex: 1) e vira a linha. */
-.secao__cabecalho .secao__numero {
+/* Rótulo "01 / CATÁLOGO". O ::after vira a régua que preenche o resto
+   da linha: é Flexbox, e flex: 1 manda o traço ocupar o espaço livre. */
+.secao__numero {
   display: flex;
   align-items: center;
   gap: var(--espaco-sm);
-  margin-top: 0;
+  max-width: none;               /* ignora o limite de leitura do <p> */
   margin-bottom: var(--espaco-sm);
   font-family: var(--fonte-display);
   font-size: var(--tamanho-micro);
   text-transform: uppercase;
   letter-spacing: var(--espacamento-rotulo);
   color: var(--cor-tinta);
-  max-width: none;
 }
 
-.secao__cabecalho .secao__numero::after {
+.secao__numero::after {
   content: "";
-  flex: 1;
+  flex: 1;                       /* cresce e ocupa a largura restante */
   border-top: var(--borda-forte);
 }
 
-.secao__cabecalho p {
+/* Parágrafo explicativo abaixo do título da seção */
+.secao__texto {
   margin-top: var(--espaco-sm);
   color: var(--cor-tinta-media);
 }
 
-/* Cabeçalho das páginas internas */
+/* --- Faixa de título das páginas internas --- */
 .pagina-titulo {
   padding: var(--espaco-lg) 0;
   background-color: var(--cor-superficie);
@@ -333,21 +396,22 @@ textarea:focus-visible {
   color: var(--cor-tinta-media);
 }
 
-/* Link de conteúdo com sublinhado espesso (estados :hover e :visited) */
+/* Link dentro de um parágrafo, com sublinhado mais grosso */
 .link-texto {
   font-weight: 600;
   text-decoration-thickness: 2px;
 }
 
-/* Link "pular para o conteúdo": só aparece ao receber foco pelo teclado */
+/* Link "pular para o conteúdo": fica escondido fora da tela e só
+   aparece quando recebe foco pelo teclado (Tab). */
 .pular-link {
   position: absolute;
-  left: -9999px;
   top: 0;
+  left: -9999px;                 /* escondido fora da área visível */
   z-index: 100;
+  padding: var(--espaco-xs) var(--espaco-md);
   background-color: var(--cor-tinta);
   color: var(--cor-papel);
-  padding: var(--espaco-xs) var(--espaco-md);
   font-family: var(--fonte-display);
   font-size: var(--tamanho-micro);
   text-transform: uppercase;
@@ -356,34 +420,36 @@ textarea:focus-visible {
 }
 
 .pular-link:focus {
-  left: 0;
+  left: 0;                       /* volta para a tela */
   color: var(--cor-papel);
 }
 
 
 /* =====================================================================
    07. CABEÇALHO E NAVEGAÇÃO — FLEXBOX
-   Flexbox porque logo e menu formam UMA linha (eixo único), com
-   distribuição das sobras entre os dois extremos.
+
+   Por que Flexbox e não Grid? Porque logo e menu formam UMA LINHA só
+   (um eixo). O Flexbox distribui a sobra entre os dois extremos sem
+   precisar declarar colunas.
    ===================================================================== */
 .cabecalho {
-  position: sticky;
+  position: sticky;              /* gruda no topo ao rolar a página */
   top: 0;
-  z-index: 50;
+  z-index: 50;                   /* fica acima do conteúdo */
   background-color: var(--cor-papel);
   border-bottom: var(--borda-forte);
 }
 
 .cabecalho__interno {
   display: flex;
-  flex-direction: column;        /* mobile: logo acima, menu abaixo */
+  flex-direction: column;        /* celular: logo em cima, menu embaixo */
   align-items: center;
   gap: var(--espaco-xs);
   padding-top: var(--espaco-sm);
   padding-bottom: 0;
 }
 
-/* --- Logo: marca em SVG + nome --- */
+/* --- Logo: quadrado com a marca em SVG + nome --- */
 .logo {
   display: flex;
   align-items: center;
@@ -398,14 +464,13 @@ textarea:focus-visible {
 
 .logo:hover,
 .logo:visited {
-  color: var(--cor-tinta);
+  color: var(--cor-tinta);       /* o nome não muda de cor */
 }
 
 .logo:hover .logo__marca {
-  background-color: var(--cor-destaque);
+  background-color: var(--cor-destaque);   /* só o quadrado reage */
 }
 
-/* Quadrado da marca, com o desenho vetorial dentro */
 .logo__marca {
   display: flex;
   align-items: center;
@@ -413,7 +478,7 @@ textarea:focus-visible {
   width: 30px;
   height: 30px;
   background-color: var(--cor-primaria);
-  color: var(--cor-papel);       /* o SVG interno herda via currentColor */
+  color: var(--cor-papel);       /* o SVG herda esta cor (currentColor) */
   transition: var(--transicao);
 }
 
@@ -430,14 +495,14 @@ textarea:focus-visible {
 
 .navbar__lista {
   display: flex;
-  flex-wrap: wrap;               /* quebra sem gerar rolagem lateral */
+  flex-wrap: wrap;               /* quebra a linha em vez de criar rolagem */
   justify-content: center;
 }
 
 .navbar__link {
   display: block;
-  padding: var(--espaco-sm) var(--espaco-sm);
-  border-bottom: 4px solid transparent;
+  padding: var(--espaco-sm);
+  border-bottom: 4px solid transparent;   /* espaço do traço do item ativo */
   color: var(--cor-tinta);
   font-family: var(--fonte-display);
   font-size: var(--tamanho-micro);
@@ -460,7 +525,7 @@ textarea:focus-visible {
   background-color: var(--cor-primaria-clara);
 }
 
-/* Página atual: marcada também por aria-current="page" no HTML */
+/* Página atual: também marcada com aria-current="page" no HTML */
 .navbar__link--ativo,
 .navbar__link--ativo:visited {
   color: var(--cor-primaria);
@@ -470,8 +535,10 @@ textarea:focus-visible {
 
 /* =====================================================================
    08. BOTÕES — FLEXBOX
-   Retângulos sólidos, em caixa-alta. O feedback de :hover desloca o
-   botão e revela uma sombra sólida (transform + box-shadow).
+
+   .botao define a forma. As variações --primario e --secundario mudam
+   só as cores. No HTML as duas classes andam juntas:
+       <a class="botao botao--primario">
    ===================================================================== */
 .botao {
   display: inline-flex;
@@ -491,7 +558,7 @@ textarea:focus-visible {
   transition: var(--transicao);
 }
 
-/* Ação primária: bloco verde cheio */
+/* Ação principal: bloco verde preenchido */
 .botao--primario,
 .botao--primario:visited {
   background-color: var(--cor-primaria);
@@ -499,6 +566,7 @@ textarea:focus-visible {
   color: var(--cor-superficie);
 }
 
+/* :hover — o botão sobe e para a esquerda, revelando a sombra sólida */
 .botao--primario:hover {
   background-color: var(--cor-primaria-escura);
   border-color: var(--cor-tinta);
@@ -507,7 +575,7 @@ textarea:focus-visible {
   box-shadow: var(--sombra-solida);
 }
 
-/* Ação secundária: apenas contorno, preenchido no hover */
+/* Ação secundária: só contorno, preenchido no :hover */
 .botao--secundario,
 .botao--secundario:visited {
   background-color: transparent;
@@ -522,17 +590,18 @@ textarea:focus-visible {
   box-shadow: 5px 5px 0 var(--cor-destaque);
 }
 
-/* :active — o botão "afunda" de volta ao lugar durante o clique */
+/* :active — durante o clique o botão volta ao lugar e "afunda" */
 .botao:active {
   transform: translate(0, 0);
   box-shadow: none;
 }
 
+/* Botão ocupando toda a largura (usado dentro dos cards no celular) */
 .botao--bloco {
   width: 100%;
 }
 
-/* :disabled — controle indisponível, sem qualquer microinteração */
+/* :disabled — indisponível, cinza e sem nenhuma reação */
 .botao:disabled {
   background-color: var(--cor-linha);
   border-color: var(--cor-linha);
@@ -542,7 +611,7 @@ textarea:focus-visible {
   box-shadow: none;
 }
 
-/* Grupo de botões: coluna no mobile, linha a partir do tablet */
+/* Grupo de botões: empilhados no celular, lado a lado no tablet */
 .grupo-botoes {
   display: flex;
   flex-direction: column;
@@ -551,20 +620,29 @@ textarea:focus-visible {
 
 
 /* =====================================================================
-   09. COMPONENTES BASE: CARDS E GRADES — CSS GRID
-   Estrutura base compartilhada entre as páginas.
+   09. CARDS E GRADES — CSS GRID
+
+   Por que Grid e não Flexbox? Porque a grade de cards tem LINHAS E
+   COLUNAS (dois eixos). O número de colunas muda por tamanho de tela
+   (1 no celular, 2 no tablet, 3 no desktop) e o gap vale para os dois
+   sentidos de uma vez.
+
+   Partes do card que só existem em uma página ficam no CSS dela:
+   .card__endereco  -> quadras.css
+   .card__detalhes  -> rachas.css
    ===================================================================== */
 .grade {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr;    /* celular: uma coluna */
   gap: var(--espaco-md);
 }
 
 .card {
-  display: flex;                 /* Flexbox: empilhamento vertical interno */
+  display: flex;                 /* dentro do card, empilhamento vertical */
   flex-direction: column;
   background-color: var(--cor-superficie);
   border: var(--borda-forte);
+  border-radius: var(--raio);
   transition: var(--transicao);
 }
 
@@ -573,7 +651,7 @@ textarea:focus-visible {
   box-shadow: var(--sombra-solida-grande);
 }
 
-/* Moldura da imagem: recorta o zoom aplicado no hover */
+/* Moldura da imagem: o overflow recorta o zoom aplicado no :hover */
 .card__figura {
   overflow: hidden;
   border-bottom: var(--borda-forte);
@@ -581,8 +659,8 @@ textarea:focus-visible {
 
 .card__imagem {
   width: 100%;
-  height: 190px;
-  object-fit: cover;
+  height: 190px;                 /* todos os cards com a mesma altura */
+  object-fit: cover;             /* recorta sem distorcer a foto */
   transition: var(--transicao);
 }
 
@@ -593,12 +671,12 @@ textarea:focus-visible {
 .card__corpo {
   display: flex;
   flex-direction: column;
-  flex: 1;                       /* alinha o rodapé de todos os cards */
+  flex: 1;                       /* estica e alinha o rodapé dos cards */
   gap: var(--espaco-xs);
   padding: var(--espaco-md);
 }
 
-/* Linha superior do card: etiqueta da modalidade + preço/vagas */
+/* Linha de cima do card: etiqueta da modalidade e, nos rachas, as vagas */
 .card__cabecalho {
   display: flex;
   align-items: center;
@@ -616,7 +694,7 @@ textarea:focus-visible {
   color: var(--cor-tinta-media);
 }
 
-/* Rodapé do card: margin-top auto empurra para a base */
+/* Rodapé do card: margin-top: auto empurra tudo para a base */
 .card__rodape {
   display: flex;
   flex-direction: column;
@@ -631,8 +709,9 @@ textarea:focus-visible {
   color: var(--cor-tinta);
 }
 
+/* A unidade ("por hora") desce para a linha de baixo */
 .card__preco span {
-  display: block;                /* a unidade vai para a linha de baixo */
+  display: block;
   font-family: var(--fonte-base);
   font-size: var(--tamanho-micro);
   line-height: 1.3;
@@ -643,38 +722,45 @@ textarea:focus-visible {
 
 
 /* =====================================================================
-   10. COMPONENTES BASE: ETIQUETAS
-   Blocos retos em caixa-alta — sem formato de pílula.
+   10. ETIQUETAS
+
+   Bloco pequeno em caixa-alta que classifica o card ("FUTEBOL SOCIETY").
+   As variações de status (--vagas e --neutra) ficam em rachas.css.
    ===================================================================== */
 .etiqueta {
   display: inline-block;
   padding: 3px var(--espaco-xs);
+  border-radius: var(--raio);
   background-color: var(--cor-primaria-clara);
   color: var(--cor-primaria);
   font-family: var(--fonte-display);
   font-size: var(--tamanho-micro);
   text-transform: uppercase;
   letter-spacing: var(--espacamento-rotulo);
-  white-space: nowrap;
+  white-space: nowrap;           /* nunca quebra no meio do texto */
 }
 
 
 /* =====================================================================
-   11. PAINÉIS COMPLEMENTARES (<aside>)
-   Conteúdo complementar usado em várias páginas.
+   11. PAINEL COMPLEMENTAR <aside>
+
+   Caixa de conteúdo secundário (dicas, regras, etapas) usada em todas
+   as páginas, sempre dentro da tag semântica <aside>.
    ===================================================================== */
 .aside-info {
   padding: var(--espaco-md);
-  background-color: var(--cor-superficie);
   border: var(--borda-forte);
-  border-top: 8px solid var(--cor-primaria);
+  border-top: 8px solid var(--cor-primaria);   /* faixa verde no topo */
+  border-radius: var(--raio);
+  background-color: var(--cor-superficie);
 }
 
 .aside-info h2 {
-  font-size: var(--tamanho-h3);
   margin-bottom: var(--espaco-xs);
+  font-size: var(--tamanho-h3);
 }
 
+/* O ">" pega só o parágrafo filho direto, não os de dentro das listas */
 .aside-info > p {
   font-size: var(--tamanho-pequeno);
   color: var(--cor-tinta-media);
@@ -695,6 +781,8 @@ textarea:focus-visible {
 
 /* =====================================================================
    12. RODAPÉ
+
+   Fundo escuro com as colunas organizadas em Grid.
    ===================================================================== */
 .rodape {
   margin-top: var(--espaco-xl);
@@ -706,7 +794,7 @@ textarea:focus-visible {
 
 .rodape__colunas {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr;    /* celular: colunas empilhadas */
   gap: var(--espaco-lg);
 }
 
@@ -723,7 +811,7 @@ textarea:focus-visible {
 .rodape li,
 .rodape address {
   font-size: var(--tamanho-pequeno);
-  font-style: normal;
+  font-style: normal;            /* tira o itálico padrão do <address> */
   color: var(--cor-linha);
 }
 
@@ -741,13 +829,14 @@ textarea:focus-visible {
   color: var(--cor-destaque);
 }
 
+/* Faixa final: copyright e link de voltar ao topo */
 .rodape__base {
   display: flex;
   flex-direction: column;
   gap: var(--espaco-xs);
   margin-top: var(--espaco-lg);
   padding-top: var(--espaco-md);
-  border-top: 1px solid rgba(242, 240, 234, 0.25);
+  border-top: 1px solid var(--cor-linha-clara);
 }
 
 .rodape__base p {
@@ -758,17 +847,21 @@ textarea:focus-visible {
 
 
 /* =====================================================================
-   13. MEDIA QUERIES GLOBAIS — TABLET (min-width: 768px)
+   13. MEDIA QUERY — TABLET (min-width: 768px)
+
+   "A partir de 768px de largura, aplique também estas regras."
+   Tudo aqui AMPLIA o layout: nada some, só reorganiza.
    ===================================================================== */
 @media (min-width: 768px) {
 
+  /* Títulos maiores em telas maiores */
   :root {
     --tamanho-h1: 3.25rem;
     --tamanho-h2: 2rem;
     --tamanho-numero: 3rem;
   }
 
-  /* Cabeçalho: logo à esquerda, menu à direita */
+  /* Cabeçalho vira uma linha: logo à esquerda, menu à direita */
   .cabecalho__interno {
     flex-direction: row;
     justify-content: space-between;
@@ -786,18 +879,19 @@ textarea:focus-visible {
     font-size: var(--tamanho-pequeno);
   }
 
+  /* Botões lado a lado */
   .grupo-botoes {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
-  /* Duas colunas nas grades */
+  /* Grades passam a ter duas colunas */
   .grade {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--espaco-lg);
   }
 
-  /* Card: preço e botão lado a lado */
+  /* Card: preço e botão na mesma linha */
   .card__rodape {
     flex-direction: row;
     align-items: center;
@@ -822,7 +916,7 @@ textarea:focus-visible {
 
 
 /* =====================================================================
-   14. MEDIA QUERIES GLOBAIS — DESKTOP (min-width: 1024px)
+   14. MEDIA QUERY — DESKTOP (min-width: 1024px)
    ===================================================================== */
 @media (min-width: 1024px) {
 
@@ -831,12 +925,12 @@ textarea:focus-visible {
     --tamanho-numero: 3.5rem;
   }
 
-  /* Três colunas em grades expandidas */
+  /* Grades marcadas com .grade--tres ganham a terceira coluna */
   .grade--tres {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Coluna lateral acompanha a rolagem */
+  /* A coluna lateral acompanha a rolagem */
   .aside-info--fixo {
     position: sticky;
     top: var(--altura-cabecalho);
@@ -845,18 +939,14 @@ textarea:focus-visible {
 
 
 /* =====================================================================
-   15. REFINAMENTOS PARA TOQUE, TELAS BAIXAS E MOVIMENTO REDUZIDO
-   Complementam as media queries de largura: aqui a consulta é pelo TIPO
-   de apontador, pela ALTURA da tela e pela preferência do sistema — três
-   condições que a largura sozinha não descreve.
+   15. TOQUE, TELAS BAIXAS E MOVIMENTO REDUZIDO
+
+   Estas media queries não perguntam pela LARGURA, e sim por outras
+   condições do aparelho. Complementam as seções 13 e 14.
    ===================================================================== */
 
-/* ---------------------------------------------------------------------
-   Alvos de toque — (pointer: coarse) identifica telas operadas com o
-   dedo (celular e tablet), onde o apontador é impreciso. Links e
-   controles passam a ter no mínimo 44px de altura, o alvo mínimo
-   recomendado para toque.
-   --------------------------------------------------------------------- */
+/* (pointer: coarse) = tela operada com o dedo, onde o toque é impreciso.
+   Vale para celular e tablet, independente da largura. Alvos de 44px. */
 @media (pointer: coarse) {
 
   .navbar__link {
@@ -869,7 +959,6 @@ textarea:focus-visible {
     min-height: 44px;
   }
 
-  /* Linhas de opção mais altas e caixas maiores, para errar menos o toque */
   .opcao {
     padding: var(--espaco-md);
   }
@@ -880,21 +969,18 @@ textarea:focus-visible {
     height: 22px;
   }
 
-  /* Campos com área de toque confortável */
   .campo input,
   .campo select {
     min-height: 44px;
   }
 }
 
-/* ---------------------------------------------------------------------
-   Celular deitado (landscape) — em telas baixas o cabeçalho fixo comeria
-   boa parte da altura útil, então ele volta a rolar com a página.
-   --------------------------------------------------------------------- */
+/* Celular deitado: o cabeçalho fixo comeria metade da altura útil,
+   então ele volta a rolar junto com a página. */
 @media (max-height: 500px) {
 
   :root {
-    --altura-cabecalho: 0rem;   /* zera a reserva das âncoras */
+    --altura-cabecalho: 0rem;    /* sem cabeçalho fixo, sem reserva */
   }
 
   .cabecalho {
@@ -911,11 +997,8 @@ textarea:focus-visible {
   }
 }
 
-/* ---------------------------------------------------------------------
-   Movimento reduzido — respeita quem configurou o sistema para menos
-   animação. As microinterações de deslocamento e zoom são desligadas;
-   as mudanças de cor permanecem, pois são o feedback essencial.
-   --------------------------------------------------------------------- */
+/* Respeita quem desativou animações no sistema operacional.
+   As mudanças de COR continuam, pois são o feedback essencial. */
 @media (prefers-reduced-motion: reduce) {
 
   html {
