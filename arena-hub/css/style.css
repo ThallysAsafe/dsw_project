@@ -16,6 +16,7 @@
    11. Painéis complementares (<aside>)
    12. Rodapé
    13. Media Queries Globais (Tablet e Desktop)
+   15. Refinamentos para toque, telas baixas e movimento reduzido
    ===================================================================== */
 
 
@@ -842,3 +843,97 @@ textarea:focus-visible {
   }
 }
 
+
+/* =====================================================================
+   15. REFINAMENTOS PARA TOQUE, TELAS BAIXAS E MOVIMENTO REDUZIDO
+   Complementam as media queries de largura: aqui a consulta é pelo TIPO
+   de apontador, pela ALTURA da tela e pela preferência do sistema — três
+   condições que a largura sozinha não descreve.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   Alvos de toque — (pointer: coarse) identifica telas operadas com o
+   dedo (celular e tablet), onde o apontador é impreciso. Links e
+   controles passam a ter no mínimo 44px de altura, o alvo mínimo
+   recomendado para toque.
+   --------------------------------------------------------------------- */
+@media (pointer: coarse) {
+
+  .navbar__link {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .botao {
+    min-height: 44px;
+  }
+
+  /* Linhas de opção mais altas e caixas maiores, para errar menos o toque */
+  .opcao {
+    padding: var(--espaco-md);
+  }
+
+  .opcao input[type="radio"],
+  .opcao input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Campos com área de toque confortável */
+  .campo input,
+  .campo select {
+    min-height: 44px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Celular deitado (landscape) — em telas baixas o cabeçalho fixo comeria
+   boa parte da altura útil, então ele volta a rolar com a página.
+   --------------------------------------------------------------------- */
+@media (max-height: 500px) {
+
+  :root {
+    --altura-cabecalho: 0rem;   /* zera a reserva das âncoras */
+  }
+
+  .cabecalho {
+    position: static;
+  }
+
+  .aside-info--fixo {
+    position: static;
+  }
+
+  .hero,
+  .secao {
+    padding: var(--espaco-lg) 0;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Movimento reduzido — respeita quem configurou o sistema para menos
+   animação. As microinterações de deslocamento e zoom são desligadas;
+   as mudanças de cor permanecem, pois são o feedback essencial.
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .card:hover,
+  .passo:hover,
+  .botao:hover,
+  .botao:active,
+  .card:hover .card__imagem {
+    transform: none;
+  }
+}
