@@ -3,8 +3,14 @@
 Projeto Integrador de Desenvolvimento Web — site completo em **HTML5 semântico e
 CSS3 puro**, sem frameworks, sem pré-processadores e sem JavaScript.
 
-O código do site está em [`arena-hub/`](arena-hub/). O enunciado da disciplina
-está em `docs_Projeto_Integrador.pdf`.
+O código do site está em [`arena-hub/`](arena-hub/).
+
+**Documentação do projeto**
+
+| Arquivo | Para que serve |
+|---|---|
+| [`GUIA-CSS.md`](GUIA-CSS.md) | Explica todo o CSS usado no projeto e indica onde alterar cada coisa |
+| [`ROTEIRO-APRESENTACAO.md`](ROTEIRO-APRESENTACAO.md) | Roteiro da defesa, com a divisão entre os 5 integrantes e o mapa requisito → arquivo → linha |
 
 ---
 
