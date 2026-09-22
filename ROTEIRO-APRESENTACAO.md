@@ -504,6 +504,19 @@ sem internet. A documentação está no `README.md` e no `GUIA-CSS.md`."
 > a numeração se corrige sozinha. Escrito na mão, seria preciso renumerar."
 > *(`css/index.css`, linha 132)*
 
+**"Por que o `quadras.css` tem uma regra só?"**
+> "Porque a página é feita quase inteira de componentes compartilhados. Ela
+> usa 37 classes: 36 vêm do `style.css` e 35 dessas também são usadas em
+> `rachas.html` — `.card`, `.grade`, `.etiqueta`, `.botao`. Só o
+> `.card__endereco` é exclusivo dela, porque no card de racha esse espaço
+> mostra os detalhes da partida.
+>
+> Poderíamos ter duplicado o `.card` nos dois arquivos, mas aí mudar o card
+> exigiria editar dois lugares. Um arquivo de página quase vazio é o
+> resultado de a reutilização ter funcionado. Mantivemos o arquivo para o
+> padrão ficar previsível: toda página tem o seu, e é ali que entra
+> qualquer estilo novo que seja só dela."
+
 **"E se o usuário desativar o CSS?"**
 > "A página continua legível, porque a estrutura é semântica. Os títulos
 > continuam títulos, as listas continuam listas e o formulário continua
