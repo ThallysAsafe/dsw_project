@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Formulário de agendamento do ArenaHub: reserve a quadra inteira ou garanta sua vaga em um racha aberto da comunidade.">
-  <title>Agendamento e reserva | ArenaHub</title>
+  <meta name="description" content="Formulário de agendamento do ArenaHub: reserve seu horário em quadras esportivas parceiras de forma rápida e online.">
+  <title>Agendamento de quadras | ArenaHub</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/agendamento.css">
 </head>
@@ -49,12 +49,11 @@
     <!-- ------------------------ TÍTULO DA PÁGINA --------------------- -->
     <div class="pagina-titulo">
       <div class="container">
-        <h1>Agendamento e reserva</h1>
+        <h1>Agendamento de quadras</h1>
         <p>
-          Preencha os dados abaixo para solicitar a reserva de uma quadra
-          inteira ou para entrar em um racha aberto. Os campos marcados com
-          <span class="obrigatorio">*</span> são obrigatórios. Ainda não
-          escolheu o espaço? Consulte o
+          Preencha os dados abaixo para solicitar a reserva da sua quadra.
+          Os campos marcados com <span class="obrigatorio">*</span> são obrigatórios.
+          Ainda não escolheu o espaço? Consulte o
           <a class="link-texto" href="quadras.html#catalogo">catálogo de quadras</a>.
         </p>
       </div>
@@ -69,16 +68,11 @@
             <p class="secao__numero">01 / Solicitação</p>
             <h2 id="form-reserva">Dados da reserva</h2>
             <p>
-              A validação dos campos é feita pelo próprio navegador, sem
-              JavaScript. A confirmação é enviada por e-mail em até 2 horas.
+              Preencha os campos abaixo com atenção. A confirmação da sua
+              reserva é enviada por e-mail em até 2 horas.
             </p>
           </header>
 
-          <!--
-            O formulário usa method="get" apontando para a própria página
-            apenas para demonstrar a validação nativa do HTML5 em um projeto
-            estático, sem servidor de back-end.
-          -->
           <form class="formulario" action="agendamento.html" method="get">
 
             <!-- ============ GRUPO 1: DADOS DO SOLICITANTE ============ -->
@@ -121,6 +115,7 @@
                          id="telefone"
                          name="telefone"
                          placeholder="(82) 90000-0000"
+                         placeholder="(11) 90000-0000"
                          pattern="\(?[0-9]{2}\)?[\s-]?[0-9]{4,5}-?[0-9]{4}"
                          autocomplete="tel">
                   <small class="campo__dica">Opcional. Usado só em caso de imprevisto na quadra.</small>
@@ -142,15 +137,22 @@
                   <optgroup label="Futebol">
                     <option value="arena-jatiuca">Arena Jatiúca &mdash; futebol society</option>
                     <option value="ginasio-farol-futsal">Ginásio Farol &mdash; futsal</option>
+                    <option value="arena-society">Arena Society Clube &mdash; futebol society</option>
+                    <option value="ginasio-central-futsal">Ginásio Central &mdash; futsal</option>
                   </optgroup>
                   <optgroup label="Areia">
                     <option value="arena-ponta-verde">Arena Ponta Verde &mdash; vôlei de praia</option>
                     <option value="beach-club-pajucara">Beach Club Pajuçara &mdash; beach tennis</option>
+                    <option value="arena-sol-praia">Arena Sol &amp; Praia &mdash; vôlei de praia</option>
+                    <option value="beach-tennis-club">Beach Tennis Club &mdash; beach tennis</option>
                   </optgroup>
                   <optgroup label="Quadra">
                     <option value="ginasio-farol-basquete">Ginásio Farol &mdash; basquete</option>
                     <option value="praca-benedito-bentes">Praça Benedito Bentes &mdash; basquete 3x3</option>
                     <option value="tennis-park-gruta">Tennis Park Gruta &mdash; tênis</option>
+                    <option value="ginasio-central-basquete">Ginásio Central &mdash; basquete</option>
+                    <option value="parque-esportes-3x3">Parque dos Esportes 3x3 &mdash; basquete 3x3</option>
+                    <option value="tennis-park-clube">Tennis Park Clube &mdash; tênis</option>
                   </optgroup>
                 </select>
               </div>
@@ -217,29 +219,30 @@
 
               <!-- Botões de rádio: escolha única e obrigatória -->
               <fieldset>
-                <legend>Tipo de reserva <span class="obrigatorio">*</span></legend>
+                <legend>Tipo de agendamento <span class="obrigatorio">*</span></legend>
 
                 <div class="grupo-opcoes">
                   <div class="opcao">
                     <input type="radio"
-                           id="tipo-quadra-inteira"
+                           id="tipo-avulso"
                            name="tipo-reserva"
-                           value="quadra-inteira"
-                           required>
-                    <label for="tipo-quadra-inteira">
-                      Quadra inteira
-                      <small>Você leva o grupo completo e paga o valor cheio da hora.</small>
+                           value="avulso"
+                           required
+                           checked>
+                    <label for="tipo-avulso">
+                      Horário avulso
+                      <small>Reserva pontual para a data e horário selecionados.</small>
                     </label>
                   </div>
 
                   <div class="opcao">
                     <input type="radio"
-                           id="tipo-entrada-racha"
+                           id="tipo-mensalista"
                            name="tipo-reserva"
-                           value="entrada-racha">
-                    <label for="tipo-entrada-racha">
-                      Entrada em racha
-                      <small>Você ocupa uma vaga aberta e divide o valor com o grupo.</small>
+                           value="mensalista">
+                    <label for="tipo-mensalista">
+                      Plano mensalista
+                      <small>Garante o mesmo dia e horário fixos todas as semanas.</small>
                     </label>
                   </div>
                 </div>
@@ -343,7 +346,7 @@
             <li>O responsável pela quadra recebe o pedido na hora.</li>
             <li>A confirmação chega por e-mail em até 2 horas.</li>
             <li>O pagamento é feito no local, antes do início da partida.</li>
-            <li>Rachas sem vaga viram lista de espera automática.</li>
+            <li>Cancelamento sem custo com até 12 horas de antecedência.</li>
           </ol>
         </aside>
 
@@ -361,9 +364,9 @@
         <section aria-labelledby="rodape-sobre">
           <h2 id="rodape-sobre">ArenaHub</h2>
           <p>
+            Catálogo de quadras esportivas e organização de rachas em Maceió.
             Catálogo de quadras esportivas e organização de rachas.
-            Projeto Integrador de Desenvolvimento Web, feito com HTML5
-            semântico e CSS3, sem frameworks.
+            Conectando atletas e grupos aos melhores espaços da cidade.
           </p>
         </section>
 
@@ -383,6 +386,7 @@
             <ul>
               <li><a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
               <li><a href="tel:+558230000000">(82) 3000-0000</a></li>
+              <li><a href="tel:+5508000000000">0800 000 0000</a></li>
               <li>Segunda a sábado, das 8h às 20h</li>
             </ul>
           </address>
