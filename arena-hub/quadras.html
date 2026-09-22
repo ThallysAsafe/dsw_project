@@ -10,16 +10,14 @@
 </head>
 <body>
 
-  <!-- Link de acessibilidade: visível apenas ao navegar por teclado (Tab) -->
-  <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
+  <a class="link-pular" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ============================ CABEÇALHO ============================ -->
+  <!-- Cabeçalho -->
   <header class="cabecalho" id="topo">
     <div class="container cabecalho__interno">
 
       <a class="logo" href="index.html">
         <span class="logo__marca">
-          <!-- Marca vetorial: planta baixa de um campo (decorativa) -->
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
             <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
@@ -29,24 +27,24 @@
         ArenaHub
       </a>
 
-      <nav class="navbar" aria-label="Navegação principal">
-        <ul class="navbar__lista">
-          <li><a class="navbar__link" href="index.html">Início</a></li>
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
+          <li><a class="menu__link" href="index.html">Início</a></li>
           <li>
-            <a class="navbar__link navbar__link--ativo" href="quadras.html" aria-current="page">Quadras</a>
+            <a class="menu__link menu__link--ativo" href="quadras.html" aria-current="page">Quadras</a>
           </li>
-          <li><a class="navbar__link" href="rachas.html">Rachas</a></li>
-          <li><a class="navbar__link" href="agendamento.html">Agendamento</a></li>
+          <li><a class="menu__link" href="rachas.html">Rachas</a></li>
+          <li><a class="menu__link" href="agendamento.html">Agendamento</a></li>
         </ul>
       </nav>
 
     </div>
   </header>
 
-  <!-- ========================= CONTEÚDO PRINCIPAL ====================== -->
+  <!-- Conteúdo principal -->
   <main id="conteudo">
 
-    <!-- ------------------------ TÍTULO DA PÁGINA --------------------- -->
+    <!-- Título da página -->
     <div class="pagina-titulo">
       <div class="container">
         <h1>Quadras disponíveis</h1>
@@ -59,7 +57,7 @@
       </div>
     </div>
 
-    <!-- ---------------------- CATÁLOGO EM GRID ----------------------- -->
+    <!-- Catálogo de quadras -->
     <section class="secao" aria-labelledby="catalogo">
       <div class="container">
 
@@ -72,14 +70,11 @@
           </p>
         </header>
 
-        <!-- Grade bidimensional (CSS Grid): 1 coluna no mobile,
-             2 no tablet e 3 no desktop -->
         <div class="grade grade--tres">
 
-          <!-- Quadra 01 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/futebol-society-800.jpg"
                    srcset="images/futebol-society-400.jpg 400w,
                            images/futebol-society-600.jpg 600w,
@@ -89,27 +84,26 @@
                    loading="lazy" decoding="async"
                    alt="Três bolas de futebol alinhadas sobre o gramado sintético de um campo society, com a trave ao fundo.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Futebol society</p>
               </div>
-              <h3 class="card__titulo">Arena Jatiúca</h3>
-              <p class="card__endereco">Rua Deputado José Lages, 210 &middot; Jatiúca</p>
-              <p class="card__texto">
+              <h3 class="cartao__titulo">Arena Jatiúca</h3>
+              <p class="cartao__endereco">Rua Deputado José Lages, 210 &middot; Jatiúca</p>
+              <p class="cartao__texto">
                 Grama sintética nova, vestiário com chuveiro quente e
                 estacionamento gratuito para até 20 carros.
               </p>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 120 <span>por hora</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 120 <span>por hora</span></p>
                 <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
               </div>
             </div>
           </article>
 
-          <!-- Quadra 02 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/volei-de-praia-800.jpg"
                    srcset="images/volei-de-praia-400.jpg 400w,
                            images/volei-de-praia-600.jpg 600w,
@@ -119,27 +113,26 @@
                    loading="lazy" decoding="async"
                    alt="Jogadores disputando um ponto de vôlei de praia junto à rede, em silhueta contra o céu alaranjado do pôr do sol.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Vôlei de praia</p>
               </div>
-              <h3 class="card__titulo">Arena Ponta Verde</h3>
-              <p class="card__endereco">Avenida Álvaro Otacílio, 1500 &middot; Ponta Verde</p>
-              <p class="card__texto">
+              <h3 class="cartao__titulo">Arena Ponta Verde</h3>
+              <p class="cartao__endereco">Avenida Álvaro Otacílio, 1500 &middot; Ponta Verde</p>
+              <p class="cartao__texto">
                 Quadra de areia fina à beira-mar, com rede oficial regulável e
                 iluminação para jogos até as 22h.
               </p>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 80 <span>por hora</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 80 <span>por hora</span></p>
                 <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
               </div>
             </div>
           </article>
 
-          <!-- Quadra 03 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/beach-tennis-800.jpg"
                    srcset="images/beach-tennis-400.jpg 400w,
                            images/beach-tennis-600.jpg 600w,
@@ -149,27 +142,26 @@
                    loading="lazy" decoding="async"
                    alt="Bola de vôlei apoiada na areia de uma quadra, com a rede e jogadores desfocados ao fundo.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Beach tennis</p>
               </div>
-              <h3 class="card__titulo">Beach Club Pajuçara</h3>
-              <p class="card__endereco">Rua Jangadeiros Alagoanos, 88 &middot; Pajuçara</p>
-              <p class="card__texto">
+              <h3 class="cartao__titulo">Beach Club Pajuçara</h3>
+              <p class="cartao__endereco">Rua Jangadeiros Alagoanos, 88 &middot; Pajuçara</p>
+              <p class="cartao__texto">
                 Duas quadras de areia compactada, com aluguel opcional de
                 raquetes e bolinhas de beach tennis.
               </p>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 70 <span>por hora</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 70 <span>por hora</span></p>
                 <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
               </div>
             </div>
           </article>
 
-          <!-- Quadra 04 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/basquete-coberto-800.jpg"
                    srcset="images/basquete-coberto-400.jpg 400w,
                            images/basquete-coberto-600.jpg 600w,
@@ -179,27 +171,26 @@
                    loading="lazy" decoding="async"
                    alt="Atleta saltando para arremessar a bola na cesta durante uma partida de basquete em ginásio coberto.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Basquete</p>
               </div>
-              <h3 class="card__titulo">Ginásio Farol</h3>
-              <p class="card__endereco">Rua Cincinato Pinto, 305 &middot; Farol</p>
-              <p class="card__texto">
+              <h3 class="cartao__titulo">Ginásio Farol</h3>
+              <p class="cartao__endereco">Rua Cincinato Pinto, 305 &middot; Farol</p>
+              <p class="cartao__texto">
                 Quadra poliesportiva coberta com piso emborrachado, placar
                 eletrônico e arquibancada para 120 pessoas.
               </p>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 95 <span>por hora</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 95 <span>por hora</span></p>
                 <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
               </div>
             </div>
           </article>
 
-          <!-- Quadra 05 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/tenis-saibro-800.jpg"
                    srcset="images/tenis-saibro-400.jpg 400w,
                            images/tenis-saibro-600.jpg 600w,
@@ -209,27 +200,26 @@
                    loading="lazy" decoding="async"
                    alt="Vista aérea de uma quadra de tênis de saibro alaranjado com um jogador preparando o saque.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Tênis</p>
               </div>
-              <h3 class="card__titulo">Tennis Park Gruta</h3>
-              <p class="card__endereco">Avenida Menino Marcelo, 940 &middot; Gruta de Lourdes</p>
-              <p class="card__texto">
+              <h3 class="cartao__titulo">Tennis Park Gruta</h3>
+              <p class="cartao__endereco">Avenida Menino Marcelo, 940 &middot; Gruta de Lourdes</p>
+              <p class="cartao__texto">
                 Quadra de saibro com manutenção diária, bancos cobertos e
                 aulas avulsas com professor credenciado.
               </p>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 90 <span>por hora</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 90 <span>por hora</span></p>
                 <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
               </div>
             </div>
           </article>
 
-          <!-- Quadra 06 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/basquete-externo-800.jpg"
                    srcset="images/basquete-externo-400.jpg 400w,
                            images/basquete-externo-600.jpg 600w,
@@ -239,18 +229,18 @@
                    loading="lazy" decoding="async"
                    alt="Bola de basquete parada sobre a linha branca de uma quadra externa com piso cinza e laranja.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Basquete 3x3</p>
               </div>
-              <h3 class="card__titulo">Praça Benedito Bentes</h3>
-              <p class="card__endereco">Conjunto Village Campestre &middot; Benedito Bentes</p>
-              <p class="card__texto">
+              <h3 class="cartao__titulo">Praça Benedito Bentes</h3>
+              <p class="cartao__endereco">Conjunto Village Campestre &middot; Benedito Bentes</p>
+              <p class="cartao__texto">
                 Quadra aberta de basquete 3x3, com duas tabelas oficiais e
                 bebedouro público ao lado do alambrado.
               </p>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 45 <span>por hora</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 45 <span>por hora</span></p>
                 <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
               </div>
             </div>
@@ -260,7 +250,7 @@
       </div>
     </section>
 
-    <!-- --------------------- INFORMAÇÕES COMPLEMENTARES -------------- -->
+    <!-- Informações complementares -->
     <section class="secao secao--papel" aria-labelledby="regras-reserva">
       <div class="container">
 
@@ -268,7 +258,7 @@
           <p class="secao__numero">02 / Regras</p>
         </header>
 
-        <aside class="aside-info" aria-labelledby="regras-reserva">
+        <aside class="info-lateral" aria-labelledby="regras-reserva">
           <h2 id="regras-reserva">Antes de reservar</h2>
           <p>Combinados válidos para todas as quadras parceiras.</p>
           <ul>
@@ -285,7 +275,7 @@
 
   </main>
 
-  <!-- ============================= RODAPÉ ============================== -->
+  <!-- Rodapé -->
   <footer class="rodape">
     <div class="container">
 

@@ -10,16 +10,14 @@
 </head>
 <body>
 
-  <!-- Link de acessibilidade: visível apenas ao navegar por teclado (Tab) -->
-  <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
+  <a class="link-pular" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ============================ CABEÇALHO ============================ -->
+  <!-- Cabeçalho -->
   <header class="cabecalho" id="topo">
     <div class="container cabecalho__interno">
 
       <a class="logo" href="index.html">
         <span class="logo__marca">
-          <!-- Marca vetorial: planta baixa de um campo (decorativa) -->
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
             <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
@@ -29,24 +27,24 @@
         ArenaHub
       </a>
 
-      <nav class="navbar" aria-label="Navegação principal">
-        <ul class="navbar__lista">
-          <li><a class="navbar__link" href="index.html">Início</a></li>
-          <li><a class="navbar__link" href="quadras.html">Quadras</a></li>
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
+          <li><a class="menu__link" href="index.html">Início</a></li>
+          <li><a class="menu__link" href="quadras.html">Quadras</a></li>
           <li>
-            <a class="navbar__link navbar__link--ativo" href="rachas.html" aria-current="page">Rachas</a>
+            <a class="menu__link menu__link--ativo" href="rachas.html" aria-current="page">Rachas</a>
           </li>
-          <li><a class="navbar__link" href="agendamento.html">Agendamento</a></li>
+          <li><a class="menu__link" href="agendamento.html">Agendamento</a></li>
         </ul>
       </nav>
 
     </div>
   </header>
 
-  <!-- ========================= CONTEÚDO PRINCIPAL ====================== -->
+  <!-- Conteúdo principal -->
   <main id="conteudo">
 
-    <!-- ------------------------ TÍTULO DA PÁGINA --------------------- -->
+    <!-- Título da página -->
     <div class="pagina-titulo">
       <div class="container">
         <h1>Rachas abertos</h1>
@@ -59,7 +57,7 @@
       </div>
     </div>
 
-    <!-- ----------------- COMO FUNCIONAM OS RACHAS -------------------- -->
+    <!-- Como funcionam os rachas -->
     <section class="secao" aria-labelledby="lista-rachas">
       <div class="container">
 
@@ -74,13 +72,11 @@
           </p>
         </header>
 
-        <!-- Lista de partidas em grade (CSS Grid) -->
         <div class="grade grade--tres">
 
-          <!-- Racha 01 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/futebol-society-800.jpg"
                    srcset="images/futebol-society-400.jpg 400w,
                            images/futebol-society-600.jpg 600w,
@@ -90,13 +86,13 @@
                    loading="lazy" decoding="async"
                    alt="Bolas de futebol apoiadas no gramado sintético de um campo society iluminado.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Society</p>
                 <p class="etiqueta etiqueta--vagas">3 vagas</p>
               </div>
-              <h3 class="card__titulo">Futebol dos Amigos das Terças</h3>
-              <ul class="card__detalhes">
+              <h3 class="cartao__titulo">Futebol dos Amigos das Terças</h3>
+              <ul class="cartao__detalhes">
                 <li><strong>Local</strong> Arena Jatiúca, Jatiúca</li>
                 <li>
                   <strong>Quando</strong>
@@ -104,17 +100,16 @@
                 </li>
                 <li><strong>Nível</strong> Recreativo, aberto a iniciantes</li>
               </ul>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 15 <span>por jogador</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 15 <span>por jogador</span></p>
                 <a class="botao botao--primario botao--bloco" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Quero%20entrar%20no%20racha%20de%20futebol" target="_blank" rel="noopener noreferrer">Entrar no racha</a>
               </div>
             </div>
           </article>
 
-          <!-- Racha 02 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/volei-de-praia-800.jpg"
                    srcset="images/volei-de-praia-400.jpg 400w,
                            images/volei-de-praia-600.jpg 600w,
@@ -124,13 +119,13 @@
                    loading="lazy" decoding="async"
                    alt="Partida de vôlei de praia ao entardecer, com um jogador saltando para cortar a bola sobre a rede.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Vôlei de praia</p>
                 <p class="etiqueta etiqueta--vagas">5 vagas</p>
               </div>
-              <h3 class="card__titulo">Vôlei da Galera</h3>
-              <ul class="card__detalhes">
+              <h3 class="cartao__titulo">Vôlei da Galera</h3>
+              <ul class="cartao__detalhes">
                 <li><strong>Local</strong> Arena Ponta Verde, Ponta Verde</li>
                 <li>
                   <strong>Quando</strong>
@@ -138,17 +133,16 @@
                 </li>
                 <li><strong>Nível</strong> Intermediário</li>
               </ul>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 12 <span>por jogador</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 12 <span>por jogador</span></p>
                 <a class="botao botao--primario botao--bloco" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Quero%20entrar%20no%20racha%20de%20v%C3%B4lei" target="_blank" rel="noopener noreferrer">Entrar no racha</a>
               </div>
             </div>
           </article>
 
-          <!-- Racha 03 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/basquete-externo-800.jpg"
                    srcset="images/basquete-externo-400.jpg 400w,
                            images/basquete-externo-600.jpg 600w,
@@ -158,13 +152,13 @@
                    loading="lazy" decoding="async"
                    alt="Bola de basquete sobre a linha branca de uma quadra externa de piso cinza e laranja.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Basquete</p>
                 <p class="etiqueta etiqueta--vagas">2 vagas</p>
               </div>
-              <h3 class="card__titulo">Basquete 3x3 da Quinta</h3>
-              <ul class="card__detalhes">
+              <h3 class="cartao__titulo">Basquete 3x3 da Quinta</h3>
+              <ul class="cartao__detalhes">
                 <li><strong>Local</strong> Praça Benedito Bentes, Benedito Bentes</li>
                 <li>
                   <strong>Quando</strong>
@@ -172,17 +166,16 @@
                 </li>
                 <li><strong>Nível</strong> Livre, times sorteados na hora</li>
               </ul>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 8 <span>por jogador</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 8 <span>por jogador</span></p>
                 <a class="botao botao--primario botao--bloco" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Quero%20entrar%20no%20racha%20de%20basquete" target="_blank" rel="noopener noreferrer">Entrar no racha</a>
               </div>
             </div>
           </article>
 
-          <!-- Racha 04 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/basquete-coberto-800.jpg"
                    srcset="images/basquete-coberto-400.jpg 400w,
                            images/basquete-coberto-600.jpg 600w,
@@ -192,13 +185,13 @@
                    loading="lazy" decoding="async"
                    alt="Jogadores disputando a bola em uma quadra coberta durante partida de basquete.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Futsal</p>
                 <p class="etiqueta etiqueta--vagas">4 vagas</p>
               </div>
-              <h3 class="card__titulo">Racha Misto de Futsal</h3>
-              <ul class="card__detalhes">
+              <h3 class="cartao__titulo">Racha Misto de Futsal</h3>
+              <ul class="cartao__detalhes">
                 <li><strong>Local</strong> Ginásio Farol, Farol</li>
                 <li>
                   <strong>Quando</strong>
@@ -206,17 +199,16 @@
                 </li>
                 <li><strong>Nível</strong> Recreativo, times mistos</li>
               </ul>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 14 <span>por jogador</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 14 <span>por jogador</span></p>
                 <a class="botao botao--primario botao--bloco" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Quero%20entrar%20no%20racha%20de%20futsal" target="_blank" rel="noopener noreferrer">Entrar no racha</a>
               </div>
             </div>
           </article>
 
-          <!-- Racha 05 -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/beach-tennis-800.jpg"
                    srcset="images/beach-tennis-400.jpg 400w,
                            images/beach-tennis-600.jpg 600w,
@@ -226,13 +218,13 @@
                    loading="lazy" decoding="async"
                    alt="Bola apoiada na areia de uma quadra de praia, com a rede esticada ao fundo.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Beach tennis</p>
                 <p class="etiqueta etiqueta--vagas">6 vagas</p>
               </div>
-              <h3 class="card__titulo">Beach Tennis para Iniciantes</h3>
-              <ul class="card__detalhes">
+              <h3 class="cartao__titulo">Beach Tennis para Iniciantes</h3>
+              <ul class="cartao__detalhes">
                 <li><strong>Local</strong> Beach Club Pajuçara, Pajuçara</li>
                 <li>
                   <strong>Quando</strong>
@@ -240,17 +232,16 @@
                 </li>
                 <li><strong>Nível</strong> Iniciante, raquetes emprestadas</li>
               </ul>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 10 <span>por jogador</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 10 <span>por jogador</span></p>
                 <a class="botao botao--primario botao--bloco" href="https://wa.me/5511900000000?text=Ol%C3%A1!%20Quero%20entrar%20no%20racha%20de%20beach%20tennis" target="_blank" rel="noopener noreferrer">Entrar no racha</a>
               </div>
             </div>
           </article>
 
-          <!-- Racha 06 (sem vagas: botão desabilitado) -->
-          <article class="card">
-            <figure class="card__figura">
-              <img class="card__imagem"
+          <article class="cartao">
+            <figure class="cartao__figura">
+              <img class="cartao__imagem"
                    src="images/tenis-saibro-800.jpg"
                    srcset="images/tenis-saibro-400.jpg 400w,
                            images/tenis-saibro-600.jpg 600w,
@@ -260,13 +251,13 @@
                    loading="lazy" decoding="async"
                    alt="Quadra de tênis de saibro vista de cima, com um jogador sozinho preparando o saque.">
             </figure>
-            <div class="card__corpo">
-              <div class="card__cabecalho">
+            <div class="cartao__corpo">
+              <div class="cartao__cabecalho">
                 <p class="etiqueta">Tênis</p>
                 <p class="etiqueta etiqueta--neutra">Sem vagas</p>
               </div>
-              <h3 class="card__titulo">Tênis em Duplas de Domingo</h3>
-              <ul class="card__detalhes">
+              <h3 class="cartao__titulo">Tênis em Duplas de Domingo</h3>
+              <ul class="cartao__detalhes">
                 <li><strong>Local</strong> Tennis Park Gruta, Gruta de Lourdes</li>
                 <li>
                   <strong>Quando</strong>
@@ -274,8 +265,8 @@
                 </li>
                 <li><strong>Nível</strong> Avançado</li>
               </ul>
-              <div class="card__rodape">
-                <p class="card__preco">R$ 23 <span>por jogador</span></p>
+              <div class="cartao__rodape">
+                <p class="cartao__preco">R$ 23 <span>por jogador</span></p>
                 <button class="botao botao--primario botao--bloco" type="button" disabled>Partida lotada</button>
               </div>
             </div>
@@ -285,7 +276,7 @@
       </div>
     </section>
 
-    <!-- --------------------- REGRAS DA COMUNIDADE -------------------- -->
+    <!-- Regras da comunidade -->
     <section class="secao secao--papel" aria-labelledby="regras-racha">
       <div class="container">
 
@@ -293,13 +284,13 @@
           <p class="secao__numero">02 / Combinados</p>
         </header>
 
-        <aside class="aside-info" aria-labelledby="regras-racha">
+        <aside class="info-lateral" aria-labelledby="regras-racha">
           <h2 id="regras-racha">Combinados da comunidade</h2>
           <p>Poucas regras, respeitadas por todo mundo, mantêm o racha divertido.</p>
           <ul>
             <li>Confirmou e não pode ir? Cancele com até 4 horas de antecedência.</li>
             <li>Duas ausências sem aviso no mês bloqueiam novas vagas por 15 dias.</li>
-            <li>O rateio da quadra é informado no card e pago ao organizador.</li>
+            <li>O rateio da quadra é informado no cartão e pago ao organizador.</li>
             <li>Leve camisa clara e camisa escura para facilitar a divisão dos times.</li>
             <li>Rachas marcados como iniciantes priorizam quem está começando agora.</li>
           </ul>
@@ -310,7 +301,7 @@
 
   </main>
 
-  <!-- ============================= RODAPÉ ============================== -->
+  <!-- Rodapé -->
   <footer class="rodape">
     <div class="container">
 

@@ -1,38 +1,17 @@
-/* =====================================================================
-   ArenaHub — index.css (estilos da página Início)
-
-   Carregado DEPOIS de style.css, então pode ajustar o que vem de lá.
-   A âncora #como-funciona está em style.css, seção 05.
-
-   ÍNDICE
-   01. Seção Hero (banner de abertura)
-   02. Passos numerados  <ol class="passos">
-   03. Painel de chamada para donos de quadra
-   04. Media Query — Tablet  (min-width: 768px)
-   05. Media Query — Desktop (min-width: 1024px)
-   ===================================================================== */
-
-
-/* =====================================================================
-   01. SEÇÃO HERO
-
-   No celular o texto fica em cima e a foto embaixo (coluna).
-   No desktop os dois ficam lado a lado — ver seção 05.
-   ===================================================================== */
-.hero {
+/* Destaque da página inicial */
+.destaque {
   padding: var(--espaco-xl) 0;
   background-color: var(--cor-superficie);
   border-bottom: var(--borda-forte);
 }
 
-.hero__conteudo {
+.destaque__conteudo {
   display: flex;
   flex-direction: column;
   gap: var(--espaco-lg);
 }
 
-/* Rótulo escuro acima do título principal */
-.hero__rotulo {
+.destaque__rotulo {
   display: inline-block;
   margin-bottom: var(--espaco-sm);
   padding: 2px var(--espaco-xs);
@@ -44,41 +23,39 @@
   letter-spacing: var(--espacamento-rotulo);
 }
 
-.hero__titulo {
+.destaque__titulo {
   font-size: var(--tamanho-h1);
 }
 
-/* Régua curta e grossa entre o título e o texto de apoio */
-.hero__regua {
+.destaque__regua {
   max-width: 200px;
   margin: var(--espaco-md) 0;
   border-top: var(--borda-grossa);
 }
 
-.hero__texto p {
+.destaque__texto p {
   font-size: var(--tamanho-medio);
   color: var(--cor-tinta-media);
 }
 
-.hero__texto .grupo-botoes {
+.destaque__texto .grupo-botoes {
   margin-top: var(--espaco-lg);
 }
 
-/* Moldura da foto, com a legenda presa embaixo */
-.hero__figura {
+.destaque__figura {
   border: var(--borda-forte);
   border-radius: var(--raio);
   background-color: var(--cor-papel);
 }
 
-.hero__imagem {
+.destaque__imagem {
   width: 100%;
-  height: 240px;                 /* cresce nas media queries */
-  object-fit: cover;             /* recorta sem distorcer a foto */
+  height: 240px;
+  object-fit: cover;
 }
 
-.hero__legenda {
-  max-width: none;               /* ignora o limite de leitura do <p> */
+.destaque__legenda {
+  max-width: none;
   padding: var(--espaco-xs) var(--espaco-sm);
   border-top: var(--borda-forte);
   font-size: var(--tamanho-micro);
@@ -87,17 +64,17 @@
   color: var(--cor-tinta-media);
 }
 
-/* --- Números de destaque (120 quadras, 40 rachas, 06 modalidades) --- */
-.hero__indicadores {
+/* Números de destaque */
+.destaque__indicadores {
   display: flex;
-  flex-wrap: wrap;               /* quebram a linha quando não cabem */
+  flex-wrap: wrap;
   gap: var(--espaco-lg);
   margin-top: var(--espaco-lg);
   padding-top: var(--espaco-md);
   border-top: var(--borda-forte);
 }
 
-.hero__indicadores strong {
+.destaque__indicadores strong {
   display: block;
   font-family: var(--fonte-display);
   font-size: var(--tamanho-numero);
@@ -105,7 +82,7 @@
   color: var(--cor-primaria);
 }
 
-.hero__indicadores span {
+.destaque__indicadores span {
   display: block;
   margin-top: 4px;
   font-size: var(--tamanho-micro);
@@ -115,25 +92,16 @@
 }
 
 
-/* =====================================================================
-   02. PASSOS NUMERADOS — <ol class="passos">
-
-   É uma lista ORDENADA porque a ordem faz parte do conteúdo: primeiro
-   escolher a quadra, depois montar o time, depois reservar.
-
-   O número 01/02/03 NÃO está digitado no HTML: ele é gerado por um
-   contador do CSS. Se um passo for inserido ou removido, a numeração
-   se ajusta sozinha.
-   ===================================================================== */
+/* Passos numerados */
 .passos {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--espaco-md);
-  counter-reset: passo;          /* cria o contador e zera */
+  counter-reset: passo;
 }
 
 .passo {
-  counter-increment: passo;      /* soma 1 a cada <li> */
+  counter-increment: passo;
   padding: var(--espaco-md);
   border: var(--borda-forte);
   border-radius: var(--raio);
@@ -141,9 +109,8 @@
   transition: var(--transicao);
 }
 
-/* Bloquinho escuro com o número gerado pelo contador */
 .passo::before {
-  content: counter(passo, decimal-leading-zero);   /* 01, 02, 03 */
+  content: counter(passo, decimal-leading-zero);
   display: inline-block;
   margin-bottom: var(--espaco-sm);
   padding: 2px var(--espaco-xs);
@@ -169,11 +136,7 @@
 }
 
 
-/* =====================================================================
-   03. PAINEL DE CHAMADA PARA DONOS DE QUADRA
-
-   Caixa escura de destaque no fim da página.
-   ===================================================================== */
+/* Painel para donos de quadra */
 .painel-destaque {
   padding: var(--espaco-lg);
   border-left: 8px solid var(--cor-destaque);
@@ -202,7 +165,6 @@
   color: var(--cor-linha);
 }
 
-/* Dentro do painel escuro o botão secundário inverte as cores */
 .painel-destaque .botao--secundario,
 .painel-destaque .botao--secundario:visited {
   margin-top: var(--espaco-md);
@@ -219,57 +181,47 @@
 }
 
 
-/* =====================================================================
-   04. MEDIA QUERY — TABLET (min-width: 768px)
-   ===================================================================== */
+/* Tablet */
 @media (min-width: 768px) {
-
-  /* Passos em duas colunas */
   .passos {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--espaco-lg);
   }
 
-  .hero__imagem {
+  .destaque__imagem {
     height: 340px;
   }
 }
 
 
-/* =====================================================================
-   05. MEDIA QUERY — DESKTOP (min-width: 1024px)
-   ===================================================================== */
+/* Desktop */
 @media (min-width: 1024px) {
-
-  /* Hero em duas colunas: texto à esquerda, foto à direita */
-  .hero__conteudo {
+  .destaque__conteudo {
     flex-direction: row;
     align-items: stretch;
   }
 
-  .hero__texto {
-    flex: 1.2;                   /* um pouco mais largo que a foto */
+  .destaque__texto {
+    flex: 1.2;
   }
 
-  .hero__figura {
+  .destaque__figura {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  .hero__imagem {
-    flex: 1;                     /* a foto estica junto com o texto */
+  .destaque__imagem {
+    flex: 1;
     height: auto;
     min-height: 420px;
   }
 
-  /* Passos em três colunas */
   .passos {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Conteúdo principal + coluna lateral <aside> */
-  .layout-conteudo {
+  .area-conteudo {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: var(--espaco-lg);

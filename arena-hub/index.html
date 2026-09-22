@@ -10,16 +10,14 @@
 </head>
 <body>
 
-  <!-- Link de acessibilidade: visível apenas ao navegar por teclado (Tab) -->
-  <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
+  <a class="link-pular" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ============================ CABEÇALHO ============================ -->
+  <!-- Cabeçalho -->
   <header class="cabecalho" id="topo">
     <div class="container cabecalho__interno">
 
       <a class="logo" href="index.html">
         <span class="logo__marca">
-          <!-- Marca vetorial: planta baixa de um campo (decorativa) -->
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
             <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
@@ -29,35 +27,35 @@
         ArenaHub
       </a>
 
-      <nav class="navbar" aria-label="Navegação principal">
-        <ul class="navbar__lista">
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
           <li>
-            <a class="navbar__link navbar__link--ativo" href="index.html" aria-current="page">Início</a>
+            <a class="menu__link menu__link--ativo" href="index.html" aria-current="page">Início</a>
           </li>
-          <li><a class="navbar__link" href="quadras.html">Quadras</a></li>
-          <li><a class="navbar__link" href="rachas.html">Rachas</a></li>
-          <li><a class="navbar__link" href="agendamento.html">Agendamento</a></li>
+          <li><a class="menu__link" href="quadras.html">Quadras</a></li>
+          <li><a class="menu__link" href="rachas.html">Rachas</a></li>
+          <li><a class="menu__link" href="agendamento.html">Agendamento</a></li>
         </ul>
       </nav>
 
     </div>
   </header>
 
-  <!-- ========================= CONTEÚDO PRINCIPAL ====================== -->
+  <!-- Conteúdo principal -->
   <main id="conteudo">
 
-    <!-- ----------------------------- HERO ---------------------------- -->
-    <section class="hero" aria-labelledby="titulo-hero">
-      <div class="container hero__conteudo">
+    <!-- Destaque -->
+    <section class="destaque" aria-labelledby="titulo-destaque">
+      <div class="container destaque__conteudo">
 
-        <div class="hero__texto">
-          <p class="hero__rotulo">Quadras e rachas &middot; Reserve online</p>
+        <div class="destaque__texto">
+          <p class="destaque__rotulo">Quadras e rachas &middot; Reserve online</p>
 
-          <h1 class="hero__titulo" id="titulo-hero">
+          <h1 class="destaque__titulo" id="titulo-destaque">
             Encontre quadras e organize seu racha
           </h1>
 
-          <hr class="hero__regua">
+          <hr class="destaque__regua">
 
           <p>
             O ArenaHub reúne as quadras da cidade em um só lugar. Escolha o
@@ -71,7 +69,7 @@
             <a class="botao botao--secundario" href="rachas.html#lista-rachas">Ver rachas</a>
           </div>
 
-          <ul class="hero__indicadores">
+          <ul class="destaque__indicadores">
             <li>
               <strong>120</strong>
               <span>quadras cadastradas</span>
@@ -87,8 +85,8 @@
           </ul>
         </div>
 
-        <figure class="hero__figura">
-          <img class="hero__imagem"
+        <figure class="destaque__figura">
+          <img class="destaque__imagem"
                src="images/campo-noturno-1200.jpg"
                srcset="images/campo-noturno-600.jpg 600w,
                        images/campo-noturno-900.jpg 900w,
@@ -97,13 +95,13 @@
                width="1200" height="800"
                loading="eager" fetchpriority="high" decoding="async"
                alt="Campo de futebol society iluminado por refletores durante uma partida noturna, com jogadores espalhados pelo gramado.">
-          <figcaption class="hero__legenda">Arena Jatiúca &middot; terça-feira, 20h</figcaption>
+          <figcaption class="destaque__legenda">Arena Jatiúca &middot; terça-feira, 20h</figcaption>
         </figure>
 
       </div>
     </section>
 
-    <!-- ------------------------ COMO FUNCIONA ------------------------ -->
+    <!-- Como funciona -->
     <section class="secao secao--papel" aria-labelledby="como-funciona">
       <div class="container">
 
@@ -116,8 +114,6 @@
           </p>
         </header>
 
-        <!-- Lista ORDENADA: a sequência dos passos faz parte do conteúdo.
-             Os numerais são gerados por contador no CSS. -->
         <ol class="passos">
 
           <li class="passo">
@@ -152,9 +148,9 @@
       </div>
     </section>
 
-    <!-- --------------------- MODALIDADES ATENDIDAS -------------------- -->
+    <!-- Modalidades -->
     <section class="secao" aria-labelledby="modalidades">
-      <div class="container layout-conteudo">
+      <div class="container area-conteudo">
 
         <div>
           <header class="secao__cabecalho">
@@ -168,52 +164,52 @@
 
           <div class="grade">
 
-            <article class="card">
-              <div class="card__corpo">
-                <div class="card__cabecalho">
-                  <h3 class="card__titulo">Futebol society</h3>
+            <article class="cartao">
+              <div class="cartao__corpo">
+                <div class="cartao__cabecalho">
+                  <h3 class="cartao__titulo">Futebol society</h3>
                   <p class="etiqueta">Campo</p>
                 </div>
-                <p class="card__texto">
+                <p class="cartao__texto">
                   Gramado sintético para times de 5 a 7 jogadores, com traves
                   oficiais e iluminação para partidas noturnas.
                 </p>
               </div>
             </article>
 
-            <article class="card">
-              <div class="card__corpo">
-                <div class="card__cabecalho">
-                  <h3 class="card__titulo">Vôlei e beach tennis</h3>
+            <article class="cartao">
+              <div class="cartao__corpo">
+                <div class="cartao__cabecalho">
+                  <h3 class="cartao__titulo">Vôlei e beach tennis</h3>
                   <p class="etiqueta">Areia</p>
                 </div>
-                <p class="card__texto">
+                <p class="cartao__texto">
                   Quadras de areia com rede regulável, para duplas, quartetos
                   e treinos ao ar livre no fim da tarde.
                 </p>
               </div>
             </article>
 
-            <article class="card">
-              <div class="card__corpo">
-                <div class="card__cabecalho">
-                  <h3 class="card__titulo">Basquete e futsal</h3>
+            <article class="cartao">
+              <div class="cartao__corpo">
+                <div class="cartao__cabecalho">
+                  <h3 class="cartao__titulo">Basquete e futsal</h3>
                   <p class="etiqueta">Coberta</p>
                 </div>
-                <p class="card__texto">
+                <p class="cartao__texto">
                   Quadras poliesportivas cobertas, com piso emborrachado,
                   placar e arquibancada para jogar em qualquer clima.
                 </p>
               </div>
             </article>
 
-            <article class="card">
-              <div class="card__corpo">
-                <div class="card__cabecalho">
-                  <h3 class="card__titulo">Tênis</h3>
+            <article class="cartao">
+              <div class="cartao__corpo">
+                <div class="cartao__cabecalho">
+                  <h3 class="cartao__titulo">Tênis</h3>
                   <p class="etiqueta">Saibro</p>
                 </div>
-                <p class="card__texto">
+                <p class="cartao__texto">
                   Quadras de saibro e de piso rápido, com aluguel opcional de
                   raquetes para partidas simples ou de duplas.
                 </p>
@@ -223,8 +219,7 @@
           </div>
         </div>
 
-        <!-- Conteúdo complementar, relacionado mas não essencial -->
-        <aside class="aside-info aside-info--fixo" aria-labelledby="dicas">
+        <aside class="info-lateral info-lateral--fixo" aria-labelledby="dicas">
           <h2 id="dicas">Dicas de quadra</h2>
           <p>Combinados que evitam dor de cabeça na hora da partida.</p>
           <ul>
@@ -239,7 +234,7 @@
       </div>
     </section>
 
-    <!-- ------------------- CHAMADA PARA PROPRIETÁRIOS ----------------- -->
+    <!-- Chamada para proprietários -->
     <section class="secao secao--papel" aria-labelledby="proprietarios">
       <div class="container">
 
@@ -266,7 +261,7 @@
 
   </main>
 
-  <!-- ============================= RODAPÉ ============================== -->
+  <!-- Rodapé -->
   <footer class="rodape">
     <div class="container">
 

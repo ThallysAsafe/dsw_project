@@ -18,7 +18,7 @@ Itens exigidos no tópico 01 do enunciado ("definam antes da implementação").
 | **Problema / objetivo** | Encontrar quadra livre e completar time hoje depende de grupos de mensagem e do contato pessoal do dono do espaço. Não existe lugar único que mostre quais quadras existem, quanto custam e quais partidas ainda têm vaga. O site centraliza essa informação e recebe a solicitação de reserva. |
 | **Público-alvo** | Praticantes amadores de esportes coletivos (18 a 45 anos) que jogam com frequência semanal; secundariamente, proprietários de quadras com horários ociosos. Acessam majoritariamente pelo celular, muitas vezes na rua — daí a prioridade para Mobile First e alvos de toque generosos. |
 | **Proposta** | O usuário pode **consultar** o catálogo de quadras (modalidade, endereço, estrutura, preço/hora), **conhecer** o funcionamento da plataforma, **selecionar** um racha aberto com vagas e **preencher** o formulário de reserva com data, horário, tipo de reserva e serviços adicionais. |
-| **Arquitetura** | Quatro páginas ligadas por uma navbar consistente, do geral para o específico: apresentação → catálogo → comunidade → conversão (formulário). Âncoras internas ligam as páginas a seções específicas. |
+| **Arquitetura** | Quatro páginas ligadas por uma menu consistente, do geral para o específico: apresentação → catálogo → comunidade → conversão (formulário). Âncoras internas ligam as páginas a seções específicas. |
 
 ### Mapa de páginas
 
@@ -51,7 +51,7 @@ gradiente.
 
 ## 3. Decisões técnicas (para a defesa)
 
-**Flexbox onde o eixo é único:** navbar (logo à esquerda, menu à direita),
+**Flexbox onde o eixo é único:** menu (logo à esquerda, menu à direita),
 grupos de botões, cabeçalho e rodapé dos cards, linhas de opções do formulário
 e o rótulo de seção — cujo `::after` usa `flex: 1` para virar a régua que
 preenche o espaço restante.
@@ -63,7 +63,7 @@ dois eixos, o que o Flexbox não entrega sem cálculo de largura.
 
 **Mobile First:** o bloco base do CSS atende telas pequenas em uma coluna. As
 media queries em `768px` e `1024px` apenas **reorganizam a composição** —
-cabeçalho vira linha, grades ganham colunas, o hero passa a duas colunas — em
+cabeçalho vira linha, grades ganham colunas, o destaque passa a duas colunas — em
 vez de só reduzir elementos.
 
 **Numerais por contador CSS:** os números dos passos e das etapas vêm de

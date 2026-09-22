@@ -1,38 +1,19 @@
-/* =====================================================================
-   ArenaHub — rachas.css (estilos da página Rachas)
-
-   Carregado DEPOIS de style.css, então pode ajustar o que vem de lá.
-   A base do card está em style.css (seção 09), a base da etiqueta na
-   seção 10, e a âncora #lista-rachas na seção 05.
-
-   ÍNDICE
-   01. Detalhes da partida dentro do card
-   02. Etiquetas de status de vagas
-   ===================================================================== */
-
-
-/* =====================================================================
-   01. DETALHES DA PARTIDA (local, data e nível)
-
-   Cada item é uma grade de DUAS COLUNAS: rótulo com largura fixa de
-   5rem e valor ocupando o resto. É isso que mantém "LOCAL", "QUANDO"
-   e "NÍVEL" alinhados na mesma vertical em todos os cards.
-   ===================================================================== */
-.card__detalhes {
+/* Detalhes da partida */
+.cartao__detalhes {
   margin: var(--espaco-xs) 0;
   font-size: var(--tamanho-pequeno);
   color: var(--cor-tinta-media);
 }
 
-.card__detalhes li {
+.cartao__detalhes li {
   display: grid;
-  grid-template-columns: 5rem 1fr;   /* rótulo fixo | valor flexível */
+  grid-template-columns: 5rem 1fr;
   gap: var(--espaco-xs);
   padding: var(--espaco-xs) 0;
   border-top: var(--borda-fina);
 }
 
-.card__detalhes strong {
+.cartao__detalhes strong {
   font-family: var(--fonte-display);
   font-size: var(--tamanho-micro);
   text-transform: uppercase;
@@ -41,21 +22,14 @@
 }
 
 
-/* =====================================================================
-   02. ETIQUETAS DE STATUS DE VAGAS
+/* Etiquetas de vagas */
 
-   Variações de .etiqueta (style.css, seção 10). No HTML as classes
-   andam juntas:  <p class="etiqueta etiqueta--vagas">
-   ===================================================================== */
-
-/* Ainda tem vaga: laranja. Contraste conferido em 4.82:1 */
 .etiqueta--vagas {
   background-color: var(--cor-destaque-clara);
   color: var(--cor-destaque);
   border-left: 4px solid var(--cor-destaque);
 }
 
-/* Partida lotada: cinza, sem apelo visual */
 .etiqueta--neutra {
   background-color: var(--cor-papel);
   color: var(--cor-tinta-media);

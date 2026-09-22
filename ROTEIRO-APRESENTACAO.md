@@ -98,7 +98,7 @@ Escrevam os nomes na tabela do `README.md` antes da apresentação.
 > Como eles acessam principalmente pelo celular, muitas vezes na rua, o
 > projeto foi feito Mobile First e com alvos de toque grandes.
 >
-> A **arquitetura** são quatro páginas ligadas por uma navbar consistente,
+> A **arquitetura** são quatro páginas ligadas por uma menu consistente,
 > indo do geral para o específico: apresentação → catálogo → comunidade →
 > formulário de reserva.
 >
@@ -255,7 +255,7 @@ tem uma classe **e** um elemento. É especificidade na prática.
 >
 > São dois pontos de quebra, em 768px e 1024px. E o que muda não é só
 > tamanho: o cabeçalho passa de coluna para linha, a grade vai de 1 para 2 e
-> depois 3 colunas, o hero vira duas colunas. É **reorganização**, que é o
+> depois 3 colunas, o destaque vira duas colunas. É **reorganização**, que é o
 > que o enunciado pede.
 >
 > Temos ainda três media queries que não perguntam pela largura: uma detecta
@@ -290,7 +290,7 @@ tem uma classe **e** um elemento. É especificidade na prática.
    quebrado em duas linhas.
 2. Mude para "iPad" (768px): **o cabeçalho vira uma linha** e a grade ganha a
    segunda coluna.
-3. Volte para desktop: terceira coluna, hero lado a lado.
+3. Volte para desktop: terceira coluna, destaque lado a lado.
 4. Passe o mouse num card: ele desloca e revela a sombra sólida, e a foto
    aproxima 4%.
 
@@ -507,11 +507,11 @@ sem internet. A documentação está no `README.md` e no `GUIA-CSS.md`."
 **"Por que o `quadras.css` tem uma regra só?"**
 > "Porque a página é feita quase inteira de componentes compartilhados. Ela
 > usa 37 classes: 36 vêm do `style.css` e 35 dessas também são usadas em
-> `rachas.html` — `.card`, `.grade`, `.etiqueta`, `.botao`. Só o
-> `.card__endereco` é exclusivo dela, porque no card de racha esse espaço
+> `rachas.html` — `.cartao`, `.grade`, `.etiqueta`, `.botao`. Só o
+> `.cartao__endereco` é exclusivo dela, porque no card de racha esse espaço
 > mostra os detalhes da partida.
 >
-> Poderíamos ter duplicado o `.card` nos dois arquivos, mas aí mudar o card
+> Poderíamos ter duplicado o `.cartao` nos dois arquivos, mas aí mudar o card
 > exigiria editar dois lugares. Um arquivo de página quase vazio é o
 > resultado de a reutilização ter funcionado. Mantivemos o arquivo para o
 > padrão ficar previsível: toda página tem o seu, e é ali que entra

@@ -10,16 +10,14 @@
 </head>
 <body>
 
-  <!-- Link de acessibilidade: visível apenas ao navegar por teclado (Tab) -->
-  <a class="pular-link" href="#conteudo">Pular para o conteúdo principal</a>
+  <a class="link-pular" href="#conteudo">Pular para o conteúdo principal</a>
 
-  <!-- ============================ CABEÇALHO ============================ -->
+  <!-- Cabeçalho -->
   <header class="cabecalho" id="topo">
     <div class="container cabecalho__interno">
 
       <a class="logo" href="index.html">
         <span class="logo__marca">
-          <!-- Marca vetorial: planta baixa de um campo (decorativa) -->
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
             <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
@@ -29,13 +27,13 @@
         ArenaHub
       </a>
 
-      <nav class="navbar" aria-label="Navegação principal">
-        <ul class="navbar__lista">
-          <li><a class="navbar__link" href="index.html">Início</a></li>
-          <li><a class="navbar__link" href="quadras.html">Quadras</a></li>
-          <li><a class="navbar__link" href="rachas.html">Rachas</a></li>
+      <nav class="menu" aria-label="Navegação principal">
+        <ul class="menu__lista">
+          <li><a class="menu__link" href="index.html">Início</a></li>
+          <li><a class="menu__link" href="quadras.html">Quadras</a></li>
+          <li><a class="menu__link" href="rachas.html">Rachas</a></li>
           <li>
-            <a class="navbar__link navbar__link--ativo" href="agendamento.html" aria-current="page">Agendamento</a>
+            <a class="menu__link menu__link--ativo" href="agendamento.html" aria-current="page">Agendamento</a>
           </li>
         </ul>
       </nav>
@@ -43,10 +41,10 @@
     </div>
   </header>
 
-  <!-- ========================= CONTEÚDO PRINCIPAL ====================== -->
+  <!-- Conteúdo principal -->
   <main id="conteudo">
 
-    <!-- ------------------------ TÍTULO DA PÁGINA --------------------- -->
+    <!-- Título da página -->
     <div class="pagina-titulo">
       <div class="container">
         <h1>Agendamento de quadras</h1>
@@ -60,9 +58,9 @@
     </div>
 
     <section class="secao" aria-labelledby="form-reserva">
-      <div class="container layout-formulario">
+      <div class="container area-formulario">
 
-        <!-- ------------------- FORMULÁRIO DE RESERVA ----------------- -->
+        <!-- Formulário de reserva -->
         <article>
           <header class="secao__cabecalho">
             <p class="secao__numero">01 / Solicitação</p>
@@ -75,7 +73,7 @@
 
           <form class="formulario" action="agendamento.html" method="get">
 
-            <!-- ============ GRUPO 1: DADOS DO SOLICITANTE ============ -->
+            <!-- Dados do solicitante -->
             <fieldset>
               <legend>Dados do solicitante</legend>
               <p>Usamos esses dados apenas para confirmar a reserva.</p>
@@ -123,7 +121,7 @@
               </div>
             </fieldset>
 
-            <!-- ============ GRUPO 2: DETALHES DA PARTIDA ============= -->
+            <!-- Detalhes da partida -->
             <fieldset>
               <legend>Detalhes da partida</legend>
               <p>Escolha o espaço, a data e o tamanho do grupo.</p>
@@ -210,7 +208,6 @@
                 </div>
               </div>
 
-              <!-- Botões de rádio: escolha única e obrigatória -->
               <fieldset class="subgrupo">
                 <legend>Tipo de agendamento <span class="obrigatorio">*</span></legend>
 
@@ -242,7 +239,7 @@
               </fieldset>
             </fieldset>
 
-            <!-- ============ GRUPO 3: SERVIÇOS ADICIONAIS ============= -->
+            <!-- Serviços adicionais -->
             <fieldset>
               <legend>Serviços adicionais</legend>
               <p>Opcional. Marque apenas o que a sua partida precisa.</p>
@@ -272,7 +269,6 @@
                   </label>
                 </div>
 
-                <!-- Serviço indisponível: demonstra o estado :disabled -->
                 <div class="opcao">
                   <input type="checkbox" id="servico-transmissao" name="servicos" value="transmissao" disabled>
                   <label for="servico-transmissao">
@@ -293,7 +289,7 @@
               </div>
             </fieldset>
 
-            <!-- ============ GRUPO 4: OBSERVAÇÕES ==================== -->
+            <!-- Observações -->
             <fieldset>
               <legend>Observações</legend>
               <p>Conte o que for importante para o responsável pela quadra.</p>
@@ -320,7 +316,7 @@
               </div>
             </fieldset>
 
-            <!-- ==================== AÇÕES DO FORMULÁRIO ============== -->
+            <!-- Botões -->
             <div class="formulario__acoes">
               <button class="botao botao--primario" type="submit">Confirmar agendamento</button>
               <button class="botao botao--secundario" type="reset">Limpar formulário</button>
@@ -329,12 +325,11 @@
           </form>
         </article>
 
-        <!-- ------------------ CONTEÚDO COMPLEMENTAR ----------------- -->
-        <aside class="aside-info aside-info--fixo" aria-labelledby="resumo">
+        <!-- Conteúdo complementar -->
+        <aside class="info-lateral info-lateral--fixo" aria-labelledby="resumo">
           <h2 id="resumo">O que acontece depois</h2>
           <p>Da solicitação até a bola rolando.</p>
 
-          <!-- Lista ORDENADA: são etapas em sequência -->
           <ol class="lista-etapas">
             <li>O responsável pela quadra recebe o pedido na hora.</li>
             <li>A confirmação chega por e-mail em até 2 horas.</li>
@@ -348,7 +343,7 @@
 
   </main>
 
-  <!-- ============================= RODAPÉ ============================== -->
+  <!-- Rodapé -->
   <footer class="rodape">
     <div class="container">
 

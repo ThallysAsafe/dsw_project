@@ -1,22 +1,5 @@
-/* =====================================================================
-   ArenaHub — quadras.css (estilos da página Quadras)
-
-   Carregado DEPOIS de style.css, então pode ajustar o que vem de lá.
-   Aqui fica só o que existe exclusivamente nesta página. A base do
-   card (.card, .card__corpo, .card__titulo...) está em style.css,
-   seção 09, e a âncora #catalogo está em style.css, seção 05.
-
-   ÍNDICE
-   01. Endereço da quadra dentro do card
-   ===================================================================== */
-
-
-/* =====================================================================
-   01. ENDEREÇO DA QUADRA
-
-   Linha pequena em caixa-alta, logo abaixo do nome da arena.
-   ===================================================================== */
-.card__endereco {
+/* Endereço da quadra */
+.cartao__endereco {
   font-size: var(--tamanho-micro);
   text-transform: uppercase;
   letter-spacing: 0.06em;

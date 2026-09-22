@@ -59,11 +59,11 @@ que está por último.
 ### Como achar uma regra em 10 segundos
 
 1. No navegador, clique com o botão direito no elemento → *Inspecionar*.
-2. Veja o nome da classe (ex.: `card__preco`).
+2. Veja o nome da classe (ex.: `cartao__preco`).
 3. A classe diz onde procurar:
-   - começa com o nome de um componente compartilhado (`card`, `botao`,
-     `navbar`, `rodape`, `etiqueta`, `aside-info`) → **style.css**
-   - `hero`, `passo`, `painel-destaque` → **index.css**
+   - começa com o nome de um componente compartilhado (`cartao`, `botao`,
+     `menu`, `rodape`, `etiqueta`, `info-lateral`) → **style.css**
+   - `destaque`, `passo`, `painel-destaque` → **index.css**
    - `campo`, `opcao`, `formulario` → **agendamento.css**
 4. Todo arquivo tem um **ÍNDICE numerado** no topo, em comentário.
 
@@ -73,7 +73,7 @@ Regra prática, do mais forte para o mais fraco:
 
 ```
 #id  (ex.: #catalogo)        >  1 - 0 - 0   mais forte
-.classe  (ex.: .card)        >  0 - 1 - 0
+.classe  (ex.: .cartao)        >  0 - 1 - 0
 elemento  (ex.: p, h2)       >  0 - 0 - 1   mais fraco
 ```
 
@@ -146,11 +146,11 @@ são declaradas.
 | `--tamanho-micro` | `0.75rem` (12px) | Rótulos em caixa-alta, dicas |
 | `--tamanho-pequeno` | `0.875rem` (14px) | Textos de card, rodapé |
 | `--tamanho-base` | `1rem` (16px) | Texto padrão do site |
-| `--tamanho-medio` | `1.125rem` (18px) | Texto do hero, nome no logo |
+| `--tamanho-medio` | `1.125rem` (18px) | Texto do destaque, nome no logo |
 | `--tamanho-h3` | `1.25rem` (20px) | `<h3>`, preço do card, legend |
 | `--tamanho-h2` | `1.75rem` (28px) | `<h2>` — **cresce nas media queries** |
 | `--tamanho-h1` | `2.25rem` (36px) | `<h1>` — **cresce nas media queries** |
-| `--tamanho-numero` | `2.5rem` (40px) | Números do hero — **cresce nas media queries** |
+| `--tamanho-numero` | `2.5rem` (40px) | Números do destaque — **cresce nas media queries** |
 | `--altura-linha` | `1.6` | Espaço entre linhas do texto |
 | `--altura-linha-titulo` | `1.05` | Títulos com linhas bem juntas |
 | `--espacamento-rotulo` | `0.12em` | `letter-spacing` das caixas-altas |
@@ -210,7 +210,7 @@ Botões, links, etiquetas, logo e o item ativo do menu mudam juntos.
 **O que é:** a cor do **texto** de um elemento.
 **Para que serve:** definir a cor das letras.
 **Onde é usado:** em todos os 5 arquivos. Ex.: `body` (`style.css` seção 04),
-`.card__texto`, `.rodape a`, `.obrigatorio` (`agendamento.css`).
+`.cartao__texto`, `.rodape a`, `.obrigatorio` (`agendamento.css`).
 **O que altera visualmente:** só as letras — fundo e borda não mudam.
 
 ```css
@@ -236,25 +236,25 @@ do site mais claro e reduz o contraste — cuidado com legibilidade.
 
 **O que é:** a cor de **fundo** da caixa do elemento.
 **Para que serve:** separar visualmente blocos da página.
-**Onde é usado:** `body`, `.secao--papel`, `.card`, `.etiqueta`, `.rodape`,
+**Onde é usado:** `body`, `.secao--papel`, `.cartao`, `.etiqueta`, `.rodape`,
 `.painel-destaque`, `.opcao:hover`, campos em foco.
 **O que altera visualmente:** preenche todo o retângulo do elemento,
 **incluindo a área do `padding`**, mas não a do `margin`.
 
 ```css
 /* style.css, seção 09 */
-.card {
+.cartao {
   background-color: var(--cor-superficie);   /* branco */
 }
 ```
 
-**Se eu alterar:** `.card { background-color: var(--cor-papel); }` faz o card
+**Se eu alterar:** `.cartao { background-color: var(--cor-papel); }` faz o card
 se misturar ao fundo da página — ele "some" visualmente, restando só a borda.
 
 **Exemplo prático:** fundo verde-claro nos cards:
 
 ```css
-.card {
+.cartao {
   background-color: var(--cor-primaria-clara);
 }
 ```
@@ -394,7 +394,7 @@ em duas linhas.
 
 **O que são:** controlam o sublinhado dos links.
 **Onde são usados:** `a` (seção 04), `.link-texto` (seção 06), `.rodape a`
-(seção 12), `.botao` e `.navbar__link` (que usam `none`).
+(seção 12), `.botao` e `.menu__link` (que usam `none`).
 **O que alteram visualmente:**
 
 | Propriedade | Efeito |
@@ -440,8 +440,8 @@ A diferença essencial:
 
 **O que é:** o espaço interno, entre o conteúdo e a borda.
 **Para que serve:** impedir que o texto encoste na borda da caixa.
-**Onde é usado:** `.container`, `.card__corpo`, `.botao`, `.campo input`,
-`.secao`, `.aside-info`, `.opcao`.
+**Onde é usado:** `.container`, `.cartao__corpo`, `.botao`, `.campo input`,
+`.secao`, `.info-lateral`, `.opcao`.
 **O que altera visualmente:** a caixa **cresce** e o conteúdo fica mais
 afastado das bordas.
 
@@ -456,14 +456,14 @@ Quando há dois valores, o primeiro é **vertical** e o segundo **horizontal**.
 
 **Se eu alterar:** `padding: 20px 40px` deixa os botões bem maiores e mais
 espaçosos. Para diminuir só de um lado, use `padding-top`, `padding-bottom`
-etc. (o projeto usa `padding-top` em `.card__rodape` e `padding-bottom` em
+etc. (o projeto usa `padding-top` em `.cartao__rodape` e `padding-bottom` em
 `.rodape h2`).
 
 **Exemplo prático:** cards mais compactos:
 
 ```css
 /* style.css, seção 09 */
-.card__corpo {
+.cartao__corpo {
   padding: var(--espaco-sm);     /* era var(--espaco-md) */
 }
 ```
@@ -472,7 +472,7 @@ etc. (o projeto usa `padding-top` em `.card__rodape` e `padding-bottom` em
 
 **O que é:** o espaço externo, que empurra os elementos vizinhos.
 **Onde é usado:** `.container { margin: 0 auto; }`, `.secao__cabecalho`,
-`.hr`, `.rodape`, `.card__rodape`.
+`.hr`, `.rodape`, `.cartao__rodape`.
 **O que altera visualmente:** afasta o elemento dos que estão ao redor, sem
 mudar o tamanho da própria caixa.
 
@@ -486,7 +486,7 @@ mudar o tamanho da própria caixa.
 > `margin: 0 auto` é o jeito clássico de centralizar um bloco que tem
 > `max-width`. O `auto` divide a sobra igualmente entre os dois lados.
 
-**Truque usado no projeto:** `.card__rodape { margin-top: auto; }`
+**Truque usado no projeto:** `.cartao__rodape { margin-top: auto; }`
 (`style.css`, seção 09). Dentro de um card em `display: flex` na vertical, o
 `auto` empurra o rodapé para a base, fazendo o preço e o botão ficarem
 alinhados em todos os cards, mesmo com textos de tamanhos diferentes.
@@ -496,8 +496,8 @@ alinhados em todos os cards, mesmo com textos de tamanhos diferentes.
 **O que é:** o espaço entre os filhos de um container flex ou grid.
 **Para que serve:** substituir a antiga gambiarra de dar `margin` em cada
 filho e depois remover a do último.
-**Onde é usado:** `.grade`, `.passos`, `.grupo-botoes`, `.navbar__lista`,
-`.card__corpo`, `.rodape__colunas`, `.campo`.
+**Onde é usado:** `.grade`, `.passos`, `.grupo-botoes`, `.menu__lista`,
+`.cartao__corpo`, `.rodape__colunas`, `.campo`.
 **O que altera visualmente:** o vão entre cards, botões, colunas e campos.
 
 ```css
@@ -522,7 +522,7 @@ menos por linha antes de a tela ficar apertada.
 
 **O que é:** a largura do elemento.
 **Onde é usado:** `.container` (`100%`), `.botao--bloco` (`100%`),
-`.card__imagem` (`100%`), `.logo__marca` (`30px`), campos do formulário (`100%`).
+`.cartao__imagem` (`100%`), `.logo__marca` (`30px`), campos do formulário (`100%`).
 **O que altera visualmente:** a largura da caixa.
 **Dica:** `width: 100%` significa "toda a largura do elemento pai".
 
@@ -532,7 +532,7 @@ menos por linha antes de a tela ficar apertada.
 **Para que serve:** é a chave da responsividade — o elemento encolhe em telas
 pequenas sozinho, e só para de crescer nas grandes.
 **Onde é usado:** `.container` (`--largura-container`), `p`
-(`--largura-leitura`), `img` (`100%`), `.hero__regua` (`200px`).
+(`--largura-leitura`), `img` (`100%`), `.destaque__regua` (`200px`).
 
 ```css
 /* style.css, seção 06 */
@@ -552,14 +552,14 @@ do caractere "0" da fonte, então `62ch` ≈ 62 caracteres por linha.
 ### `height` e `min-height`
 
 **O que é:** altura fixa (`height`) ou altura mínima (`min-height`).
-**Onde é usado:** `.card__imagem` (`190px`), `.hero__imagem` (`240px`),
+**Onde é usado:** `.cartao__imagem` (`190px`), `.destaque__imagem` (`240px`),
 `.campo textarea` (`min-height: 130px`), alvos de toque (`min-height: 44px`).
 **O que altera visualmente:** `height` fixa força todas as fotos dos cards a
 ter a mesma altura — é isso que mantém a grade alinhada.
 
 ```css
 /* style.css, seção 09 */
-.card__imagem {
+.cartao__imagem {
   height: 190px;
   object-fit: cover;    /* recorta em vez de espremer */
 }
@@ -610,7 +610,7 @@ passariam a vazar para fora da caixa branca do formulário.
 ### `border`
 
 **O que é:** a linha em volta da caixa. Tem espessura, estilo e cor.
-**Onde é usado:** `.card`, `.botao`, `.aside-info`, `.opcao`, `.formulario`,
+**Onde é usado:** `.cartao`, `.botao`, `.info-lateral`, `.opcao`, `.formulario`,
 `.passo`. O projeto usa três variáveis prontas.
 
 ```css
@@ -624,7 +624,7 @@ usadas para criar as faixas coloridas, como a do topo do `<aside>`:
 
 ```css
 /* style.css, seção 11 */
-.aside-info {
+.info-lateral {
   border: var(--borda-forte);
   border-top: 8px solid var(--cor-primaria);   /* sobrescreve só o topo */
 }
@@ -639,8 +639,8 @@ os cards, botões e campos de uma vez — o visual fica mais pesado.
 ### `border-radius`
 
 **O que é:** o arredondamento dos cantos.
-**Onde é usado:** `.card`, `.botao`, `.etiqueta`, `.aside-info`, `.formulario`,
-`.opcao`, `.passo`, `.painel-destaque`, `.hero__figura`, campos do formulário.
+**Onde é usado:** `.cartao`, `.botao`, `.etiqueta`, `.info-lateral`, `.formulario`,
+`.opcao`, `.passo`, `.painel-destaque`, `.destaque__figura`, campos do formulário.
 Todos usam `var(--raio)`.
 **O que altera visualmente:** no projeto vale **`0`**, ou seja, cantos retos —
 uma escolha da identidade "editorial esportiva".
@@ -656,7 +656,7 @@ uma escolha da identidade "editorial esportiva".
 ### `box-shadow`
 
 **O que é:** uma sombra projetada atrás do elemento.
-**Onde é usado:** `.card:hover`, `.botao:hover`, `.passo:hover`.
+**Onde é usado:** `.cartao:hover`, `.botao:hover`, `.passo:hover`.
 **O que altera visualmente:** aqui a sombra é **sólida**, não desfocada.
 
 ```css
@@ -703,15 +703,15 @@ Grid     →  DUAS direções (linhas E colunas ao mesmo tempo)
 | Componente | Técnica | Por quê |
 |---|---|---|
 | `.cabecalho__interno` | Flexbox | Logo e menu em **uma linha**, empurrados para os extremos |
-| `.navbar__lista` | Flexbox | Itens em **uma linha**, com `flex-wrap` para quebrar no celular |
+| `.menu__lista` | Flexbox | Itens em **uma linha**, com `flex-wrap` para quebrar no celular |
 | `.grupo-botoes` | Flexbox | Botões lado a lado em **um eixo** |
-| `.card` | Flexbox | Empilhamento **vertical** interno (imagem, corpo, rodapé) |
-| `.card__rodape` | Flexbox | Preço e botão em **uma linha** |
+| `.cartao` | Flexbox | Empilhamento **vertical** interno (imagem, corpo, rodapé) |
+| `.cartao__rodape` | Flexbox | Preço e botão em **uma linha** |
 | `.grade` | **Grid** | Catálogo com **linhas e colunas** (1 → 2 → 3) |
 | `.passos` | **Grid** | Mesmo caso: grade de 3 cards |
 | `.rodape__colunas` | **Grid** | Três colunas de largura igual |
-| `.layout-conteudo` | **Grid** | Conteúdo + `<aside>` em proporção `2fr 1fr` |
-| `.card__detalhes li` | **Grid** | Rótulo fixo + valor: `5rem 1fr` |
+| `.area-conteudo` | **Grid** | Conteúdo + `<aside>` em proporção `2fr 1fr` |
+| `.cartao__detalhes li` | **Grid** | Rótulo fixo + valor: `5rem 1fr` |
 
 ### `display`
 
@@ -720,11 +720,11 @@ Grid     →  DUAS direções (linhas E colunas ao mesmo tempo)
 
 | Valor | Onde | Efeito |
 |---|---|---|
-| `flex` | `.card`, `.navbar`, `.botao`, `.campo` | Vira container Flexbox |
+| `flex` | `.cartao`, `.menu`, `.botao`, `.campo` | Vira container Flexbox |
 | `grid` | `.grade`, `.passos`, `.rodape__colunas` | Vira container Grid |
-| `block` | `.navbar__link`, `.card__preco span`, `.formulario legend` | Ocupa a linha inteira |
+| `block` | `.menu__link`, `.cartao__preco span`, `.formulario legend` | Ocupa a linha inteira |
 | `inline-flex` | `.botao` | Flexbox por dentro, mas fica na linha do texto |
-| `inline-block` | `.etiqueta`, `.hero__rotulo` | Fica na linha, mas aceita largura e padding |
+| `inline-block` | `.etiqueta`, `.destaque__rotulo` | Fica na linha, mas aceita largura e padding |
 
 ### Flexbox: as propriedades usadas
 
@@ -752,7 +752,7 @@ muda de direção conforme a largura.
 
 ```css
 .cabecalho__interno { justify-content: space-between; }  /* extremos */
-.navbar__lista      { justify-content: center; }         /* centro */
+.menu__lista      { justify-content: center; }         /* centro */
 ```
 
 `space-between` joga o primeiro filho para o início, o último para o fim, e
@@ -769,7 +769,7 @@ divide a sobra no meio. É o que separa o logo do menu.
 
 ```css
 /* style.css, seção 07 */
-.navbar__lista {
+.menu__lista {
   display: flex;
   flex-wrap: wrap;    /* no celular o menu quebra em 2 linhas */
 }
@@ -777,17 +777,17 @@ divide a sobra no meio. É o que separa o logo do menu.
 
 **Sem isso**, os 4 itens do menu tentariam caber numa linha só e criariam
 rolagem horizontal no celular. Também é usado em `.grupo-botoes` e
-`.hero__indicadores`.
+`.destaque__indicadores`.
 
 **`flex`** — quanto um filho cresce em relação aos irmãos.
 
 ```css
 /* style.css, seção 09 */
-.card__corpo { flex: 1; }     /* estica e ocupa a sobra */
+.cartao__corpo { flex: 1; }     /* estica e ocupa a sobra */
 
 /* index.css, seção 05 */
-.hero__texto  { flex: 1.2; }  /* 20% mais largo... */
-.hero__figura { flex: 1; }    /* ...que a foto */
+.destaque__texto  { flex: 1.2; }  /* 20% mais largo... */
+.destaque__figura { flex: 1; }    /* ...que a foto */
 ```
 
 **`flex-shrink`** — impede que um filho encolha.
@@ -813,8 +813,8 @@ fosse longo.
 
 - `1fr` = "uma fração do espaço livre". Duas colunas `1fr 1fr` ficam iguais.
 - `repeat(3, 1fr)` é o atalho para `1fr 1fr 1fr`.
-- `2fr 1fr` (em `.layout-conteudo`) faz a primeira coluna ser o dobro da segunda.
-- `5rem 1fr` (em `.card__detalhes li`) mistura medida fixa e flexível: o
+- `2fr 1fr` (em `.area-conteudo`) faz a primeira coluna ser o dobro da segunda.
+- `5rem 1fr` (em `.cartao__detalhes li`) mistura medida fixa e flexível: o
   rótulo "LOCAL" tem sempre 5rem, e o valor ocupa o resto. É isso que mantém
   os rótulos alinhados entre cards diferentes.
 
@@ -832,7 +832,7 @@ fosse longo.
 ### `object-fit`
 
 **O que é:** como a imagem preenche o espaço reservado para ela.
-**Onde é usado:** `.card__imagem` e `.hero__imagem`.
+**Onde é usado:** `.cartao__imagem` e `.destaque__imagem`.
 **O que altera visualmente:** com `cover`, a foto **recorta** o excesso para
 preencher a área sem distorcer.
 **Se eu alterar:** `fill` (o padrão) **estica** a imagem e deforma as pessoas
@@ -845,7 +845,7 @@ na foto. `contain` mostra a imagem inteira, mas deixa faixas vazias.
 
 ```css
 /* style.css, seção 09 — recorta o zoom da foto no hover */
-.card__figura { overflow: hidden; }
+.cartao__figura { overflow: hidden; }
 
 /* style.css, seção 04 — trava a rolagem horizontal da página */
 body { overflow-x: hidden; }
@@ -864,8 +864,8 @@ moldura do card em vez de vazar por cima da borda.
 
 | Valor | Onde | O que faz |
 |---|---|---|
-| `sticky` | `.cabecalho`, `.aside-info--fixo` | Rola normal até encostar no topo, e ali **gruda** |
-| `absolute` | `.pular-link` | Sai do fluxo e é posicionado por `top`/`left` |
+| `sticky` | `.cabecalho`, `.info-lateral--fixo` | Rola normal até encostar no topo, e ali **gruda** |
+| `absolute` | `.link-pular` | Sai do fluxo e é posicionado por `top`/`left` |
 | `static` | `.cabecalho` em telas baixas | Volta ao comportamento normal |
 
 ```css
@@ -883,12 +883,12 @@ moldura do card em vez de vazar por cima da borda.
 ### `top`, `left` e `z-index`
 
 - **`top: 0`** no cabeçalho: gruda encostado no topo da tela.
-- **`left: -9999px`** no `.pular-link`: joga o link para fora da tela.
+- **`left: -9999px`** no `.link-pular`: joga o link para fora da tela.
   Quando ele recebe foco, `left: 0` traz de volta. É a técnica que mantém o
   link de acessibilidade disponível para o teclado sem poluir o visual.
 - **`z-index: 50`**: define quem fica na frente quando dois elementos se
   sobrepõem. Número maior = mais à frente. O cabeçalho (`50`) fica acima do
-  conteúdo; o `.pular-link` (`100`) fica acima até do cabeçalho.
+  conteúdo; o `.link-pular` (`100`) fica acima até do cabeçalho.
 
 ### `scroll-behavior` e `scroll-margin-top`
 
@@ -920,8 +920,8 @@ alto; o destino das âncoras se ajusta sozinho.
 |---|---|---|
 | `:hover` | mouse em cima | botões, cards, links, menu, passos, opções |
 | `:focus` / `:focus-visible` | elemento em foco (Tab) | contorno laranja global |
-| `:active` | durante o clique | `.botao`, `.navbar__link` |
-| `:visited` | link já aberto | `a`, `.navbar__link`, `.rodape a` |
+| `:active` | durante o clique | `.botao`, `.menu__link` |
+| `:visited` | link já aberto | `a`, `.menu__link`, `.rodape a` |
 | `:invalid` | campo que não atende à validação | campos do formulário |
 | `:valid` | campo preenchido corretamente | campos do formulário |
 | `:user-invalid` / `:user-valid` | idem, mas só **após** a pessoa mexer | campos do formulário |
@@ -936,12 +936,12 @@ alto; o destino das âncoras se ajusta sozinho.
 
 ```css
 /* style.css, seção 09 */
-.card:hover {
+.cartao:hover {
   transform: translate(-4px, -4px);       /* sobe e vai para a esquerda */
   box-shadow: var(--sombra-solida-grande); /* revela a sombra sólida */
 }
 
-.card:hover .card__imagem {
+.cartao:hover .cartao__imagem {
   transform: scale(1.04);                 /* a foto aproxima 4% */
 }
 ```
@@ -953,7 +953,7 @@ mouse, mude a imagem que está dentro dele".
 **Exemplo prático:** deixar o movimento mais forte:
 
 ```css
-.card:hover {
+.cartao:hover {
   transform: translate(-8px, -8px);
 }
 ```
@@ -1001,7 +1001,7 @@ Ajuda quem está navegando a lembrar onde já esteve. No projeto ele é
 mudar de cor só porque a página já foi visitada:
 
 ```css
-.navbar__link:visited     { color: var(--cor-tinta); }
+.menu__link:visited     { color: var(--cor-tinta); }
 .botao--primario:visited  { color: var(--cor-superficie); }
 ```
 
@@ -1076,7 +1076,7 @@ salto seco.
              └─────────── quais propriedades (todas)                */
 ```
 
-**Onde é usado:** `.botao`, `.card`, `.card__imagem`, `.navbar__link`,
+**Onde é usado:** `.botao`, `.cartao`, `.cartao__imagem`, `.menu__link`,
 `.passo`, `.opcao`, campos do formulário, `.logo__marca`, `a`.
 
 **Importante:** a `transition` fica na regra **normal**, não na do `:hover`.
@@ -1094,9 +1094,9 @@ os vizinhos não se mexem.
 | Uso | Onde | Efeito |
 |---|---|---|
 | `translate(-3px, -3px)` | `.botao:hover` | desloca 3px para cima e para a esquerda |
-| `translate(-4px, -4px)` | `.card:hover` | mesmo efeito, mais forte |
+| `translate(-4px, -4px)` | `.cartao:hover` | mesmo efeito, mais forte |
 | `translate(0, 0)` | `.botao:active` | volta ao lugar durante o clique |
-| `scale(1.04)` | `.card:hover .card__imagem` | aproxima a foto em 4% |
+| `scale(1.04)` | `.cartao:hover .cartao__imagem` | aproxima a foto em 4% |
 | `none` | `.botao:disabled` | desliga o efeito no botão desabilitado |
 
 **Por que `transform` e não `margin`:** mudar `margin` no `:hover` empurraria
@@ -1146,7 +1146,7 @@ inverso, é fácil esquecer de desfazer algo e quebrar a tela pequena.
 | Consulta | Onde | O que muda |
 |---|---|---|
 | `min-width: 768px` | style, index, agendamento | Cabeçalho vira linha; grades ganham 2 colunas; botões lado a lado; títulos maiores; campos em 2 colunas |
-| `min-width: 1024px` | style, index, agendamento | Grades com 3 colunas; hero em 2 colunas; formulário + `<aside>` lado a lado; títulos ainda maiores |
+| `min-width: 1024px` | style, index, agendamento | Grades com 3 colunas; destaque em 2 colunas; formulário + `<aside>` lado a lado; títulos ainda maiores |
 | `pointer: coarse` | style.css, seção 15 | Alvos de toque de 44px em menu, botões e campos |
 | `max-height: 500px` | style.css, seção 15 | Celular deitado: cabeçalho deixa de ser fixo |
 | `prefers-reduced-motion` | style.css, seção 15 | Desliga deslocamentos e zoom para quem pediu menos animação |
@@ -1289,22 +1289,22 @@ Tabela de consulta rápida. Todos os caminhos são reais.
 | **Arredondamento das caixas** | `css/style.css` §02 | `--raio` | De `0` para `8px` arredonda o site inteiro |
 | **Espessura das bordas** | `css/style.css` §02 | `--borda-forte` | Contorno de cards, botões e campos |
 | **Velocidade das animações** | `css/style.css` §02 | `--transicao` | `all 0.2s ease` → mude a duração |
-| **Navbar (cores e tamanho)** | `css/style.css` §07 | `.navbar__link`, `.navbar__link--ativo` | `padding` para o tamanho, `border-bottom-color` para o traço do item ativo |
+| **Navbar (cores e tamanho)** | `css/style.css` §07 | `.menu__link`, `.menu__link--ativo` | `padding` para o tamanho, `border-bottom-color` para o traço do item ativo |
 | **Navbar (posição no tablet)** | `css/style.css` §13 | `.cabecalho__interno` | `flex-direction: row` |
 | **Cabeçalho deixar de ser fixo** | `css/style.css` §07 | `.cabecalho` | Trocar `position: sticky` por `static` |
 | **Botões (forma)** | `css/style.css` §08 | `.botao` | `padding`, `border`, `font-size` |
 | **Botões (cores)** | `css/style.css` §08 | `.botao--primario`, `.botao--secundario` | `background-color` e `color` |
 | **Botões (efeito hover)** | `css/style.css` §08 | `.botao--primario:hover` | `transform` e `box-shadow` |
-| **Cards (tamanho e espaço)** | `css/style.css` §09 | `.card__corpo` | `padding` para o espaço interno |
-| **Cards (altura da foto)** | `css/style.css` §09 | `.card__imagem` | `height: 190px` |
-| **Cards (efeito hover)** | `css/style.css` §09 | `.card:hover` | `transform` e `box-shadow` |
+| **Cards (tamanho e espaço)** | `css/style.css` §09 | `.cartao__corpo` | `padding` para o espaço interno |
+| **Cards (altura da foto)** | `css/style.css` §09 | `.cartao__imagem` | `height: 190px` |
+| **Cards (efeito hover)** | `css/style.css` §09 | `.cartao:hover` | `transform` e `box-shadow` |
 | **Cards (nº de colunas)** | `css/style.css` §13 e §14 | `.grade`, `.grade--tres` | `grid-template-columns: repeat(N, 1fr)` |
-| **Endereço no card de quadra** | `css/quadras.css` §01 | `.card__endereco` | `font-size`, `color` |
-| **Detalhes do racha** | `css/rachas.css` §01 | `.card__detalhes li` | `grid-template-columns: 5rem 1fr` alinha os rótulos |
+| **Endereço no card de quadra** | `css/quadras.css` §01 | `.cartao__endereco` | `font-size`, `color` |
+| **Detalhes do racha** | `css/rachas.css` §01 | `.cartao__detalhes li` | `grid-template-columns: 5rem 1fr` alinha os rótulos |
 | **Etiqueta de vagas** | `css/rachas.css` §02 | `.etiqueta--vagas` | `background-color`, `color`, `border-left` |
 | **Etiqueta de modalidade** | `css/style.css` §10 | `.etiqueta` | Forma e cores base de todas as etiquetas |
-| **Hero (banner da home)** | `css/index.css` §01 | `.hero`, `.hero__titulo`, `.hero__imagem` | `padding`, `font-size`, `height` |
-| **Hero (2 colunas no desktop)** | `css/index.css` §05 | `.hero__conteudo`, `.hero__texto` | `flex-direction: row` e `flex: 1.2` |
+| **Hero (banner da home)** | `css/index.css` §01 | `.destaque`, `.destaque__titulo`, `.destaque__imagem` | `padding`, `font-size`, `height` |
+| **Hero (2 colunas no desktop)** | `css/index.css` §05 | `.destaque__conteudo`, `.destaque__texto` | `flex-direction: row` e `flex: 1.2` |
 | **Passos numerados** | `css/index.css` §02 | `.passo`, `.passo::before` | `content: counter(...)` gera o número |
 | **Painel de proprietários** | `css/index.css` §03 | `.painel-destaque` | `background-color`, `border-left` |
 | **Formulário (moldura)** | `css/agendamento.css` §01 | `.formulario` | `padding`, `border` |
