@@ -1,0 +1,28 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5433/postgres?schema=public"
+}
+
+model Agendamento {
+  id          Int      @id @default(autoincrement())
+  nome        String
+  email       String
+  telefone    String?
+  quadra      String
+  data        String
+  horario     String
+  jogadores   Int
+  horas       Int
+  tipoReserva String   @default("avulso")
+  servicos    String[] @default([])
+  observacoes String?
+  criadoEm    DateTime @default(now())
+
+  @@map("agendamentos")
+}

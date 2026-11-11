@@ -71,7 +71,8 @@
             </p>
           </header>
 
-          <form class="formulario" action="agendamento.html" method="get">
+          <form class="formulario" id="form-agendamento">
+            <input type="hidden" id="agendamento-id" name="id">
 
             <!-- Dados do solicitante -->
             <fieldset>
@@ -318,7 +319,8 @@
 
             <!-- Botões -->
             <div class="formulario__acoes">
-              <button class="botao botao--primario" type="submit">Confirmar agendamento</button>
+              <button class="botao botao--primario" id="btn-submeter" type="submit">Confirmar agendamento</button>
+              <button class="botao botao--secundario" id="btn-cancelar-edicao" type="button" style="display: none;">Cancelar edição</button>
               <button class="botao botao--secundario" type="reset">Limpar formulário</button>
             </div>
 
@@ -338,6 +340,23 @@
           </ol>
         </aside>
 
+      </div>
+    </section>
+
+    <!-- Seção de Reservas Confirmadas (READ, UPDATE, DELETE) -->
+    <section class="secao" id="secao-reservas" aria-labelledby="titulo-reservas">
+      <div class="container">
+        <header class="secao__cabecalho">
+          <p class="secao__numero">02 / Acompanhamento</p>
+          <h2 id="titulo-reservas">Reservas confirmadas</h2>
+          <p class="secao__texto">
+            Consulte, altere ou cancele reservas de quadras cadastradas no sistema.
+          </p>
+        </header>
+
+        <div class="grade grade--tres" id="lista-reservas">
+          <!-- Os agendamentos são carregados dinamicamente via JavaScript -->
+        </div>
       </div>
     </section>
 
@@ -390,5 +409,6 @@
     </div>
   </footer>
 
+  <script src="js/agendamento.js"></script>
 </body>
 </html>
