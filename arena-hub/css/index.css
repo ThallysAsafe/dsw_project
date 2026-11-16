@@ -1,173 +1,152 @@
-/* Destaque da página inicial */
+/* ==========================================================
+   index.css — só a página inicial
+   (destaque, passos e painel para donos de quadra)
+   ========================================================== */
+
+
+/* Destaque (primeira seção da página) */
 .destaque {
-  padding: var(--espaco-xl) 0;
-  background-color: var(--cor-superficie);
-  border-bottom: var(--borda-forte);
+  padding: 3rem 0;
+  background-color: var(--cor-branco);
+  border-bottom: var(--borda);
 }
 
+/* Flexbox: texto e imagem empilhados no celular, lado a lado no desktop */
 .destaque__conteudo {
   display: flex;
   flex-direction: column;
-  gap: var(--espaco-lg);
+  gap: 2rem;
 }
 
 .destaque__rotulo {
   display: inline-block;
-  margin-bottom: var(--espaco-sm);
-  padding: 2px var(--espaco-xs);
+  margin-bottom: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--raio);
   background-color: var(--cor-tinta);
   color: var(--cor-papel);
-  font-family: var(--fonte-display);
-  font-size: var(--tamanho-micro);
+  font-family: var(--fonte-titulo);
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: var(--espacamento-rotulo);
 }
 
-.destaque__titulo {
-  font-size: var(--tamanho-h1);
-}
-
-.destaque__regua {
-  max-width: 200px;
-  margin: var(--espaco-md) 0;
-  border-top: var(--borda-grossa);
-}
-
-.destaque__texto p {
-  font-size: var(--tamanho-medio);
+.destaque__descricao {
+  margin: 1.25rem 0 2rem;
   color: var(--cor-tinta-media);
+  font-size: 1.125rem;
 }
 
-.destaque__texto .grupo-botoes {
-  margin-top: var(--espaco-lg);
-}
-
-.destaque__figura {
-  border: var(--borda-forte);
-  border-radius: var(--raio);
-  background-color: var(--cor-papel);
-}
-
-.destaque__imagem {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-}
-
-.destaque__legenda {
-  max-width: none;
-  padding: var(--espaco-xs) var(--espaco-sm);
-  border-top: var(--borda-forte);
-  font-size: var(--tamanho-micro);
-  text-transform: uppercase;
-  letter-spacing: var(--espacamento-rotulo);
-  color: var(--cor-tinta-media);
-}
-
-/* Números de destaque */
+/* números grandes (120 quadras, 40 rachas...) */
 .destaque__indicadores {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--espaco-lg);
-  margin-top: var(--espaco-lg);
-  padding-top: var(--espaco-md);
-  border-top: var(--borda-forte);
+  gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: var(--borda);
 }
 
 .destaque__indicadores strong {
   display: block;
-  font-family: var(--fonte-display);
-  font-size: var(--tamanho-numero);
-  line-height: 1;
   color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
+  font-size: 2.5rem;
+  line-height: 1;
 }
 
 .destaque__indicadores span {
-  display: block;
-  margin-top: 4px;
-  font-size: var(--tamanho-micro);
-  text-transform: uppercase;
-  letter-spacing: var(--espacamento-rotulo);
   color: var(--cor-tinta-media);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.destaque__figura {
+  overflow: hidden;
+  border: var(--borda);
+  border-radius: var(--raio);
+}
+
+.destaque__imagem {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.destaque__legenda {
+  padding: 0.5rem 0.75rem;
+  border-top: var(--borda);
+  color: var(--cor-tinta-media);
+  font-size: 0.75rem;
+  text-transform: uppercase;
 }
 
 
-/* Passos numerados */
+/* Passos numerados (o número vem do próprio <ol>) */
 .passos {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--espaco-md);
-  counter-reset: passo;
+  gap: 1.25rem;
 }
 
 .passo {
-  counter-increment: passo;
-  padding: var(--espaco-md);
-  border: var(--borda-forte);
+  padding: 1.25rem;
+  border: var(--borda);
   border-radius: var(--raio);
   background-color: var(--cor-papel);
-  transition: var(--transicao);
-}
-
-.passo::before {
-  content: counter(passo, decimal-leading-zero);
-  display: inline-block;
-  margin-bottom: var(--espaco-sm);
-  padding: 2px var(--espaco-xs);
-  background-color: var(--cor-tinta);
-  color: var(--cor-papel);
-  font-family: var(--fonte-display);
-  font-size: var(--tamanho-micro);
-  letter-spacing: var(--espacamento-rotulo);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .passo:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: var(--sombra-solida);
+  transform: translateY(-4px);
+  box-shadow: var(--sombra);
+}
+
+/* ::marker é o número do item da lista */
+.passo::marker {
+  color: var(--cor-primaria);
+  font-family: var(--fonte-titulo);
 }
 
 .passo h3 {
-  margin-bottom: var(--espaco-xs);
+  margin: 0.5rem 0;
 }
 
 .passo p {
-  font-size: var(--tamanho-pequeno);
   color: var(--cor-tinta-media);
+  font-size: 0.9rem;
 }
 
 
 /* Painel para donos de quadra */
 .painel-destaque {
-  padding: var(--espaco-lg);
-  border-left: 8px solid var(--cor-destaque);
+  padding: 2rem;
+  border-left: 6px solid var(--cor-destaque);
   border-radius: var(--raio);
   background-color: var(--cor-tinta);
   color: var(--cor-papel);
 }
 
-.painel-destaque h2 {
-  color: var(--cor-papel);
+.painel-destaque p,
+.painel-destaque li {
+  color: var(--cor-linha);
 }
 
 .painel-destaque p {
-  margin-top: var(--espaco-sm);
-  color: var(--cor-linha);
+  margin-top: 0.75rem;
 }
 
 .painel-destaque ul {
-  margin-top: var(--espaco-md);
+  margin: 1.25rem 0;
 }
 
 .painel-destaque li {
-  padding: var(--espaco-xs) 0;
-  border-top: 1px solid var(--cor-linha-clara);
-  font-size: var(--tamanho-pequeno);
-  color: var(--cor-linha);
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--cor-tinta-media);
+  font-size: 0.9rem;
 }
 
-.painel-destaque .botao--secundario,
-.painel-destaque .botao--secundario:visited {
-  margin-top: var(--espaco-md);
+/* fundo escuro: o botão secundário precisa de cores invertidas */
+.painel-destaque .botao--secundario {
   background-color: var(--cor-papel);
   border-color: var(--cor-papel);
   color: var(--cor-tinta);
@@ -176,20 +155,19 @@
 .painel-destaque .botao--secundario:hover {
   background-color: var(--cor-destaque);
   border-color: var(--cor-destaque);
-  color: var(--cor-superficie);
-  box-shadow: 5px 5px 0 var(--cor-papel);
+  color: var(--cor-branco);
 }
 
 
 /* Tablet */
 @media (min-width: 768px) {
-  .passos {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--espaco-lg);
-  }
-
   .destaque__imagem {
     height: 340px;
+  }
+
+  .passos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 }
 
@@ -198,33 +176,27 @@
 @media (min-width: 1024px) {
   .destaque__conteudo {
     flex-direction: row;
-    align-items: stretch;
+    align-items: center; /* centraliza a imagem na altura do texto */
   }
 
-  .destaque__texto {
-    flex: 1.2;
-  }
-
+  .destaque__texto,
   .destaque__figura {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    flex: 1; /* metade para cada um */
   }
 
   .destaque__imagem {
-    flex: 1;
-    height: auto;
-    min-height: 420px;
+    height: 460px;
   }
 
   .passos {
     grid-template-columns: repeat(3, 1fr);
   }
 
+  /* Grid: cards à esquerda (2 partes) e aside à direita (1 parte) */
   .area-conteudo {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: var(--espaco-lg);
+    gap: 2rem;
     align-items: start;
   }
 }

@@ -42,10 +42,10 @@ gradiente.
 | **Marca** | ArenaHub — nome em caixa-alta acompanhado de uma marca vetorial (SVG inline) que representa a planta baixa de um campo. |
 | **Paleta** | Tinta `#14150F` · Papel `#F2F0EA` · Primária (verde de campo) `#14513A` · Destaque (laranja) `#B23A10` · Linha `#D5D1C4`. Todos os pares texto/fundo utilizados foram conferidos e atingem no mínimo **4.5:1** (WCAG AA). |
 | **Tipografia** | *Archivo Black* nos títulos e rótulos; *Archivo* (variável, 400–700) no texto corrido. Hospedadas em `assets/fonts/` — o site não depende de CDN e funciona offline. |
-| **Botões** | Retângulos sólidos em caixa-alta. Primário: verde preenchido. Secundário: apenas contorno, preenchido no `:hover`. |
-| **Cards** | Contorno de 2px, sem arredondamento. No `:hover`, deslocam-se e revelam sombra sólida. |
-| **Inputs** | Borda inferior espessa, fundo verde-claro no `:focus`, vermelho apenas após interação. |
-| **Links** | Sublinhados, com `:hover` em laranja e `:visited` em verde escuro. |
+| **Botões** | Caixa-alta, cantos levemente arredondados (4px). Primário: verde preenchido. Secundário: apenas contorno, preenchido no `:hover`. Sobem 2px no `:hover` e voltam no `:active`. |
+| **Cards** | Contorno de 2px e cantos de 4px. No `:hover`, sobem 4px e revelam uma sombra sólida. |
+| **Inputs** | Borda fina, fundo verde-claro no `:focus`, vermelho apenas após interação (`:user-invalid`). |
+| **Links** | Sublinhados, com `:hover` em laranja; links de texto já visitados (`:visited`) ficam verde-escuro. |
 
 ---
 
@@ -66,16 +66,15 @@ media queries em `768px` e `1024px` apenas **reorganizam a composição** —
 cabeçalho vira linha, grades ganham colunas, o destaque passa a duas colunas — em
 vez de só reduzir elementos.
 
-**Numerais por contador CSS:** os números dos passos e das etapas vêm de
-`counter-increment` / `content: counter(...)`, não de texto digitado no HTML.
-A numeração continua correta se um item for inserido ou removido.
+**Numeração pela própria lista:** os passos e as etapas são `<ol>`, então o
+navegador numera sozinho. A numeração continua correta se um item for inserido
+ou removido, e o `::marker` só pinta o número com a cor do site.
 
-**Validação sem JavaScript:** toda a validação é nativa (`required`, `min`,
-`max`, `minlength`, `maxlength`, `pattern`). O feedback de erro só aparece
-**após** a interação — `:invalid` é combinado com `:not(:placeholder-shown)`,
-e `:user-invalid` cobre `date`, `time` e `<select>`, que não têm placeholder
-visível. Sem isso, os campos obrigatórios ficariam vermelhos assim que a
-página abrisse.
+**Validação nativa do HTML:** toda a validação é feita por atributos
+(`required`, `min`, `max`, `minlength`, `maxlength`, `pattern`). O campo só
+fica vermelho **depois** da interação (`:user-invalid`); enquanto o usuário
+digita algo inválido, `:invalid` deixa a dica do campo vermelha. Com `:invalid`
+puro, os campos obrigatórios ficariam vermelhos assim que a página abrisse.
 
 **IDs e classes:** `class` para estilo reutilizável; `id` para identificar um
 ponto único do documento. Os IDs `#topo`, `#conteudo`, `#como-funciona`,
@@ -98,8 +97,10 @@ arena-hub/
 │   │                     cards, etiquetas, aside e rodapé
 │   ├── index.css         Hero, passos numerados, painel de proprietários
 │   ├── quadras.css       Endereço da quadra no card
-│   ├── rachas.css        Detalhes da partida e etiquetas de vagas
+│   ├── rachas.css        Cores das etiquetas de vagas
 │   └── agendamento.css   Formulário
+│
+├── js/agendamento.js     Lista, cria, edita e cancela reservas (API)
 │
 ├── images/               21 fotos locais, 3 larguras de cada (ver README)
 │
@@ -108,8 +109,8 @@ arena-hub/
 ```
 
 Cada página carrega `style.css` primeiro e depois o CSS da própria página.
-O `GUIA-CSS.md`, na raiz do repositório, explica todo o CSS usado e indica
-onde alterar cada coisa.
+O `GUIA-CSS.md`, na raiz do repositório, explica **por que** cada recurso do
+CSS foi usado (bom para a defesa) e indica onde alterar cada coisa.
 
 ## 5. Como executar
 
