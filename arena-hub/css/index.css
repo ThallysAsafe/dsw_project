@@ -66,12 +66,6 @@
   border-radius: var(--raio);
 }
 
-.destaque__imagem {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-}
-
 .destaque__legenda {
   padding: 0.5rem 0.75rem;
   border-top: var(--borda);
@@ -99,12 +93,6 @@
 .passo:hover {
   transform: translateY(-4px);
   box-shadow: var(--sombra);
-}
-
-/* ::marker é o número do item da lista */
-.passo::marker {
-  color: var(--cor-primaria);
-  font-family: var(--fonte-titulo);
 }
 
 .passo h3 {
@@ -161,10 +149,6 @@
 
 /* Tablet */
 @media (min-width: 768px) {
-  .destaque__imagem {
-    height: 340px;
-  }
-
   .passos {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -182,10 +166,6 @@
   .destaque__texto,
   .destaque__figura {
     flex: 1; /* metade para cada um */
-  }
-
-  .destaque__imagem {
-    height: 460px;
   }
 
   .passos {

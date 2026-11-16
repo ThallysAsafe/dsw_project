@@ -11,13 +11,8 @@
    ========================================================== */
 
 
-/* 1. Fontes locais (o site funciona sem internet) */
-@font-face {
-  font-family: "Archivo";
-  src: url("../assets/fonts/archivo-latin.woff2") format("woff2");
-  font-weight: 400 700; /* fonte variável: um arquivo vai do normal ao negrito */
-}
-
+/* 1. Fonte dos títulos, salva no projeto (o site funciona sem internet).
+   O texto comum usa Arial, que já existe em todo computador. */
 @font-face {
   font-family: "Archivo Black";
   src: url("../assets/fonts/archivo-black-latin.woff2") format("woff2");
@@ -39,7 +34,7 @@
   --cor-erro: #a8200f;
 
   --fonte-titulo: "Archivo Black", Arial, sans-serif;
-  --fonte-texto: "Archivo", Arial, sans-serif;
+  --fonte-texto: Arial, Helvetica, sans-serif;
 
   --borda: 2px solid var(--cor-tinta);
   --raio: 4px;
@@ -109,19 +104,9 @@ img {
 }
 
 /* foco visível para quem navega pelo teclado (Tab) */
-:focus-visible {
+:focus {
   outline: 3px solid var(--cor-destaque);
   outline-offset: 2px;
-}
-
-/* Alvos das âncoras (ex.: quadras.html#catalogo).
-   Seletor de ID porque cada um é um ponto único da página.
-   A margem impede que o título fique escondido atrás do cabeçalho fixo. */
-#como-funciona,
-#catalogo,
-#lista-rachas,
-#form-reserva {
-  scroll-margin-top: 8rem;
 }
 
 /* Container: centraliza o conteúdo e limita a largura */
@@ -156,7 +141,7 @@ img {
 }
 
 .secao__texto {
-  max-width: 65ch; /* linhas muito longas cansam a leitura */
+  max-width: 700px; /* linhas muito longas cansam a leitura */
   margin-top: 0.75rem;
   color: var(--cor-tinta-media);
 }
@@ -169,7 +154,7 @@ img {
 }
 
 .pagina-titulo p {
-  max-width: 65ch;
+  max-width: 700px;
   margin-top: 0.75rem;
   color: var(--cor-tinta-media);
 }
@@ -206,9 +191,6 @@ img {
 
 /* 4. Cabeçalho e menu (Flexbox: itens em uma linha só) */
 .cabecalho {
-  position: sticky; /* o menu acompanha a rolagem */
-  top: 0;
-  z-index: 10;
   background-color: var(--cor-papel);
   border-bottom: var(--borda);
 }
@@ -370,7 +352,7 @@ img {
 .cartao {
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* a imagem respeita o canto arredondado */
+  overflow: hidden; /* a foto não passa por cima do canto arredondado */
   border: var(--borda);
   border-radius: var(--raio);
   background-color: var(--cor-branco);
@@ -383,9 +365,6 @@ img {
 }
 
 .cartao__imagem {
-  width: 100%;
-  height: 190px;
-  object-fit: cover; /* corta a foto sem distorcer */
   border-bottom: var(--borda);
 }
 

@@ -4,8 +4,12 @@ Este guia explica **cada escolha** do CSS, no formato "o que é → onde está �
 por que usamos". A ideia é que qualquer integrante consiga responder à
 pergunta "por que vocês usaram isso?" durante a apresentação.
 
-Regra que seguimos ao escrever o CSS: **só entra o que dá para justificar**.
-Se uma propriedade não resolve um problema concreto do site, ela não está lá.
+Regras que seguimos ao escrever o CSS:
+
+- **só entra o que dá para justificar**: se uma propriedade não resolve um
+  problema concreto do site, ela não está lá;
+- **só recursos tradicionais de CSS**, os que aparecem em qualquer material da
+  disciplina. Nada de propriedades novas ou pouco conhecidas.
 
 ---
 
@@ -106,12 +110,11 @@ Espaçamentos e tamanhos de fonte **não** viraram variável: estão escritos em
 |---|---|---|
 | Elemento | `body`, `h1`, `a`, `img`, `ul` | Estilo padrão de todas as tags daquele tipo |
 | Classe | `.cartao`, `.botao` | Estilo reutilizável — a maior parte do CSS |
-| ID | `#catalogo`, `#form-reserva` | Pontos únicos da página (alvos das âncoras) |
+| ID | `#lista-reservas` (`agendamento.css`) | Elemento único da página, que o JavaScript também encontra pelo id |
 | Universal | `*` | Reset: vale para todos os elementos |
 | Descendente | `.rodape a` | "links que estão dentro do rodapé" |
 | Irmão adjacente | `legend + p`, `input:disabled + label` | "o elemento logo depois de" |
 | Pseudo-classe | `:hover`, `:focus`, `:disabled` | Estados (ver seção 7) |
-| Pseudo-elemento | `.passo::marker` | O número da lista |
 
 ### Especificidade: quem vence
 
@@ -122,6 +125,13 @@ elemento           0-0-1   mais fraco
 ```
 
 Empate → vence a regra que aparece **por último**.
+
+**Por que quase não usamos ID no CSS?** Porque o ID é forte demais (1-0-0):
+para mudar um estilo feito com ID, só outro ID ou um seletor ainda maior
+vence. Por isso o estilo fica em classes, e os IDs ficam para âncoras
+(`quadras.html#catalogo`), para os `label for="..."` do formulário e para o
+JavaScript. O único estilo por ID é o `#lista-reservas`, porque ele é um
+elemento único da página.
 
 ### Exemplos reais do projeto (bons para a apresentação)
 
@@ -241,7 +251,9 @@ Com Flexbox teríamos que calcular a largura de cada card na mão.
 - Flexbox: `display: flex`, `flex-direction`, `justify-content`,
   `align-items`, `flex-wrap`, `gap`, `flex: 1`, `flex-shrink: 0`.
 - Grid: `display: grid`, `grid-template-columns`, `repeat()`, `fr`, `gap`,
-  `column-gap`, `align-items: start`.
+  `align-items: start`.
+- `gap: 0 1.25rem` (em `.campo-duplo`) = 0 entre linhas e 1.25rem entre
+  colunas.
 - `fr` = "fração do espaço livre". `2fr 1fr` = a primeira coluna tem o dobro
   da segunda.
 
@@ -281,12 +293,10 @@ clicável e o que está acontecendo.
 | Recurso | Onde | Para quê |
 |---|---|---|
 | `:hover` | Links, menu, botões, cards, passos, opções do formulário | Mostrar que o elemento é clicável |
-| `:focus-visible` | Todos os elementos (`style.css`) | Contorno laranja para quem navega com Tab |
-| `:focus` | Campos do formulário; `.link-pular` | Destacar o campo sendo preenchido; mostrar o link de pular |
+| `:focus` | Todos os elementos; campos do formulário; `.link-pular` | Contorno laranja para quem navega com Tab; destacar o campo sendo preenchido; mostrar o link de pular |
 | `:active` | `.botao:active` | O botão "afunda" de volta no clique |
 | `:visited` | `.link-texto:visited` | Links de texto já visitados ficam verde-escuro |
-| `:invalid` | `.campo input:focus:invalid + .campo__dica` | A dica fica vermelha enquanto o valor está errado |
-| `:user-invalid` | Campos do formulário | Borda vermelha depois que o usuário mexeu no campo |
+| `:invalid` | `.campo input:focus:invalid` | Borda vermelha no campo que está sendo preenchido com valor errado |
 | `:disabled` | Botão "Partida lotada", cupom, "Transmissão ao vivo" | Mostrar que o controle está indisponível |
 
 ### `transition`
@@ -321,32 +331,27 @@ A validação é **do HTML** (`required`, `min`, `max`, `minlength`,
 /* campo sendo preenchido */
 .campo input:focus { border-color: var(--cor-primaria); background-color: var(--cor-primaria-clara); }
 
-/* enquanto digita algo inválido, a dica abaixo fica vermelha */
-.campo input:focus:invalid + .campo__dica { color: var(--cor-erro); }
-
-/* depois que o usuário mexeu no campo e deixou errado */
-.campo input:user-invalid { border-color: var(--cor-erro); background-color: var(--cor-destaque-clara); }
+/* campo em foco com valor que não passa na validação */
+.campo input:focus:invalid { border-color: var(--cor-erro); background-color: var(--cor-destaque-clara); }
 
 /* campo indisponível */
 .campo input:disabled { background-color: var(--cor-papel); cursor: not-allowed; }
 ```
 
-**Por que não usar só `:invalid` para pintar o campo de vermelho?** Porque um
-campo obrigatório vazio já é `:invalid` assim que a página abre — o formulário
-inteiro apareceria vermelho antes de o usuário digitar qualquer coisa. Por
-isso:
+**Por que `:focus:invalid` e não só `:invalid`?** Porque um campo
+obrigatório vazio já é `:invalid` assim que a página abre: o formulário
+inteiro apareceria vermelho antes de o usuário digitar qualquer coisa.
+Juntando com `:focus`, o vermelho aparece **só no campo que o usuário está
+preenchendo**, e some quando o valor fica certo. A dica embaixo do campo
+(`.campo__dica`) explica a regra ("mínimo de 5 caracteres").
 
-- `:invalid` só age **enquanto o campo está em foco** e muda a cor da dica,
-  que explica a regra ("mínimo de 5 caracteres").
-- `:user-invalid` (a versão "depois da interação" do `:invalid`) pinta o campo
-  de vermelho só depois que o usuário mexeu nele.
+Se o usuário tentar enviar com erro, o próprio navegador mostra a mensagem e
+leva o foco ao campo errado, que fica vermelho pela mesma regra.
 
 **Outras escolhas do formulário:**
 
 - `font-family: inherit` nos campos: `input`, `select` e `textarea` **não**
   herdam a fonte da página por padrão.
-- `accent-color`: pinta o rádio e o checkbox marcados com o verde do site, sem
-  precisar recriar o controle.
 - `flex-shrink: 0` no rádio/checkbox: sem isso, quando o texto é longo, o
   Flexbox encolhe a caixinha.
 - `cursor: not-allowed` em campos desabilitados e `cursor: pointer` nos
@@ -358,9 +363,8 @@ isso:
 
 ## 9. Acessibilidade no CSS
 
-- **Foco visível:** `:focus-visible` com contorno laranja de 3px. Usamos
-  `:focus-visible` (e não `:focus`) no geral porque ele aparece na navegação
-  por teclado, mas não quando se clica com o mouse num botão.
+- **Foco visível:** `:focus` com contorno laranja de 3px (`outline`) em
+  qualquer elemento. Quem navega com Tab sempre vê onde está.
 - **Link "pular para o conteúdo"** (`.link-pular`): fica fora da tela
   (`left: -9999px`) e aparece no `:focus`. É o primeiro Tab da página e leva
   direto ao `<main>`, sem passar pelo menu.
@@ -369,8 +373,6 @@ isso:
   laranja, porque laranja sobre preto ficaria com contraste baixo.
 - **Alvos de toque:** `.botao--bloco` ocupa a largura toda no celular, e os
   botões têm cerca de 48px de altura.
-- **Âncoras com cabeçalho fixo:** `scroll-margin-top` nos IDs das seções
-  (próxima seção).
 
 ---
 
@@ -378,20 +380,18 @@ isso:
 
 | Propriedade | Onde | Por quê |
 |---|---|---|
-| `@font-face` | `style.css` | Fontes ficam em `assets/fonts/`; o site funciona sem internet |
-| `font-weight: 400 700` no `@font-face` | Fonte Archivo | É uma fonte variável: um arquivo cobre do normal ao negrito |
+| `@font-face` | `style.css` | A fonte dos títulos (Archivo Black) fica em `assets/fonts/`; o site funciona sem internet |
+| `font-family: Arial, Helvetica, sans-serif` | Texto comum | Fonte que já existe em todo computador; as outras são reserva, caso a primeira falte |
 | `font-weight: 400` nos títulos | `h1, h2, h3` | A Archivo Black já é grossa; o navegador deixaria títulos em negrito e "engrossaria" a fonte de novo |
 | `text-transform: uppercase` | Títulos, botões, menu | Identidade visual (estilo cartaz esportivo) sem digitar em maiúsculas no HTML |
 | `line-height: 1.6` / `1.1` | Texto / títulos | Texto corrido precisa de respiro; títulos grandes ficam melhores juntos |
-| `max-width: 65ch` | `.secao__texto`, `.pagina-titulo p` | Linhas de texto muito longas cansam a leitura |
-| `position: sticky; top: 0` | `.cabecalho` | O menu acompanha a rolagem (útil no celular) |
-| `z-index` | Cabeçalho (10) e `.link-pular` (100) | O cabeçalho fica por cima do conteúdo; o link de pular fica por cima do cabeçalho |
-| `scroll-margin-top: 8rem` | `#catalogo`, `#form-reserva`... | Ao clicar num link com âncora, o título não fica escondido atrás do cabeçalho fixo |
-| `object-fit: cover` | Imagens dos cards e do destaque | Corta a foto para caber na altura fixa sem distorcer |
-| `overflow: hidden` | `.cartao`, `.destaque__figura` | A imagem respeita o canto arredondado do card |
+| `max-width: 700px` | `.secao__texto`, `.pagina-titulo p` | Linhas de texto muito longas cansam a leitura |
+| `position: absolute` + `z-index` | `.link-pular` | Tira o link do fluxo e o coloca por cima de tudo quando aparece |
+| `max-width: 100%; height: auto` | `img` | A imagem nunca passa da largura da tela e mantém a proporção. Todas as fotos dos cards têm a mesma proporção (4:3), então ficam com a mesma altura |
+| `overflow: hidden` | `.cartao`, `.destaque__figura` | A foto não passa por cima do canto arredondado do card |
+| `min-height` | `#lista-reservas` | A seção não "pula" enquanto o JavaScript carrega as reservas |
 | `list-style: none` | `ul` | Menus e listas de informação não precisam de bolinha |
 | `list-style-position: inside` | `ol` | O número dos passos e etapas fica dentro da caixa |
-| `::marker` | `.passo::marker` | Pinta o número da lista de verde com a fonte dos títulos |
 | `font-style: normal` | `.rodape address` | `<address>` vem em itálico por padrão |
 | `resize: vertical` | `textarea` | Deixa aumentar a altura, mas não a largura (evita quebrar o layout) |
 
@@ -404,9 +404,12 @@ Se o professor perguntar por que algo **não** está no CSS:
 | Removido | Motivo |
 |---|---|
 | `unicode-range` e arquivos `latin-ext` das fontes | Todos os acentos do português (á, ç, ã, ê...) já estão no arquivo `latin` |
+| Fonte variável Archivo no texto | Exigia `font-weight: 400 700` no `@font-face`; trocamos por Arial |
 | ~20 variáveis de tamanho e espaçamento | Ficava mais difícil ler as regras; usamos `rem` direto |
 | Contadores CSS (`counter-reset`/`counter-increment`) | A própria `<ol>` já numera os itens |
-| `:has()`, `:valid`, `:placeholder-shown` | Combinações difíceis de explicar; `:user-invalid` resolve o mesmo problema |
+| `:has()`, `:valid`, `:placeholder-shown`, `:user-invalid`, `:focus-visible` | Pseudo-classes novas ou pouco conhecidas; `:focus` e `:invalid` resolvem |
+| `::marker`, `accent-color`, `object-fit`, `scroll-margin-top`, unidade `ch` | Recursos menos conhecidos; não fazem falta para o layout |
+| Cabeçalho fixo (`position: sticky`) | Precisava de `z-index` e `scroll-margin-top` para não cobrir os títulos das âncoras |
 | Media queries `pointer: coarse`, `max-height`, `prefers-reduced-motion` | Ajustes finos que não mudavam a composição do layout |
 | Zoom na imagem do card no hover | Efeito sem função (o enunciado pede interações com propósito) |
 | `position: sticky` no aside | O aside é curto; não precisava acompanhar a rolagem |
