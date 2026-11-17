@@ -1,5 +1,3 @@
-// prisma/schema.prisma
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,20 +7,28 @@ datasource db {
   url      = "postgresql://postgres:postgres@localhost:5433/postgres?schema=public"
 }
 
+model Quadra {
+  id           Int           @id @default(autoincrement())
+  nome         String
+  modalidade   String
+  endereco     String
+  descricao    String
+  precoHora    Int
+  agendamentos Agendamento[]
+
+  @@map("quadras")
+}
+
 model Agendamento {
-  id          Int      @id @default(autoincrement())
-  nome        String
-  email       String
-  telefone    String?
-  quadra      String
-  data        String
-  horario     String
-  jogadores   Int
-  horas       Int
-  tipoReserva String   @default("avulso")
-  servicos    String[] @default([])
-  observacoes String?
-  criadoEm    DateTime @default(now())
+  id       Int      @id @default(autoincrement())
+  nome     String
+  email    String
+  telefone String?
+  quadraId Int
+  quadra   Quadra   @relation(fields: [quadraId], references: [id])
+  data     String
+  horarios String[] @default([])
+  criadoEm DateTime @default(now())
 
   @@map("agendamentos")
 }

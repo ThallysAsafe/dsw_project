@@ -3,409 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Formulário de agendamento do ArenaHub: reserve seu horário em quadras esportivas parceiras de forma rápida e online.">
-  <title>Agendamento de quadras | ArenaHub</title>
+  <title>Agendar horário | ArenaHub</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/agendamento.css">
 </head>
 <body>
 
-  <a class="link-pular" href="#conteudo">Pular para o conteúdo principal</a>
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <a class="logo" href="index.html">ArenaHub</a>
 
-  <!-- Cabeçalho -->
-  <header class="cabecalho" id="topo">
-    <div class="container cabecalho__interno">
-
-      <a class="logo" href="index.html">
-        <span class="logo__marca">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
-            <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
-            <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
-          </svg>
-        </span>
-        ArenaHub
-      </a>
-
-      <nav class="menu" aria-label="Navegação principal">
-        <ul class="menu__lista">
-          <li><a class="menu__link" href="index.html">Início</a></li>
-          <li><a class="menu__link" href="quadras.html">Quadras</a></li>
-          <li><a class="menu__link" href="rachas.html">Rachas</a></li>
-          <li>
-            <a class="menu__link menu__link--ativo" href="agendamento.html" aria-current="page">Agendamento</a>
-          </li>
+      <nav aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="quadras.html">Quadras</a></li>
+          <li><a href="agendamentos.html">Agendamentos</a></li>
         </ul>
       </nav>
-
     </div>
   </header>
 
-  <!-- Conteúdo principal -->
-  <main id="conteudo">
-
-    <!-- Título da página -->
-    <div class="pagina-titulo">
+  <main>
+    <div class="titulo-pagina">
       <div class="container">
-        <h1>Agendamento de quadras</h1>
-        <p>
-          Preencha os dados abaixo para solicitar a reserva da sua quadra.
-          Os campos marcados com <span class="obrigatorio">*</span> são obrigatórios.
-          Ainda não escolheu o espaço? Consulte o
-          <a class="link-texto" href="quadras.html#catalogo">catálogo de quadras</a>.
-        </p>
+        <h1 id="titulo-pagina">Agendar quadra</h1>
+        <p>Preencha os dados abaixo para confirmar ou alterar sua reserva.</p>
       </div>
     </div>
 
-    <section class="secao" aria-labelledby="form-reserva">
-      <div class="container area-formulario">
+    <section class="secao">
+      <div class="container">
+        <div class="form-box">
+          <div class="quadra-escolhida" id="info-quadra" style="display: none;"></div>
 
-        <!-- Formulário de reserva -->
-        <article>
-          <header class="secao__cabecalho">
-            <p class="secao__numero">01 / Solicitação</p>
-            <h2 id="form-reserva">Dados da reserva</h2>
-            <p class="secao__texto">
-              Preencha os campos abaixo com atenção. A confirmação da sua
-              reserva é enviada por e-mail em até 2 horas.
-            </p>
-          </header>
-
-          <form class="formulario" id="form-agendamento">
+          <form id="form-agendamento">
             <input type="hidden" id="agendamento-id" name="id">
 
-            <!-- Dados do solicitante -->
-            <fieldset>
-              <legend>Dados do solicitante</legend>
-              <p>Usamos esses dados apenas para confirmar a reserva.</p>
-
-              <div class="campo">
-                <label for="nome">
-                  Nome completo <span class="obrigatorio">*</span>
-                </label>
-                <input type="text"
-                       id="nome"
-                       name="nome"
-                       placeholder="Ex.: Ana Beatriz Correia"
-                       minlength="5"
-                       maxlength="80"
-                       autocomplete="name"
-                       required>
-                <small class="campo__dica">Informe nome e sobrenome (mínimo de 5 caracteres).</small>
-              </div>
-
-              <div class="campo-duplo">
-                <div class="campo">
-                  <label for="email">
-                    E-mail de contato <span class="obrigatorio">*</span>
-                  </label>
-                  <input type="email"
-                         id="email"
-                         name="email"
-                         placeholder="voce@email.com"
-                         autocomplete="email"
-                         required>
-                  <small class="campo__dica">A confirmação da reserva chega neste endereço.</small>
-                </div>
-
-                <div class="campo">
-                  <label for="telefone">Telefone com DDD</label>
-                  <input type="tel"
-                         id="telefone"
-                         name="telefone"
-                         placeholder="(82) 90000-0000"
-                         placeholder="(11) 90000-0000"
-                         pattern="\(?[0-9]{2}\)?[\s-]?[0-9]{4,5}-?[0-9]{4}"
-                         autocomplete="tel">
-                  <small class="campo__dica">Opcional. Usado só em caso de imprevisto na quadra.</small>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Detalhes da partida -->
-            <fieldset>
-              <legend>Detalhes da partida</legend>
-              <p>Escolha o espaço, a data e o tamanho do grupo.</p>
-
-              <div class="campo">
-                <label for="quadra">
-                  Quadra e modalidade <span class="obrigatorio">*</span>
-                </label>
-                <select id="quadra" name="quadra" required>
-                  <option value="" selected disabled>Selecione uma opção</option>
-                  <optgroup label="Futebol">
-                    <option value="arena-jatiuca">Arena Jatiúca &mdash; futebol society</option>
-                    <option value="ginasio-farol-futsal">Ginásio Farol &mdash; futsal</option>
-                  </optgroup>
-                  <optgroup label="Areia">
-                    <option value="arena-ponta-verde">Arena Ponta Verde &mdash; vôlei de praia</option>
-                    <option value="beach-club-pajucara">Beach Club Pajuçara &mdash; beach tennis</option>
-                  </optgroup>
-                  <optgroup label="Quadra">
-                    <option value="ginasio-farol-basquete">Ginásio Farol &mdash; basquete</option>
-                    <option value="praca-benedito-bentes">Praça Benedito Bentes &mdash; basquete 3x3</option>
-                    <option value="tennis-park-gruta">Tennis Park Gruta &mdash; tênis</option>
-                  </optgroup>
-                </select>
-              </div>
-
-              <div class="campo-duplo">
-                <div class="campo">
-                  <label for="data">
-                    Data da partida <span class="obrigatorio">*</span>
-                  </label>
-                  <input type="date"
-                         id="data"
-                         name="data"
-                         min="2026-09-21"
-                         max="2026-12-31"
-                         required>
-                  <small class="campo__dica">Agendamentos abertos até 31/12/2026.</small>
-                </div>
-
-                <div class="campo">
-                  <label for="horario">
-                    Horário de início <span class="obrigatorio">*</span>
-                  </label>
-                  <input type="time"
-                         id="horario"
-                         name="horario"
-                         min="06:00"
-                         max="22:00"
-                         required>
-                  <small class="campo__dica">As quadras funcionam das 6h às 23h.</small>
-                </div>
-              </div>
-
-              <div class="campo-duplo">
-                <div class="campo">
-                  <label for="jogadores">
-                    Quantidade de jogadores <span class="obrigatorio">*</span>
-                  </label>
-                  <input type="number"
-                         id="jogadores"
-                         name="jogadores"
-                         placeholder="10"
-                         min="2"
-                         max="22"
-                         step="1"
-                         required>
-                  <small class="campo__dica">De 2 a 22 pessoas, incluindo você.</small>
-                </div>
-
-                <div class="campo">
-                  <label for="horas">
-                    Horas de reserva <span class="obrigatorio">*</span>
-                  </label>
-                  <input type="number"
-                         id="horas"
-                         name="horas"
-                         placeholder="1"
-                         min="1"
-                         max="4"
-                         step="1"
-                         required>
-                  <small class="campo__dica">Máximo de 4 horas seguidas por reserva.</small>
-                </div>
-              </div>
-
-              <fieldset class="subgrupo">
-                <legend>Tipo de agendamento <span class="obrigatorio">*</span></legend>
-
-                <div class="grupo-opcoes">
-                  <div class="opcao">
-                    <input type="radio"
-                           id="tipo-avulso"
-                           name="tipo-reserva"
-                           value="avulso"
-                           required
-                           checked>
-                    <label for="tipo-avulso">
-                      Horário avulso
-                      <small>Reserva pontual para a data e horário selecionados.</small>
-                    </label>
-                  </div>
-
-                  <div class="opcao">
-                    <input type="radio"
-                           id="tipo-mensalista"
-                           name="tipo-reserva"
-                           value="mensalista">
-                    <label for="tipo-mensalista">
-                      Plano mensalista
-                      <small>Garante o mesmo dia e horário fixos todas as semanas.</small>
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-            </fieldset>
-
-            <!-- Serviços adicionais -->
-            <fieldset>
-              <legend>Serviços adicionais</legend>
-              <p>Opcional. Marque apenas o que a sua partida precisa.</p>
-
-              <div class="grupo-opcoes">
-                <div class="opcao">
-                  <input type="checkbox" id="servico-colete" name="servicos" value="colete">
-                  <label for="servico-colete">
-                    Coletes
-                    <small>Jogo de 10 coletes lavados &mdash; R$ 15</small>
-                  </label>
-                </div>
-
-                <div class="opcao">
-                  <input type="checkbox" id="servico-bola" name="servicos" value="bola-oficial">
-                  <label for="servico-bola">
-                    Bola oficial
-                    <small>Bola calibrada da modalidade escolhida &mdash; R$ 10</small>
-                  </label>
-                </div>
-
-                <div class="opcao">
-                  <input type="checkbox" id="servico-arbitro" name="servicos" value="arbitro">
-                  <label for="servico-arbitro">
-                    Árbitro
-                    <small>Profissional credenciado por partida &mdash; R$ 60</small>
-                  </label>
-                </div>
-
-                <div class="opcao">
-                  <input type="checkbox" id="servico-transmissao" name="servicos" value="transmissao" disabled>
-                  <label for="servico-transmissao">
-                    Transmissão ao vivo
-                    <small>Em breve &mdash; apenas para quadras cobertas</small>
-                  </label>
-                </div>
-              </div>
-
-              <div class="campo">
-                <label for="cupom">Cupom de desconto</label>
-                <input type="text"
-                       id="cupom"
-                       name="cupom"
-                       placeholder="Disponível em breve"
-                       disabled>
-                <small class="campo__dica">Os cupons entram no ar na próxima temporada.</small>
-              </div>
-            </fieldset>
-
-            <!-- Observações -->
-            <fieldset>
-              <legend>Observações</legend>
-              <p>Conte o que for importante para o responsável pela quadra.</p>
-
-              <div class="campo">
-                <label for="observacoes">Observações especiais</label>
-                <textarea id="observacoes"
-                          name="observacoes"
-                          rows="5"
-                          minlength="10"
-                          maxlength="400"
-                          placeholder="Ex.: somos um grupo iniciante e vamos precisar de dois coletes extras."></textarea>
-                <small class="campo__dica">Se preenchido, escreva no mínimo 10 caracteres (limite de 400).</small>
-              </div>
-
-              <div class="grupo-opcoes">
-                <div class="opcao">
-                  <input type="checkbox" id="termos" name="termos" value="aceito" required>
-                  <label for="termos">
-                    Li e aceito as regras de uso <span class="obrigatorio">*</span>
-                    <small>Inclui a política de cancelamento com 12 horas de antecedência.</small>
-                  </label>
-                </div>
-              </div>
-            </fieldset>
-
-            <!-- Botões -->
-            <div class="formulario__acoes">
-              <button class="botao botao--primario" id="btn-submeter" type="submit">Confirmar agendamento</button>
-              <button class="botao botao--secundario" id="btn-cancelar-edicao" type="button" style="display: none;">Cancelar edição</button>
-              <button class="botao botao--secundario" type="reset">Limpar formulário</button>
+            <div class="campo">
+              <label for="quadraId">Quadra e modalidade <span class="obrigatorio">*</span></label>
+              <select id="quadraId" name="quadraId" required>
+                <option value="">Carregando quadras...</option>
+              </select>
             </div>
 
+            <div class="campo">
+              <label for="nome">Nome completo <span class="obrigatorio">*</span></label>
+              <input type="text" id="nome" name="nome" placeholder="Ex.: Ana Beatriz Correia" minlength="5" maxlength="80" required>
+            </div>
+
+            <div class="campo-linha">
+              <div class="campo">
+                <label for="email">E-mail de contato <span class="obrigatorio">*</span></label>
+                <input type="email" id="email" name="email" placeholder="voce@email.com" required>
+              </div>
+
+              <div class="campo">
+                <label for="telefone">Telefone com DDD</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(82) 90000-0000">
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="data">Data da partida <span class="obrigatorio">*</span></label>
+              <input type="date" id="data" name="data" required>
+            </div>
+
+            <div class="campo">
+              <label>Horários disponíveis (08h às 22h) <span class="obrigatorio">*</span></label>
+              <div class="grade-horarios" id="lista-horarios"></div>
+            </div>
+
+            <div class="resumo-valor" id="resumo-valor">
+              Valor total: <strong>R$ 0</strong>
+            </div>
+
+            <div class="botoes">
+              <button class="btn btn-primario" id="btn-submeter" type="submit">Confirmar agendamento</button>
+              <a class="btn btn-secundario" href="quadras.html">Voltar para quadras</a>
+            </div>
           </form>
-        </article>
-
-        <!-- Conteúdo complementar -->
-        <aside class="info-lateral" aria-labelledby="resumo">
-          <h2 id="resumo">O que acontece depois</h2>
-          <p>Da solicitação até a bola rolando.</p>
-
-          <ol>
-            <li>O responsável pela quadra recebe o pedido na hora.</li>
-            <li>A confirmação chega por e-mail em até 2 horas.</li>
-            <li>O pagamento é feito no local, antes do início da partida.</li>
-            <li>Cancelamento sem custo com até 12 horas de antecedência.</li>
-          </ol>
-        </aside>
-
-      </div>
-    </section>
-
-    <!-- Seção de Reservas Confirmadas (READ, UPDATE, DELETE) -->
-    <section class="secao" id="secao-reservas" aria-labelledby="titulo-reservas">
-      <div class="container">
-        <header class="secao__cabecalho">
-          <p class="secao__numero">02 / Acompanhamento</p>
-          <h2 id="titulo-reservas">Reservas confirmadas</h2>
-          <p class="secao__texto">
-            Consulte, altere ou cancele reservas de quadras cadastradas no sistema.
-          </p>
-        </header>
-
-        <div class="grade grade--tres" id="lista-reservas">
-          <!-- Os agendamentos são carregados dinamicamente via JavaScript -->
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Rodapé -->
   <footer class="rodape">
     <div class="container">
+      <div class="rodape-conteudo">
+        <div>
+          <h3>ArenaHub</h3>
+          <p>Sistema simples de catálogo e agendamento de quadras esportivas.</p>
+        </div>
 
-      <div class="rodape__colunas">
-
-        <section aria-labelledby="rodape-sobre">
-          <h2 id="rodape-sobre">ArenaHub</h2>
-          <p>
-            Catálogo de quadras esportivas e organização de rachas em Maceió.
-            Catálogo de quadras esportivas e organização de rachas.
-            Conectando atletas e grupos aos melhores espaços da cidade.
-          </p>
-        </section>
-
-        <nav aria-labelledby="rodape-navegacao">
-          <h2 id="rodape-navegacao">Navegação</h2>
+        <div>
+          <h3>Navegação</h3>
           <ul>
             <li><a href="index.html">Início</a></li>
-            <li><a href="quadras.html#catalogo">Catálogo de quadras</a></li>
-            <li><a href="rachas.html#lista-rachas">Rachas abertos</a></li>
-            <li><a href="agendamento.html#form-reserva">Agendamento</a></li>
+            <li><a href="quadras.html">Quadras</a></li>
+            <li><a href="agendamentos.html">Agendamentos</a></li>
           </ul>
-        </nav>
+        </div>
 
-        <section aria-labelledby="rodape-suporte">
-          <h2 id="rodape-suporte">Suporte</h2>
-          <address>
-            <ul>
-              <li><a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
-              <li><a href="tel:+558230000000">(82) 3000-0000</a></li>
-              <li><a href="tel:+5508000000000">0800 000 0000</a></li>
-              <li>Segunda a sábado, das 8h às 20h</li>
-            </ul>
-          </address>
-        </section>
-
+        <div>
+          <h3>Contato</h3>
+          <ul>
+            <li>suporte@arenahub.com.br</li>
+            <li>(82) 3000-0000</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="rodape__base">
+      <div class="rodape-base">
         <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
-        <p><a href="#topo">Voltar ao topo</a></p>
       </div>
-
     </div>
   </footer>
 

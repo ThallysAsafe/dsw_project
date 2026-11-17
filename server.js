@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 
+const quadraRepository = require('./repositories/quadraRepository');
 const agendamentoRepository = require('./repositories/agendamentoRepository');
 
 const app = express();
@@ -8,7 +9,37 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
 app.use(express.static(path.join(__dirname, 'arena-hub')));
+
+app.get('/api/quadras', async (req, res) => {
+  try {
+    const quadras = await quadraRepository.listAll();
+    res.json(quadras);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensagem: 'Erro ao buscar quadras.' });
+  }
+});
+
+app.get('/api/quadras/:id', async (req, res) => {
+  try {
+    const quadra = await quadraRepository.findById(req.params.id);
+    if (!quadra) {
+      return res.status(404).json({ mensagem: 'Quadra não encontrada.' });
+    }
+    res.json(quadra);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensagem: 'Erro ao buscar quadra.' });
+  }
+});
 
 app.get('/api/agendamentos', async (req, res) => {
   try {
@@ -20,8 +51,26 @@ app.get('/api/agendamentos', async (req, res) => {
   }
 });
 
+app.get('/api/agendamentos/:id', async (req, res) => {
+  try {
+    const agendamento = await agendamentoRepository.findById(req.params.id);
+    if (!agendamento) {
+      return res.status(404).json({ mensagem: 'Agendamento não encontrado.' });
+    }
+    res.json(agendamento);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ mensagem: 'Erro ao buscar agendamento.' });
+  }
+});
+
 app.post('/api/agendamentos', async (req, res) => {
   try {
+    const { nome, email, quadraId, data, horarios } = req.body;
+    if (!nome || !email || !quadraId || !data || !Array.isArray(horarios) || horarios.length === 0) {
+      return res.status(400).json({ mensagem: 'Preencha todos os campos obrigatórios e ao menos um horário.' });
+    }
+
     const novoAgendamento = await agendamentoRepository.create(req.body);
     res.status(201).json(novoAgendamento);
   } catch (error) {
@@ -32,6 +81,11 @@ app.post('/api/agendamentos', async (req, res) => {
 
 app.put('/api/agendamentos/:id', async (req, res) => {
   try {
+    const { nome, email, quadraId, data, horarios } = req.body;
+    if (!nome || !email || !quadraId || !data || !Array.isArray(horarios) || horarios.length === 0) {
+      return res.status(400).json({ mensagem: 'Preencha todos os campos obrigatórios e ao menos um horário.' });
+    }
+
     const agendamentoAtualizado = await agendamentoRepository.update(req.params.id, req.body);
     res.json(agendamentoAtualizado);
   } catch (error) {

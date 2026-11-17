@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meus Agendamentos | ArenaHub</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <a class="logo" href="index.html">ArenaHub</a>
+
+      <nav aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="quadras.html">Quadras</a></li>
+          <li><a class="menu-ativo" href="agendamentos.html">Agendamentos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="titulo-pagina">
+      <div class="container">
+        <h1>Agendamentos</h1>
+        <p>Consulte, edite ou cancele suas reservas de quadra.</p>
+      </div>
+    </div>
+
+    <section class="secao">
+      <div class="container">
+        <div class="secao-titulo" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <div>
+            <h2>Reservas cadastradas</h2>
+            <p>Todas as solicitações confirmadas aparecem abaixo.</p>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="campo-busca" placeholder="Buscar por nome ou quadra..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; min-width: 240px;">
+            <a class="btn btn-primario" href="quadras.html">+ Novo agendamento</a>
+          </div>
+        </div>
+
+        <div class="grade" id="lista-reservas">
+          <p>Carregando agendamentos...</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <div class="rodape-conteudo">
+        <div>
+          <h3>ArenaHub</h3>
+          <p>Sistema simples de catálogo e agendamento de quadras esportivas.</p>
+        </div>
+
+        <div>
+          <h3>Navegação</h3>
+          <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="quadras.html">Quadras</a></li>
+            <li><a href="agendamentos.html">Agendamentos</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contato</h3>
+          <ul>
+            <li>suporte@arenahub.com.br</li>
+            <li>(82) 3000-0000</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rodape-base">
+        <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/agendamentos.js"></script>
+</body>
+</html>

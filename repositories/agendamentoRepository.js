@@ -3,13 +3,15 @@ const prisma = require('../prisma/client');
 const agendamentoRepository = {
   async listAll() {
     return await prisma.agendamento.findMany({
+      include: { quadra: true },
       orderBy: { id: 'desc' }
     });
   },
 
   async findById(id) {
     return await prisma.agendamento.findUnique({
-      where: { id: Number(id) }
+      where: { id: Number(id) },
+      include: { quadra: true }
     });
   },
 
@@ -19,15 +21,11 @@ const agendamentoRepository = {
         nome: data.nome,
         email: data.email,
         telefone: data.telefone || null,
-        quadra: data.quadra,
+        quadraId: Number(data.quadraId),
         data: data.data,
-        horario: data.horario,
-        jogadores: Number(data.jogadores) || 1,
-        horas: Number(data.horas) || 1,
-        tipoReserva: data.tipoReserva || 'avulso',
-        servicos: Array.isArray(data.servicos) ? data.servicos : [],
-        observacoes: data.observacoes || null
-      }
+        horarios: Array.isArray(data.horarios) ? data.horarios : []
+      },
+      include: { quadra: true }
     });
   },
 
@@ -38,15 +36,11 @@ const agendamentoRepository = {
         nome: data.nome,
         email: data.email,
         telefone: data.telefone || null,
-        quadra: data.quadra,
+        quadraId: Number(data.quadraId),
         data: data.data,
-        horario: data.horario,
-        jogadores: Number(data.jogadores) || 1,
-        horas: Number(data.horas) || 1,
-        tipoReserva: data.tipoReserva || 'avulso',
-        servicos: Array.isArray(data.servicos) ? data.servicos : [],
-        observacoes: data.observacoes || null
-      }
+        horarios: Array.isArray(data.horarios) ? data.horarios : []
+      },
+      include: { quadra: true }
     });
   },
 

@@ -3,324 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Catálogo de quadras esportivas do ArenaHub: futebol society, vôlei de praia, beach tennis, basquete e tênis com preço por hora.">
   <title>Quadras disponíveis | ArenaHub</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/quadras.css">
 </head>
 <body>
 
-  <a class="link-pular" href="#conteudo">Pular para o conteúdo principal</a>
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <a class="logo" href="index.html">ArenaHub</a>
 
-  <!-- Cabeçalho -->
-  <header class="cabecalho" id="topo">
-    <div class="container cabecalho__interno">
-
-      <a class="logo" href="index.html">
-        <span class="logo__marca">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <rect x="2" y="4" width="20" height="16" fill="none" stroke="currentColor" stroke-width="2"></rect>
-            <line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"></line>
-            <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"></circle>
-          </svg>
-        </span>
-        ArenaHub
-      </a>
-
-      <nav class="menu" aria-label="Navegação principal">
-        <ul class="menu__lista">
-          <li><a class="menu__link" href="index.html">Início</a></li>
-          <li>
-            <a class="menu__link menu__link--ativo" href="quadras.html" aria-current="page">Quadras</a>
-          </li>
-          <li><a class="menu__link" href="rachas.html">Rachas</a></li>
-          <li><a class="menu__link" href="agendamento.html">Agendamento</a></li>
+      <nav aria-label="Navegação principal">
+        <ul class="menu">
+          <li><a href="index.html">Início</a></li>
+          <li><a class="menu-ativo" href="quadras.html">Quadras</a></li>
+          <li><a href="agendamentos.html">Agendamentos</a></li>
         </ul>
       </nav>
-
     </div>
   </header>
 
-  <!-- Conteúdo principal -->
-  <main id="conteudo">
-
-    <!-- Título da página -->
-    <div class="pagina-titulo">
+  <main>
+    <div class="titulo-pagina">
       <div class="container">
         <h1>Quadras disponíveis</h1>
-        <p>
-          Seis espaços parceiros em Maceió, com estrutura verificada pela nossa
-          equipe. Os preços são por hora e já incluem a iluminação noturna.
-          Prefere entrar em uma partida já montada? Veja os
-          <a class="link-texto" href="rachas.html#lista-rachas">rachas abertos</a>.
-        </p>
+        <p>Escolha a quadra desejada e clique em agendar horário para fazer sua reserva.</p>
       </div>
     </div>
 
-    <!-- Catálogo de quadras -->
-    <section class="secao" aria-labelledby="catalogo">
+    <section class="secao">
       <div class="container">
+        <div class="secao-titulo">
+          <h2>Catálogo de espaços</h2>
+          <p>Escolha uma das quadras parceiras disponíveis na cidade.</p>
+        </div>
 
-        <header class="secao__cabecalho">
-          <p class="secao__numero">01 / Catálogo</p>
-          <h2 id="catalogo">Espaços parceiros</h2>
-          <p class="secao__texto">
-            Escolha a quadra pela modalidade e siga para o agendamento com a
-            data e o horário desejados.
-          </p>
-        </header>
-
-        <div class="grade grade--tres">
-
-          <article class="cartao">
-            <figure>
-              <img class="cartao__imagem"
-                   src="images/futebol-society-800.jpg"
-                   srcset="images/futebol-society-400.jpg 400w,
-                           images/futebol-society-600.jpg 600w,
-                           images/futebol-society-800.jpg 800w"
-                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                   width="800" height="600"
-                   loading="lazy" decoding="async"
-                   alt="Três bolas de futebol alinhadas sobre o gramado sintético de um campo society, com a trave ao fundo.">
-            </figure>
-            <div class="cartao__corpo">
-              <div class="cartao__cabecalho">
-                <p class="etiqueta">Futebol society</p>
-              </div>
-              <h3>Arena Jatiúca</h3>
-              <p class="cartao__endereco">Rua Deputado José Lages, 210 &middot; Jatiúca</p>
-              <p class="cartao__texto">
-                Grama sintética nova, vestiário com chuveiro quente e
-                estacionamento gratuito para até 20 carros.
-              </p>
-              <div class="cartao__rodape">
-                <p class="cartao__preco">R$ 120 <span>por hora</span></p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="cartao">
-            <figure>
-              <img class="cartao__imagem"
-                   src="images/volei-de-praia-800.jpg"
-                   srcset="images/volei-de-praia-400.jpg 400w,
-                           images/volei-de-praia-600.jpg 600w,
-                           images/volei-de-praia-800.jpg 800w"
-                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                   width="800" height="600"
-                   loading="lazy" decoding="async"
-                   alt="Jogadores disputando um ponto de vôlei de praia junto à rede, em silhueta contra o céu alaranjado do pôr do sol.">
-            </figure>
-            <div class="cartao__corpo">
-              <div class="cartao__cabecalho">
-                <p class="etiqueta">Vôlei de praia</p>
-              </div>
-              <h3>Arena Ponta Verde</h3>
-              <p class="cartao__endereco">Avenida Álvaro Otacílio, 1500 &middot; Ponta Verde</p>
-              <p class="cartao__texto">
-                Quadra de areia fina à beira-mar, com rede oficial regulável e
-                iluminação para jogos até as 22h.
-              </p>
-              <div class="cartao__rodape">
-                <p class="cartao__preco">R$ 80 <span>por hora</span></p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="cartao">
-            <figure>
-              <img class="cartao__imagem"
-                   src="images/beach-tennis-800.jpg"
-                   srcset="images/beach-tennis-400.jpg 400w,
-                           images/beach-tennis-600.jpg 600w,
-                           images/beach-tennis-800.jpg 800w"
-                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                   width="800" height="600"
-                   loading="lazy" decoding="async"
-                   alt="Bola de vôlei apoiada na areia de uma quadra, com a rede e jogadores desfocados ao fundo.">
-            </figure>
-            <div class="cartao__corpo">
-              <div class="cartao__cabecalho">
-                <p class="etiqueta">Beach tennis</p>
-              </div>
-              <h3>Beach Club Pajuçara</h3>
-              <p class="cartao__endereco">Rua Jangadeiros Alagoanos, 88 &middot; Pajuçara</p>
-              <p class="cartao__texto">
-                Duas quadras de areia compactada, com aluguel opcional de
-                raquetes e bolinhas de beach tennis.
-              </p>
-              <div class="cartao__rodape">
-                <p class="cartao__preco">R$ 70 <span>por hora</span></p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="cartao">
-            <figure>
-              <img class="cartao__imagem"
-                   src="images/basquete-coberto-800.jpg"
-                   srcset="images/basquete-coberto-400.jpg 400w,
-                           images/basquete-coberto-600.jpg 600w,
-                           images/basquete-coberto-800.jpg 800w"
-                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                   width="800" height="600"
-                   loading="lazy" decoding="async"
-                   alt="Atleta saltando para arremessar a bola na cesta durante uma partida de basquete em ginásio coberto.">
-            </figure>
-            <div class="cartao__corpo">
-              <div class="cartao__cabecalho">
-                <p class="etiqueta">Basquete</p>
-              </div>
-              <h3>Ginásio Farol</h3>
-              <p class="cartao__endereco">Rua Cincinato Pinto, 305 &middot; Farol</p>
-              <p class="cartao__texto">
-                Quadra poliesportiva coberta com piso emborrachado, placar
-                eletrônico e arquibancada para 120 pessoas.
-              </p>
-              <div class="cartao__rodape">
-                <p class="cartao__preco">R$ 95 <span>por hora</span></p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="cartao">
-            <figure>
-              <img class="cartao__imagem"
-                   src="images/tenis-saibro-800.jpg"
-                   srcset="images/tenis-saibro-400.jpg 400w,
-                           images/tenis-saibro-600.jpg 600w,
-                           images/tenis-saibro-800.jpg 800w"
-                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                   width="800" height="600"
-                   loading="lazy" decoding="async"
-                   alt="Vista aérea de uma quadra de tênis de saibro alaranjado com um jogador preparando o saque.">
-            </figure>
-            <div class="cartao__corpo">
-              <div class="cartao__cabecalho">
-                <p class="etiqueta">Tênis</p>
-              </div>
-              <h3>Tennis Park Gruta</h3>
-              <p class="cartao__endereco">Avenida Menino Marcelo, 940 &middot; Gruta de Lourdes</p>
-              <p class="cartao__texto">
-                Quadra de saibro com manutenção diária, bancos cobertos e
-                aulas avulsas com professor credenciado.
-              </p>
-              <div class="cartao__rodape">
-                <p class="cartao__preco">R$ 90 <span>por hora</span></p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="cartao">
-            <figure>
-              <img class="cartao__imagem"
-                   src="images/basquete-externo-800.jpg"
-                   srcset="images/basquete-externo-400.jpg 400w,
-                           images/basquete-externo-600.jpg 600w,
-                           images/basquete-externo-800.jpg 800w"
-                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                   width="800" height="600"
-                   loading="lazy" decoding="async"
-                   alt="Bola de basquete parada sobre a linha branca de uma quadra externa com piso cinza e laranja.">
-            </figure>
-            <div class="cartao__corpo">
-              <div class="cartao__cabecalho">
-                <p class="etiqueta">Basquete 3x3</p>
-              </div>
-              <h3>Praça Benedito Bentes</h3>
-              <p class="cartao__endereco">Conjunto Village Campestre &middot; Benedito Bentes</p>
-              <p class="cartao__texto">
-                Quadra aberta de basquete 3x3, com duas tabelas oficiais e
-                bebedouro público ao lado do alambrado.
-              </p>
-              <div class="cartao__rodape">
-                <p class="cartao__preco">R$ 45 <span>por hora</span></p>
-                <a class="botao botao--primario botao--bloco" href="agendamento.html#form-reserva">Agendar horário</a>
-              </div>
-            </div>
-          </article>
-
+        <div class="grade" id="lista-quadras">
+          <p>Carregando quadras...</p>
         </div>
       </div>
     </section>
 
-    <!-- Informações complementares -->
-    <section class="secao secao--papel" aria-labelledby="regras-reserva">
+    <section class="secao secao-branca">
       <div class="container">
+        <div class="secao-titulo">
+          <h2>Antes de reservar</h2>
+          <p>Regras gerais para todas as quadras.</p>
+        </div>
 
-        <header class="secao__cabecalho">
-          <p class="secao__numero">02 / Regras</p>
-        </header>
-
-        <aside class="info-lateral" aria-labelledby="regras-reserva">
-          <h2 id="regras-reserva">Antes de reservar</h2>
-          <p>Combinados válidos para todas as quadras parceiras.</p>
-          <ul>
-            <li>O valor por hora é cobrado integralmente, mesmo com atraso do grupo.</li>
-            <li>Cancelamento com mais de 12 horas de antecedência não tem custo.</li>
-            <li>Chuteira de trava alta é proibida nas quadras de grama sintética.</li>
-            <li>Colete, bola e apito podem ser contratados como serviço adicional.</li>
-            <li>Cada reserva permite até dois acompanhantes sem custo extra.</li>
-          </ul>
-        </aside>
-
+        <ul class="lista-regras">
+          <li>O valor por hora é cobrado integralmente, mesmo em caso de atraso.</li>
+          <li>Cancelamentos podem ser feitos com até 12 horas de antecedência sem custo.</li>
+          <li>Chuteira de trava alta é proibida nas quadras de grama sintética.</li>
+        </ul>
       </div>
     </section>
-
   </main>
 
-  <!-- Rodapé -->
   <footer class="rodape">
     <div class="container">
+      <div class="rodape-conteudo">
+        <div>
+          <h3>ArenaHub</h3>
+          <p>Sistema simples de catálogo e agendamento de quadras esportivas.</p>
+        </div>
 
-      <div class="rodape__colunas">
-
-        <section aria-labelledby="rodape-sobre">
-          <h2 id="rodape-sobre">ArenaHub</h2>
-          <p>
-            Catálogo de quadras esportivas e organização de rachas em Maceió.
-            Catálogo de quadras esportivas e organização de rachas.
-            Conectando atletas e grupos aos melhores espaços da cidade.
-          </p>
-        </section>
-
-        <nav aria-labelledby="rodape-navegacao">
-          <h2 id="rodape-navegacao">Navegação</h2>
+        <div>
+          <h3>Navegação</h3>
           <ul>
             <li><a href="index.html">Início</a></li>
-            <li><a href="quadras.html#catalogo">Catálogo de quadras</a></li>
-            <li><a href="rachas.html#lista-rachas">Rachas abertos</a></li>
-            <li><a href="agendamento.html#form-reserva">Agendamento</a></li>
+            <li><a href="quadras.html">Quadras</a></li>
+            <li><a href="agendamentos.html">Agendamentos</a></li>
           </ul>
-        </nav>
+        </div>
 
-        <section aria-labelledby="rodape-suporte">
-          <h2 id="rodape-suporte">Suporte</h2>
-          <address>
-            <ul>
-              <li><a href="mailto:suporte@arenahub.com.br">suporte@arenahub.com.br</a></li>
-              <li><a href="tel:+558230000000">(82) 3000-0000</a></li>
-              <li><a href="tel:+5508000000000">0800 000 0000</a></li>
-              <li>Segunda a sábado, das 8h às 20h</li>
-            </ul>
-          </address>
-        </section>
-
+        <div>
+          <h3>Contato</h3>
+          <ul>
+            <li>suporte@arenahub.com.br</li>
+            <li>(82) 3000-0000</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="rodape__base">
+      <div class="rodape-base">
         <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
-        <p><a href="#topo">Voltar ao topo</a></p>
       </div>
-
     </div>
   </footer>
 
+  <script src="js/quadras.js"></script>
 </body>
 </html>

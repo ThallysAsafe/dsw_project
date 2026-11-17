@@ -1,142 +1,91 @@
-# ArenaHub
+# ArenaHub — Projeto Integrador (Etapa 2)
 
-Projeto Integrador de Desenvolvimento Web — site completo em **HTML5 semântico e
-CSS3 puro**, sem frameworks, sem pré-processadores e sem JavaScript.
-
-O código do site está em [`arena-hub/`](arena-hub/). O enunciado da disciplina
-está em `docs_Projeto_Integrador.pdf`.
+Sistema web para catálogo de quadras esportivas e gerenciamento de agendamentos online, desenvolvido para a disciplina de Desenvolvimento Web.
 
 ---
 
-## 1. Definição do projeto
+## 1. Tecnologias Utilizadas
 
-Itens exigidos no tópico 01 do enunciado ("definam antes da implementação").
+* **Frontend:** HTML5 semântico, CSS3 puro (sem frameworks) e JavaScript puro (DOM, eventos e `fetch`).
+* **Backend:** Node.js com Express.
+* **ORM e Banco de Dados:** Prisma ORM com banco de dados relacional PostgreSQL (rodando via Docker).
 
-| Item | Definição |
-|---|---|
-| **Tema** | Catálogo de quadras esportivas e organização de rachas (partidas avulsas). |
-| **Problema / objetivo** | Encontrar quadra livre e completar time hoje depende de grupos de mensagem e do contato pessoal do dono do espaço. Não existe lugar único que mostre quais quadras existem, quanto custam e quais partidas ainda têm vaga. O site centraliza essa informação e recebe a solicitação de reserva. |
-| **Público-alvo** | Praticantes amadores de esportes coletivos (18 a 45 anos) que jogam com frequência semanal; secundariamente, proprietários de quadras com horários ociosos. Acessam majoritariamente pelo celular, muitas vezes na rua — daí a prioridade para Mobile First e alvos de toque generosos. |
-| **Proposta** | O usuário pode **consultar** o catálogo de quadras (modalidade, endereço, estrutura, preço/hora), **conhecer** o funcionamento da plataforma, **selecionar** um racha aberto com vagas e **preencher** o formulário de reserva com data, horário, tipo de reserva e serviços adicionais. |
-| **Arquitetura** | Quatro páginas ligadas por uma menu consistente, do geral para o específico: apresentação → catálogo → comunidade → conversão (formulário). Âncoras internas ligam as páginas a seções específicas. |
+---
 
-### Mapa de páginas
+## 2. Estrutura do Projeto
 
-| Página | Papel | Seções |
+```text
+dsw_project/
+├── arena-hub/             # Frontend estático (HTML, CSS, JS e imagens)
+│   ├── css/style.css      # Estilização limpa e responsiva do site
+│   ├── js/
+│   │   ├── quadras.js     # Consome GET /api/quadras e renderiza o catálogo
+│   │   ├── agendamento.js # Formulário com cálculo dinâmico de valor e envio POST/PUT
+│   │   └── agendamentos.js# Listagem (GET), busca/filtro e cancelamento (DELETE)
+│   ├── index.html         # Apresentação do sistema
+│   ├── quadras.html       # Catálogo de quadras disponíveis
+│   ├── agendamento.html   # Formulário de criação/edição de agendamento
+│   └── agendamentos.html  # Tela de acompanhamento e listagem das reservas
+├── prisma/
+│   ├── schema.prisma      # Modelos das tabelas Quadra e Agendamento
+│   ├── client.js          # Instância do PrismaClient
+│   └── seed.js            # Script para popular quadras e agendamentos iniciais
+├── repositories/          # Padrão Repository para encapsular as consultas
+│   ├── quadraRepository.js
+│   └── agendamentoRepository.js
+├── docker-compose.yml     # Configuração do container PostgreSQL (porta 5433:5432)
+├── server.js              # Servidor Express e rotas da API REST
+└── package.json
+```
+
+---
+
+## 3. Rotas da API (CRUD de Agendamentos e Consulta de Quadras)
+
+| Método | Rota | Descrição |
 |---|---|---|
-| `index.html` | Apresentação e identidade | Hero, Como funciona (01), Modalidades (02), Donos de quadra (03) |
-| `quadras.html` | Catálogo | Catálogo em grade (01), Regras de reserva (02) |
-| `rachas.html` | Comunidade | Partidas da semana (01), Combinados (02) |
-| `agendamento.html` | Conversão | Formulário de solicitação (01) |
+| `GET` | `/api/quadras` | Lista todas as quadras cadastradas |
+| `GET` | `/api/quadras/:id` | Retorna os detalhes de uma quadra por ID |
+| `GET` | `/api/agendamentos` | **Read:** Lista todos os agendamentos cadastrados |
+| `GET` | `/api/agendamentos/:id` | Retorna um agendamento específico para edição |
+| `POST` | `/api/agendamentos` | **Create:** Cadastra um novo agendamento |
+| `PUT` | `/api/agendamentos/:id` | **Update:** Atualiza os dados de um agendamento |
+| `DELETE` | `/api/agendamentos/:id` | **Delete:** Remove/cancela um agendamento |
 
 ---
 
-## 2. Identidade visual
+## 4. Instruções de Execução
 
-Direção **editorial esportiva**: referência de cartaz e revista de esporte.
-O contraste vem de peso tipográfico e de régua, não de sombra difusa ou
-gradiente.
+### Pré-requisitos
+* Node.js instalado (versão 18 ou superior)
+* Docker Desktop instalado e em execução
 
-| Elemento | Definição |
-|---|---|
-| **Marca** | ArenaHub — nome em caixa-alta acompanhado de uma marca vetorial (SVG inline) que representa a planta baixa de um campo. |
-| **Paleta** | Tinta `#14150F` · Papel `#F2F0EA` · Primária (verde de campo) `#14513A` · Destaque (laranja) `#B23A10` · Linha `#D5D1C4`. Todos os pares texto/fundo utilizados foram conferidos e atingem no mínimo **4.5:1** (WCAG AA). |
-| **Tipografia** | *Archivo Black* nos títulos e rótulos (hospedada em `assets/fonts/`, funciona offline); *Arial* no texto corrido. |
-| **Botões** | Caixa-alta, cantos levemente arredondados (4px). Primário: verde preenchido. Secundário: apenas contorno, preenchido no `:hover`. Sobem 2px no `:hover` e voltam no `:active`. |
-| **Cards** | Contorno de 2px e cantos de 4px. No `:hover`, sobem 4px e revelam uma sombra sólida. |
-| **Inputs** | Borda fina, fundo verde-claro no `:focus`, vermelho no campo em foco com valor inválido (`:focus:invalid`). |
-| **Links** | Sublinhados, com `:hover` em laranja; links de texto já visitados (`:visited`) ficam verde-escuro. |
+### Passo a Passo
 
----
+1. **Instalar as dependências:**
+   ```bash
+   npm install
+   ```
 
-## 3. Decisões técnicas (para a defesa)
+2. **Iniciar o banco de dados PostgreSQL com Docker:**
+   ```bash
+   docker compose up -d
+   ```
 
-**Flexbox onde o eixo é único:** menu (logo à esquerda, menu à direita),
-grupos de botões, cabeçalho e rodapé dos cards, linhas de opções do formulário
-e o rótulo de seção — cujo `::after` usa `flex: 1` para virar a régua que
-preenche o espaço restante.
+3. **Criar as tabelas e sincronizar o banco com o Prisma:**
+   ```bash
+   npx prisma db push
+   ```
 
-**Grid onde há linhas *e* colunas:** catálogo de quadras, lista de rachas,
-passos da home, colunas do rodapé e os layouts de conteúdo + `<aside>`. O
-número de colunas muda por breakpoint (1 → 2 → 3) e o `gap` é uniforme nos
-dois eixos, o que o Flexbox não entrega sem cálculo de largura.
+4. **Popular os dados iniciais de teste (opcional):**
+   ```bash
+   npm run prisma:seed
+   ```
 
-**Mobile First:** o bloco base do CSS atende telas pequenas em uma coluna. As
-media queries em `768px` e `1024px` apenas **reorganizam a composição** —
-cabeçalho vira linha, grades ganham colunas, o destaque passa a duas colunas — em
-vez de só reduzir elementos.
+5. **Iniciar a aplicação:**
+   ```bash
+   npm start
+   ```
 
-**Numeração pela própria lista:** os passos e as etapas são `<ol>`, então o
-navegador numera sozinho. A numeração continua correta se um item for inserido
-ou removido.
-
-**Validação nativa do HTML:** toda a validação é feita por atributos
-(`required`, `min`, `max`, `minlength`, `maxlength`, `pattern`). O CSS usa
-`:focus:invalid`: só o campo que está sendo preenchido fica vermelho enquanto o
-valor estiver errado. Com `:invalid` puro, os campos obrigatórios ficariam
-vermelhos assim que a página abrisse.
-
-**IDs e classes:** `class` para estilo reutilizável; `id` para identificar um
-ponto único do documento. Os IDs `#topo`, `#conteudo`, `#como-funciona`,
-`#catalogo`, `#lista-rachas` e `#form-reserva` são alvos de âncora. No CSS, o
-único estilo por ID é o `#lista-reservas`, um elemento único da página.
-
----
-
-## 4. Estrutura de arquivos
-
-```
-arena-hub/
-├── index.html            Página inicial
-├── quadras.html          Catálogo de quadras
-├── rachas.html           Rachas abertos
-├── agendamento.html      Formulário de reserva
-│
-├── css/                  Folhas de estilo (todas comentadas)
-│   ├── style.css         Global: variáveis, reset, cabeçalho, botões,
-│   │                     cards, etiquetas, aside e rodapé
-│   ├── index.css         Hero, passos numerados, painel de proprietários
-│   ├── quadras.css       Endereço da quadra no card
-│   ├── rachas.css        Cores das etiquetas de vagas
-│   └── agendamento.css   Formulário
-│
-├── js/agendamento.js     Lista, cria, edita e cancela reservas (API)
-│
-├── images/               21 fotos locais, 3 larguras de cada (ver README)
-│
-└── assets/
-    └── fonts/            Fonte Archivo Black (.woff2)
-```
-
-Cada página carrega `style.css` primeiro e depois o CSS da própria página.
-O `GUIA-CSS.md`, na raiz do repositório, explica **por que** cada recurso do
-CSS foi usado (bom para a defesa) e indica onde alterar cada coisa.
-
-## 5. Como executar
-
-O site é **estático e autocontido** — imagens e fontes estão no próprio
-projeto, nada vem da internet. Basta abrir `arena-hub/index.html` no
-navegador, com duplo clique.
-
-Se preferir servir por HTTP (mais próximo de um ambiente real):
-
-```bash
-python3 -m http.server 8000 --directory arena-hub
-```
-
-Depois acesse `http://localhost:8000`.
-
----
-
-## 6. Equipe
-
-Grupo de 5 integrantes. Cada um deve conseguir localizar no código e explicar
-as partes pelas quais ficou responsável.
-
-| Integrante | Responsabilidade na apresentação |
-|---|---|
-| | Proposta, tema, público-alvo e arquitetura |
-| | HTML semântico, títulos, links, imagens, classes e IDs |
-| | CSS: seletores, cascata, especificidade e Box Model |
-| | Layout: Flexbox, Grid e responsividade Mobile First |
-| | Formulário, pseudo-classes, estados e acessibilidade |
+6. **Acessar no navegador:**
+   Abra `http://localhost:3000`
