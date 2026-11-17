@@ -1,109 +1,78 @@
 const express = require('express');
-const path = require('path');
-
-const quadraRepository = require('./repositories/quadraRepository');
-const agendamentoRepository = require('./repositories/agendamentoRepository');
+const { PrismaClient } = require('@prisma/client');
 
 const app = express();
-const PORT = 3000;
+const prisma = new PrismaClient();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.sendStatus(200);
-  next();
-});
-app.use(express.static(path.join(__dirname, 'arena-hub')));
+app.use(express.static('arena-hub'));
+
+const PAGAMENTOS = ['Pix', 'Cartão', 'Dinheiro'];
+
+// valida os dados recebidos; devolve a mensagem de erro ou null
+function validar(d) {
+  if (!d.nome || d.nome.trim().length < 3) return 'Informe um nome com pelo menos 3 letras.';
+  if (!d.email || !d.email.includes('@')) return 'Informe um e-mail válido.';
+  if (!Number.isInteger(Number(d.quadraId))) return 'Escolha uma quadra.';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d.data || '')) return 'Informe uma data válida.';
+  if (!Array.isArray(d.horarios) || d.horarios.length === 0) return 'Escolha pelo menos um horário.';
+  if (!Number.isInteger(d.jogadores) || d.jogadores < 2 || d.jogadores > 22) return 'Informe de 2 a 22 jogadores.';
+  if (!PAGAMENTOS.includes(d.pagamento)) return 'Escolha a forma de pagamento.';
+  return null;
+}
+
+// monta somente os campos que podem ser gravados
+function dadosAgendamento(d) {
+  return {
+    nome: d.nome.trim(),
+    email: d.email.trim(),
+    telefone: d.telefone || null,
+    quadraId: Number(d.quadraId),
+    data: d.data,
+    horarios: d.horarios,
+    jogadores: d.jogadores,
+    pagamento: d.pagamento,
+    observacoes: d.observacoes || null
+  };
+}
 
 app.get('/api/quadras', async (req, res) => {
-  try {
-    const quadras = await quadraRepository.listAll();
-    res.json(quadras);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao buscar quadras.' });
-  }
-});
-
-app.get('/api/quadras/:id', async (req, res) => {
-  try {
-    const quadra = await quadraRepository.findById(req.params.id);
-    if (!quadra) {
-      return res.status(404).json({ mensagem: 'Quadra não encontrada.' });
-    }
-    res.json(quadra);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao buscar quadra.' });
-  }
+  res.json(await prisma.quadra.findMany({ orderBy: { id: 'asc' } }));
 });
 
 app.get('/api/agendamentos', async (req, res) => {
-  try {
-    const agendamentos = await agendamentoRepository.listAll();
-    res.json(agendamentos);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao buscar agendamentos.' });
-  }
-});
-
-app.get('/api/agendamentos/:id', async (req, res) => {
-  try {
-    const agendamento = await agendamentoRepository.findById(req.params.id);
-    if (!agendamento) {
-      return res.status(404).json({ mensagem: 'Agendamento não encontrado.' });
-    }
-    res.json(agendamento);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao buscar agendamento.' });
-  }
+  res.json(await prisma.agendamento.findMany({ include: { quadra: true }, orderBy: { id: 'desc' } }));
 });
 
 app.post('/api/agendamentos', async (req, res) => {
-  try {
-    const { nome, email, quadraId, data, horarios } = req.body;
-    if (!nome || !email || !quadraId || !data || !Array.isArray(horarios) || horarios.length === 0) {
-      return res.status(400).json({ mensagem: 'Preencha todos os campos obrigatórios e ao menos um horário.' });
-    }
-
-    const novoAgendamento = await agendamentoRepository.create(req.body);
-    res.status(201).json(novoAgendamento);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao criar agendamento.' });
-  }
+  const erro = validar(req.body);
+  if (erro) return res.status(400).json({ mensagem: erro });
+  const agendamento = await prisma.agendamento.create({ data: dadosAgendamento(req.body) });
+  res.status(201).json(agendamento);
 });
 
 app.put('/api/agendamentos/:id', async (req, res) => {
-  try {
-    const { nome, email, quadraId, data, horarios } = req.body;
-    if (!nome || !email || !quadraId || !data || !Array.isArray(horarios) || horarios.length === 0) {
-      return res.status(400).json({ mensagem: 'Preencha todos os campos obrigatórios e ao menos um horário.' });
-    }
-
-    const agendamentoAtualizado = await agendamentoRepository.update(req.params.id, req.body);
-    res.json(agendamentoAtualizado);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao atualizar agendamento.' });
-  }
+  const erro = validar(req.body);
+  if (erro) return res.status(400).json({ mensagem: erro });
+  const agendamento = await prisma.agendamento.update({
+    where: { id: Number(req.params.id) },
+    data: dadosAgendamento(req.body)
+  });
+  res.json(agendamento);
 });
 
 app.delete('/api/agendamentos/:id', async (req, res) => {
-  try {
-    await agendamentoRepository.delete(req.params.id);
-    res.json({ mensagem: 'Agendamento cancelado com sucesso!' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ mensagem: 'Erro ao cancelar agendamento.' });
-  }
+  await prisma.agendamento.delete({ where: { id: Number(req.params.id) } });
+  res.status(204).end();
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+// converte os erros do banco em códigos HTTP adequados
+app.use((err, req, res, next) => {
+  if (err.code === 'P2025') return res.status(404).json({ mensagem: 'Agendamento não encontrado.' });
+  if (err.code === 'P2003') return res.status(400).json({ mensagem: 'Quadra inexistente.' });
+  if (err.name === 'PrismaClientValidationError') return res.status(400).json({ mensagem: 'Dados inválidos.' });
+  console.error(err);
+  res.status(500).json({ mensagem: 'Erro interno no servidor.' });
 });
+
+app.listen(3000, () => console.log('Servidor rodando em http://localhost:3000'));

@@ -1,14 +1,12 @@
 {
   "name": "dsw_project",
   "version": "1.0.0",
-  "description": "Projeto Integrador de Desenvolvimento Web — site completo em **HTML5 semântico e\r CSS3 puro**, sem frameworks, sem pré-processadores e sem JavaScript.",
-  "main": "index.js",
+  "description": "ArenaHub — CRUD de agendamentos de quadras com Node.js, Express, Prisma e PostgreSQL.",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio",
-    "prisma:seed": "node prisma/seed.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prisma:seed": "node prisma/seed.js"
   },
   "repository": {
     "type": "git",
@@ -24,9 +22,7 @@
   "homepage": "https://github.com/ThallysAsafe/dsw_project#readme",
   "dependencies": {
     "@prisma/client": "^6.19.3",
-    "dotenv": "^18.0.10",
-    "express": "^5.3.0",
-    "pg": "^8.23.1"
+    "express": "^5.3.0"
   },
   "devDependencies": {
     "prisma": "^6.19.3"

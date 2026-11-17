@@ -1,91 +1,87 @@
 # ArenaHub — Projeto Integrador (Etapa 2)
 
-Sistema web para catálogo de quadras esportivas e gerenciamento de agendamentos online, desenvolvido para a disciplina de Desenvolvimento Web.
+Site de catálogo de quadras esportivas com agendamento online.
+A entidade principal é o **Agendamento**, com cadastro, consulta, edição e exclusão (CRUD).
 
----
+## Tecnologias
 
-## 1. Tecnologias Utilizadas
+- **Frontend:** HTML5, CSS3 e JavaScript puro (`fetch`, DOM e eventos).
+- **Backend:** Node.js com Express.
+- **Banco de dados:** PostgreSQL (Docker), acessado pelo Prisma ORM. Somente o backend acessa o banco.
 
-* **Frontend:** HTML5 semântico, CSS3 puro (sem frameworks) e JavaScript puro (DOM, eventos e `fetch`).
-* **Backend:** Node.js com Express.
-* **ORM e Banco de Dados:** Prisma ORM com banco de dados relacional PostgreSQL (rodando via Docker).
-
----
-
-## 2. Estrutura do Projeto
+## Estrutura
 
 ```text
 dsw_project/
-├── arena-hub/             # Frontend estático (HTML, CSS, JS e imagens)
-│   ├── css/style.css      # Estilização limpa e responsiva do site
-│   ├── js/
-│   │   ├── quadras.js     # Consome GET /api/quadras e renderiza o catálogo
-│   │   ├── agendamento.js # Formulário com cálculo dinâmico de valor e envio POST/PUT
-│   │   └── agendamentos.js# Listagem (GET), busca/filtro e cancelamento (DELETE)
-│   ├── index.html         # Apresentação do sistema
-│   ├── quadras.html       # Catálogo de quadras disponíveis
-│   ├── agendamento.html   # Formulário de criação/edição de agendamento
-│   └── agendamentos.html  # Tela de acompanhamento e listagem das reservas
+├── arena-hub/                # Frontend
+│   ├── index.html            # Início
+│   ├── quadras.html          # Catálogo de quadras (GET /api/quadras)
+│   ├── agendamentos.html     # Formulário e lista de reservas (CRUD)
+│   ├── css/style.css         # Estilos (mobile first, Grid, Flexbox)
+│   ├── js/quadras.js         # Monta os cards do catálogo
+│   ├── js/agendamentos.js    # Formulário, busca, edição e exclusão
+│   └── images/               # Fotos das quadras
 ├── prisma/
-│   ├── schema.prisma      # Modelos das tabelas Quadra e Agendamento
-│   ├── client.js          # Instância do PrismaClient
-│   └── seed.js            # Script para popular quadras e agendamentos iniciais
-├── repositories/          # Padrão Repository para encapsular as consultas
-│   ├── quadraRepository.js
-│   └── agendamentoRepository.js
-├── docker-compose.yml     # Configuração do container PostgreSQL (porta 5433:5432)
-├── server.js              # Servidor Express e rotas da API REST
-└── package.json
+│   ├── schema.prisma         # Tabelas quadras e agendamentos
+│   └── seed.js               # Cadastra as quadras iniciais
+├── server.js                 # API Express
+└── docker-compose.yml        # PostgreSQL na porta 5433
 ```
 
----
+## Rotas da API
 
-## 3. Rotas da API (CRUD de Agendamentos e Consulta de Quadras)
+| Método | Rota | Ação | Respostas |
+|---|---|---|---|
+| `GET` | `/api/quadras` | Lista as quadras | 200 |
+| `GET` | `/api/agendamentos` | Lista os agendamentos | 200 |
+| `POST` | `/api/agendamentos` | Cadastra um agendamento | 201, 400 |
+| `PUT` | `/api/agendamentos/:id` | Atualiza um agendamento | 200, 400, 404 |
+| `DELETE` | `/api/agendamentos/:id` | Exclui um agendamento | 204, 404 |
 
-| Método | Rota | Descrição |
-|---|---|---|
-| `GET` | `/api/quadras` | Lista todas as quadras cadastradas |
-| `GET` | `/api/quadras/:id` | Retorna os detalhes de uma quadra por ID |
-| `GET` | `/api/agendamentos` | **Read:** Lista todos os agendamentos cadastrados |
-| `GET` | `/api/agendamentos/:id` | Retorna um agendamento específico para edição |
-| `POST` | `/api/agendamentos` | **Create:** Cadastra um novo agendamento |
-| `PUT` | `/api/agendamentos/:id` | **Update:** Atualiza os dados de um agendamento |
-| `DELETE` | `/api/agendamentos/:id` | **Delete:** Remove/cancela um agendamento |
+Corpo JSON do `POST` e do `PUT`:
 
----
+```json
+{
+  "nome": "Ana Souza",
+  "email": "ana@email.com",
+  "telefone": "(82) 99999-0000",
+  "quadraId": 1,
+  "data": "2026-12-01",
+  "horarios": ["18:00", "19:00"],
+  "jogadores": 10,
+  "pagamento": "Pix",
+  "observacoes": "Opcional"
+}
+```
 
-## 4. Instruções de Execução
+Regras de validação no servidor: nome com 3 letras ou mais, e-mail com `@`, quadra existente,
+data `AAAA-MM-DD`, pelo menos um horário, de 2 a 22 jogadores e pagamento `Pix`, `Cartão` ou `Dinheiro`.
+Se um dado for inválido, a API devolve `400` com `{ "mensagem": "..." }`.
 
-### Pré-requisitos
-* Node.js instalado (versão 18 ou superior)
-* Docker Desktop instalado e em execução
+## Como executar
 
-### Passo a Passo
+Pré-requisitos: Node.js 18 ou superior e Docker Desktop em execução.
 
-1. **Instalar as dependências:**
+1. Instale as dependências:
    ```bash
    npm install
    ```
-
-2. **Iniciar o banco de dados PostgreSQL com Docker:**
+2. Inicie o PostgreSQL:
    ```bash
    docker compose up -d
    ```
-
-3. **Criar as tabelas e sincronizar o banco com o Prisma:**
+3. Crie as tabelas:
    ```bash
-   npx prisma db push
+   npm run prisma:push
    ```
-
-4. **Popular os dados iniciais de teste (opcional):**
+4. Cadastre as quadras iniciais:
    ```bash
    npm run prisma:seed
    ```
-
-5. **Iniciar a aplicação:**
+5. Inicie o servidor:
    ```bash
    npm start
    ```
+6. Abra `http://localhost:3000` no navegador.
 
-6. **Acessar no navegador:**
-   Abra `http://localhost:3000`
+Os dados ficam no volume Docker `postgres_data`. Eles continuam salvos depois de reiniciar o servidor.

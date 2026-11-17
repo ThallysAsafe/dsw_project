@@ -27,8 +27,11 @@ model Agendamento {
   quadraId Int
   quadra   Quadra   @relation(fields: [quadraId], references: [id])
   data     String
-  horarios String[] @default([])
-  criadoEm DateTime @default(now())
+  horarios    String[] @default([])
+  jogadores   Int?
+  pagamento   String?
+  observacoes String?
+  criadoEm    DateTime @default(now())
 
   @@map("agendamentos")
 }

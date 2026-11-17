@@ -1,0 +1,3 @@
+/* Início: texto e imagem lado a lado; quebra de linha em telas pequenas */
+.hero { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.hero > * { flex: 1 1 300px; min-width: 0; }

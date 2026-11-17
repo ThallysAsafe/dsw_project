@@ -3,148 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArenaHub | Agendamento de Quadras</title>
+  <title>ArenaHub | Início</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-
-  <header class="topo">
-    <div class="container topo-conteudo">
-      <a class="logo" href="index.html">ArenaHub</a>
-
-      <nav aria-label="Navegação principal">
-        <ul class="menu">
-          <li><a class="menu-ativo" href="index.html">Início</a></li>
-          <li><a href="quadras.html">Quadras</a></li>
-          <li><a href="agendamentos.html">Agendamentos</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header>
+    <a class="logo" href="index.html">ArenaHub</a>
+    <nav aria-label="Navegação principal">
+      <ul class="menu">
+        <li><a aria-current="page" href="index.html">Início</a></li>
+        <li><a href="quadras.html">Quadras</a></li>
+        <li><a href="agendamentos.html">Agendamentos</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="container hero-conteudo">
-        <div class="hero-texto">
-          <h1>Encontre quadras e agende seu horário</h1>
-          <p>
-            O ArenaHub reúne as quadras esportivas da cidade em um só lugar.
-            Consulte os espaços disponíveis, escolha a data e faça sua reserva online.
-          </p>
-          <div class="botoes">
-            <a class="btn btn-primario" href="quadras.html">Ver quadras</a>
-            <a class="btn btn-secundario" href="agendamentos.html">Meus agendamentos</a>
-          </div>
-        </div>
-
-        <div class="hero-imagem">
-          <img src="images/campo-noturno-1200.jpg" alt="Campo de futebol society iluminado à noite.">
-        </div>
+      <div>
+        <h1>Encontre quadras e agende seu horário</h1>
+        <p>O ArenaHub reúne quadras esportivas de Maceió. Escolha a quadra, a data e faça sua reserva online.</p>
+        <p>
+          <a class="btn" href="quadras.html">Ver quadras</a>
+          <a class="btn btn-secundario" href="#como-funciona">Como funciona</a>
+        </p>
       </div>
+      <img src="images/campo-noturno-900.jpg" alt="Campo de futebol society iluminado à noite.">
     </section>
 
-    <section class="secao">
-      <div class="container">
-        <div class="secao-titulo">
-          <h2>Como funciona</h2>
-          <p>Três passos simples para garantir sua partida.</p>
-        </div>
-
-        <div class="grade">
-          <article class="card">
-            <div class="card-corpo">
-              <span class="tag">Passo 1</span>
-              <h3>Escolha a quadra</h3>
-              <p>Veja as opções cadastradas no catálogo com modalidade, endereço e valor por hora.</p>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-corpo">
-              <span class="tag">Passo 2</span>
-              <h3>Faça o agendamento</h3>
-              <p>Clique em agendar na quadra escolhida, informe a data, o horário e seus dados.</p>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-corpo">
-              <span class="tag">Passo 3</span>
-              <h3>Acompanhe sua reserva</h3>
-              <p>Consulte seus horários reservados na aba Agendamentos, podendo editar ou cancelar quando precisar.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="secao secao-branca">
-      <div class="container">
-        <div class="secao-titulo">
-          <h2>Modalidades disponíveis</h2>
-          <p>Espaços para futebol, areia, quadra coberta e tênis.</p>
-        </div>
-
-        <div class="grade">
-          <article class="card">
-            <div class="card-corpo">
-              <span class="tag">Campo</span>
-              <h3>Futebol society</h3>
-              <p>Gramado sintético com iluminação noturna e vestiário.</p>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-corpo">
-              <span class="tag">Areia</span>
-              <h3>Vôlei e beach tennis</h3>
-              <p>Quadras de areia com rede oficial e aluguel de equipamentos.</p>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="card-corpo">
-              <span class="tag">Quadra</span>
-              <h3>Basquete e tênis</h3>
-              <p>Ginásio coberto, quadra externa 3x3 e quadra de saibro.</p>
-            </div>
-          </article>
-        </div>
+    <section id="como-funciona">
+      <h2>Como funciona</h2>
+      <div class="grade">
+        <article class="card">
+          <h3>1. Escolha a quadra</h3>
+          <p>Veja no catálogo a modalidade, o endereço e o valor por hora.</p>
+        </article>
+        <article class="card">
+          <h3>2. Faça o agendamento</h3>
+          <p>Informe seus dados, a data e os horários desejados.</p>
+        </article>
+        <article class="card">
+          <h3>3. Acompanhe a reserva</h3>
+          <p>Consulte, edite ou cancele suas reservas quando precisar.</p>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer class="rodape">
-    <div class="container">
-      <div class="rodape-conteudo">
-        <div>
-          <h3>ArenaHub</h3>
-          <p>Sistema simples de catálogo e agendamento de quadras esportivas.</p>
-        </div>
-
-        <div>
-          <h3>Navegação</h3>
-          <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="quadras.html">Quadras</a></li>
-            <li><a href="agendamentos.html">Agendamentos</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Contato</h3>
-          <ul>
-            <li>suporte@arenahub.com.br</li>
-            <li>(82) 3000-0000</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="rodape-base">
-        <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
-      </div>
-    </div>
+  <footer>
+    <p>ArenaHub · suporte@arenahub.com.br · (82) 3000-0000</p>
+    <p>&copy; 2026 ArenaHub</p>
   </footer>
-
 </body>
 </html>

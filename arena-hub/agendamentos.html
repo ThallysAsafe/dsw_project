@@ -3,83 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meus Agendamentos | ArenaHub</title>
+  <title>ArenaHub | Agendamentos</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/agendamentos.css">
 </head>
 <body>
-
-  <header class="topo">
-    <div class="container topo-conteudo">
-      <a class="logo" href="index.html">ArenaHub</a>
-
-      <nav aria-label="Navegação principal">
-        <ul class="menu">
-          <li><a href="index.html">Início</a></li>
-          <li><a href="quadras.html">Quadras</a></li>
-          <li><a class="menu-ativo" href="agendamentos.html">Agendamentos</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header>
+    <a class="logo" href="index.html">ArenaHub</a>
+    <nav aria-label="Navegação principal">
+      <ul class="menu">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="quadras.html">Quadras</a></li>
+        <li><a aria-current="page" href="agendamentos.html">Agendamentos</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <div class="titulo-pagina">
-      <div class="container">
-        <h1>Agendamentos</h1>
-        <p>Consulte, edite ou cancele suas reservas de quadra.</p>
-      </div>
-    </div>
+    <section>
+      <h1 id="titulo-form">Novo agendamento</h1>
+      <form id="form" novalidate>
+        <input type="hidden" id="id">
 
-    <section class="secao">
-      <div class="container">
-        <div class="secao-titulo" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-          <div>
-            <h2>Reservas cadastradas</h2>
-            <p>Todas as solicitações confirmadas aparecem abaixo.</p>
-          </div>
-          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-            <input type="text" id="campo-busca" placeholder="Buscar por nome ou quadra..." style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; min-width: 240px;">
-            <a class="btn btn-primario" href="quadras.html">+ Novo agendamento</a>
-          </div>
-        </div>
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" required minlength="3" maxlength="80">
 
-        <div class="grade" id="lista-reservas">
-          <p>Carregando agendamentos...</p>
-        </div>
-      </div>
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" required>
+
+        <label for="telefone">Telefone</label>
+        <input type="tel" id="telefone" pattern="\(\d{2}\) \d{4,5}-\d{4}" placeholder="(82) 90000-0000">
+
+        <label for="quadraId">Quadra *</label>
+        <select id="quadraId" required></select>
+
+        <label for="data">Data *</label>
+        <input type="date" id="data" required>
+
+        <fieldset>
+          <legend>Horários *</legend>
+          <div class="opcoes" id="horarios"></div>
+        </fieldset>
+
+        <label for="jogadores">Número de jogadores *</label>
+        <input type="number" id="jogadores" required min="2" max="22" value="10">
+
+        <fieldset>
+          <legend>Pagamento *</legend>
+          <div class="opcoes">
+            <label><input type="radio" name="pagamento" value="Pix" required> Pix</label>
+            <label><input type="radio" name="pagamento" value="Cartão"> Cartão</label>
+            <label><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label>
+          </div>
+        </fieldset>
+
+        <label for="observacoes">Observações</label>
+        <textarea id="observacoes" rows="3" maxlength="300"></textarea>
+
+        <p>
+          <button type="submit" class="btn" id="btn-salvar">Cadastrar</button>
+          <button type="button" class="btn btn-secundario" id="btn-cancelar" hidden>Cancelar edição</button>
+        </p>
+        <p id="mensagem" role="status"></p>
+      </form>
+    </section>
+
+    <section>
+      <h2>Reservas cadastradas</h2>
+      <label for="busca">Buscar</label>
+      <input type="search" id="busca" placeholder="Nome ou quadra">
+      <p id="status">Carregando...</p>
+      <div class="grade" id="lista"></div>
     </section>
   </main>
 
-  <footer class="rodape">
-    <div class="container">
-      <div class="rodape-conteudo">
-        <div>
-          <h3>ArenaHub</h3>
-          <p>Sistema simples de catálogo e agendamento de quadras esportivas.</p>
-        </div>
-
-        <div>
-          <h3>Navegação</h3>
-          <ul>
-            <li><a href="index.html">Início</a></li>
-            <li><a href="quadras.html">Quadras</a></li>
-            <li><a href="agendamentos.html">Agendamentos</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Contato</h3>
-          <ul>
-            <li>suporte@arenahub.com.br</li>
-            <li>(82) 3000-0000</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="rodape-base">
-        <p>&copy; 2026 ArenaHub. Todos os direitos reservados.</p>
-      </div>
-    </div>
+  <footer>
+    <p>ArenaHub · suporte@arenahub.com.br · (82) 3000-0000</p>
+    <p>&copy; 2026 ArenaHub</p>
   </footer>
 
   <script src="js/agendamentos.js"></script>
