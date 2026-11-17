@@ -28,8 +28,8 @@ model Agendamento {
   quadra   Quadra   @relation(fields: [quadraId], references: [id])
   data     String
   horarios    String[] @default([])
-  jogadores   Int?
-  pagamento   String?
+  jogadores   Int
+  pagamento   String
   observacoes String?
   criadoEm    DateTime @default(now())
 

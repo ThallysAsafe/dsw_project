@@ -56,6 +56,7 @@ Corpo JSON do `POST` e do `PUT`:
 
 Regras de validação no servidor: nome com 3 letras ou mais, e-mail com `@`, quadra existente,
 data `AAAA-MM-DD`, pelo menos um horário, de 2 a 22 jogadores e pagamento `Pix`, `Cartão` ou `Dinheiro`.
+Também não é permitido reservar a mesma quadra, na mesma data, em um horário que já esteja ocupado.
 Se um dado for inválido, a API devolve `400` com `{ "mensagem": "..." }`.
 
 ## Como executar

@@ -1,9 +1,46 @@
-label { display: block; margin-top: 8px; }
-input, select, textarea { width: 100%; padding: 8px; border: 1px solid #999; border-radius: var(--raio); font: inherit; }
-fieldset { margin-top: 8px; }
-.opcoes { display: flex; flex-wrap: wrap; gap: 4px 16px; }
-.opcoes input { width: auto; }
-.form-enviado input:invalid, .form-enviado select:invalid { border: 2px solid var(--erro); }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.erro { color: var(--erro); }
-.sucesso { color: var(--primaria); }
+label {
+  display: block;
+  margin-top: 8px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #999;
+  border-radius: var(--raio);
+  font: inherit;
+}
+
+fieldset {
+  margin-top: 8px;
+}
+
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.opcoes input {
+  width: auto;
+}
+
+.form-enviado input:invalid,
+.form-enviado select:invalid {
+  border: 2px solid var(--erro);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.erro {
+  color: var(--erro);
+}
+
+.sucesso {
+  color: var(--primaria);
+}

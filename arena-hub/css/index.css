@@ -1,2 +1,12 @@
-.hero { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
-.hero > * { flex: 1 1 300px; min-width: 0; }
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero div,
+.hero img {
+  flex: 1 1 300px;
+  min-width: 0;
+}
