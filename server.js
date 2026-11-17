@@ -9,7 +9,6 @@ app.use(express.static('arena-hub'));
 
 const PAGAMENTOS = ['Pix', 'Cartão', 'Dinheiro'];
 
-// valida os dados recebidos; devolve a mensagem de erro ou null
 function validar(d) {
   if (!d.nome || d.nome.trim().length < 3) return 'Informe um nome com pelo menos 3 letras.';
   if (!d.email || !d.email.includes('@')) return 'Informe um e-mail válido.';
@@ -21,7 +20,6 @@ function validar(d) {
   return null;
 }
 
-// monta somente os campos que podem ser gravados
 function dadosAgendamento(d) {
   return {
     nome: d.nome.trim(),
@@ -66,7 +64,6 @@ app.delete('/api/agendamentos/:id', async (req, res) => {
   res.status(204).end();
 });
 
-// converte os erros do banco em códigos HTTP adequados
 app.use((err, req, res, next) => {
   if (err.code === 'P2025') return res.status(404).json({ mensagem: 'Agendamento não encontrado.' });
   if (err.code === 'P2003') return res.status(400).json({ mensagem: 'Quadra inexistente.' });

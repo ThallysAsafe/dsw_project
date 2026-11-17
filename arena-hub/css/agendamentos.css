@@ -1,4 +1,3 @@
-/* Agendamentos: formulário, campos e estados */
 label { display: block; margin-top: 8px; }
 input, select, textarea { width: 100%; padding: 8px; border: 1px solid #999; border-radius: var(--raio); font: inherit; }
 fieldset { margin-top: 8px; }

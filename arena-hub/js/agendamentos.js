@@ -17,7 +17,6 @@ function mostrarMensagem(texto, tipo) {
   mensagem.className = tipo;
 }
 
-// cria os checkboxes de horário das 08:00 às 22:00
 for (let hora = 8; hora <= 22; hora++) {
   const texto = String(hora).padStart(2, '0') + ':00';
   caixaHorarios.insertAdjacentHTML('beforeend',
@@ -31,7 +30,6 @@ async function carregarQuadras() {
     const quadras = await resposta.json();
     selectQuadra.add(new Option('Selecione', ''));
     quadras.forEach(q => selectQuadra.add(new Option(`${q.nome} (${q.modalidade}) - R$ ${q.precoHora}/h`, q.id)));
-    // pré-seleciona a quadra vinda do catálogo
     selectQuadra.value = new URLSearchParams(location.search).get('quadraId') || '';
   } catch {
     mostrarMensagem('Erro ao carregar as quadras.', 'erro');
@@ -51,7 +49,6 @@ async function carregarAgendamentos() {
   }
 }
 
-// desenha os cards aplicando o filtro da busca
 function renderizar() {
   const termo = busca.value.trim().toLowerCase();
   const filtrados = agendamentos.filter(a =>
@@ -83,7 +80,6 @@ function renderizar() {
   });
 }
 
-// preenche o formulário com os dados do agendamento escolhido
 function editar(a) {
   campoId.value = a.id;
   form.nome.value = a.nome;
@@ -130,7 +126,6 @@ form.addEventListener('submit', async (evento) => {
 
   const horarios = [...form.querySelectorAll('[name=horarios]:checked')].map(c => c.value);
 
-  // validação antes do envio
   if (!form.checkValidity()) return mostrarMensagem('Corrija os campos destacados.', 'erro');
   if (horarios.length === 0) return mostrarMensagem('Escolha pelo menos um horário.', 'erro');
 
