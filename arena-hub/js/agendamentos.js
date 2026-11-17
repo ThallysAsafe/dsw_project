@@ -1,12 +1,6 @@
-const form = document.getElementById('form');
-const campoId = document.getElementById('id');
-const selectQuadra = document.getElementById('quadraId');
-const caixaHorarios = document.getElementById('horarios');
-const titulo = document.getElementById('titulo-form');
-const btnSalvar = document.getElementById('btn-salvar');
-const btnCancelar = document.getElementById('btn-cancelar');
+const API_URL = location.port === '3000' ? '' : 'http://localhost:3000';
+
 const mensagem = document.getElementById('mensagem');
-const busca = document.getElementById('busca');
 const estado = document.getElementById('status');
 const lista = document.getElementById('lista');
 
@@ -22,31 +16,10 @@ function formatarData(data) {
   return partes[2] + '/' + partes[1] + '/' + partes[0];
 }
 
-for (let hora = 8; hora <= 22; hora++) {
-  const texto = (hora < 10 ? '0' + hora : hora) + ':00';
-  caixaHorarios.innerHTML += `<label><input type="checkbox" name="horarios" value="${texto}"> ${texto}</label>`;
-}
-
-async function carregarQuadras() {
-  try {
-    const resposta = await fetch('/api/quadras');
-    if (!resposta.ok) throw new Error();
-    const quadras = await resposta.json();
-
-    selectQuadra.innerHTML = '<option value="">Selecione</option>';
-    quadras.forEach(quadra => {
-      selectQuadra.innerHTML += `<option value="${quadra.id}">${quadra.nome} (${quadra.modalidade}) - R$ ${quadra.precoHora}/h</option>`;
-    });
-    selectQuadra.value = new URLSearchParams(location.search).get('quadraId') || '';
-  } catch {
-    mostrarMensagem('erro ao carregar as quadras.', 'erro');
-  }
-}
-
 async function carregarAgendamentos() {
   estado.textContent = 'carregando...';
   try {
-    const resposta = await fetch('/api/agendamentos');
+    const resposta = await fetch(`${API_URL}/api/agendamentos`);
     if (!resposta.ok) throw new Error();
     agendamentos = await resposta.json();
     renderizar();
@@ -57,32 +30,30 @@ async function carregarAgendamentos() {
 }
 
 function renderizar() {
-  const termo = busca.value.trim().toLowerCase();
-  const filtrados = agendamentos.filter(agendamento =>
-    agendamento.nome.toLowerCase().includes(termo) ||
-    agendamento.quadra.nome.toLowerCase().includes(termo));
-
   lista.innerHTML = '';
-  estado.textContent = filtrados.length === 0 ? 'nenhum agendamento encontrado.' : '';
+  estado.textContent = agendamentos.length === 0 ? 'nenhum agendamento encontrado.' : '';
 
-  filtrados.forEach(agendamento => {
+  agendamentos.forEach(agendamento => {
     const card = document.createElement('article');
     card.className = 'card';
 
     const nomeQuadra = document.createElement('h3');
     nomeQuadra.textContent = agendamento.quadra.nome;
 
+    const total = agendamento.horarios.length * agendamento.quadra.precoHora;
+    const telefoneTexto = agendamento.telefone ? ` · ${agendamento.telefone}` : '';
+
     const detalhes = document.createElement('p');
     detalhes.innerText =
-      `${agendamento.nome} (${agendamento.email})\n` +
+      `${agendamento.nome} (${agendamento.email}${telefoneTexto})\n` +
       `Data: ${formatarData(agendamento.data)}\n` +
       `Horários: ${agendamento.horarios.join(', ')}\n` +
-      `Jogadores: ${agendamento.jogadores} · Pagamento: ${agendamento.pagamento}`;
+      `Valor total: R$ ${total}`;
 
-    const btnEditar = document.createElement('button');
+    const btnEditar = document.createElement('a');
     btnEditar.className = 'btn btn-secundario';
     btnEditar.textContent = 'Editar';
-    btnEditar.addEventListener('click', () => editar(agendamento));
+    btnEditar.href = `agendamento.html?id=${agendamento.id}`;
 
     const btnExcluir = document.createElement('button');
     btnExcluir.className = 'btn';
@@ -97,43 +68,11 @@ function renderizar() {
   });
 }
 
-function editar(agendamento) {
-  campoId.value = agendamento.id;
-  form.nome.value = agendamento.nome;
-  form.email.value = agendamento.email;
-  form.telefone.value = agendamento.telefone || '';
-  selectQuadra.value = agendamento.quadraId;
-  form.data.value = agendamento.data;
-  form.jogadores.value = agendamento.jogadores;
-  form.observacoes.value = agendamento.observacoes || '';
-  form.querySelectorAll('[name=horarios]').forEach(checkbox => {
-    checkbox.checked = agendamento.horarios.includes(checkbox.value);
-  });
-  form.querySelectorAll('[name=pagamento]').forEach(radio => {
-    radio.checked = radio.value === agendamento.pagamento;
-  });
-  titulo.textContent = 'editar agendamento';
-  btnSalvar.textContent = 'Salvar alterações';
-  btnCancelar.style.display = 'inline-block';
-  mostrarMensagem('', '');
-  form.scrollIntoView();
-}
-
-function limparFormulario() {
-  form.reset();
-  form.classList.remove('form-enviado');
-  campoId.value = '';
-  titulo.textContent = 'Novo agendamento';
-  btnSalvar.textContent = 'Cadastrar';
-  btnCancelar.style.display = 'none';
-}
-
 async function excluir(id) {
   if (!confirm('deseja excluir este agendamento?')) return;
   try {
-    const resposta = await fetch(`/api/agendamentos/${id}`, { method: 'DELETE' });
+    const resposta = await fetch(`${API_URL}/api/agendamentos/${id}`, { method: 'DELETE' });
     if (!resposta.ok) throw new Error((await resposta.json()).mensagem);
-    if (campoId.value == id) limparFormulario();
     mostrarMensagem('agendamento excluído.', 'sucesso');
     carregarAgendamentos();
   } catch (erro) {
@@ -141,56 +80,4 @@ async function excluir(id) {
   }
 }
 
-form.addEventListener('submit', async (evento) => {
-  evento.preventDefault();
-  form.classList.add('form-enviado');
-
-  const horarios = [];
-  for (const checkbox of form.querySelectorAll('[name=horarios]:checked')) {
-    horarios.push(checkbox.value);
-  }
-
-  if (!form.checkValidity()) return mostrarMensagem('corrija os campos destacados.', 'erro');
-  if (horarios.length === 0) return mostrarMensagem('escolha pelo menos um horário.', 'erro');
-
-  const dados = {
-    nome: form.nome.value.trim(),
-    email: form.email.value.trim(),
-    telefone: form.telefone.value.trim(),
-    quadraId: Number(selectQuadra.value),
-    data: form.data.value,
-    horarios: horarios,
-    jogadores: Number(form.jogadores.value),
-    pagamento: form.querySelector('[name=pagamento]:checked').value,
-    observacoes: form.observacoes.value.trim()
-  };
-
-  const id = campoId.value;
-  btnSalvar.disabled = true;
-  try {
-    const resposta = await fetch(id ? `/api/agendamentos/${id}` : '/api/agendamentos', {
-      method: id ? 'PUT' : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    });
-    const corpo = await resposta.json();
-    if (!resposta.ok) throw new Error(corpo.mensagem);
-
-    limparFormulario();
-    mostrarMensagem(id ? 'agendamento atualizado.' : 'agendamento cadastrado.', 'sucesso');
-    carregarAgendamentos();
-  } catch (erro) {
-    mostrarMensagem(erro.message || 'erro ao salvar.', 'erro');
-  } finally {
-    btnSalvar.disabled = false;
-  }
-});
-
-btnCancelar.addEventListener('click', () => {
-  limparFormulario();
-  mostrarMensagem('', '');
-});
-busca.addEventListener('input', renderizar);
-
-carregarQuadras();
 carregarAgendamentos();

@@ -5,9 +5,14 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
 app.use(express.static('arena-hub'));
-
-const PAGAMENTOS = ['Pix', 'Cartão', 'Dinheiro'];
 
 async function validar(dados, id) {
   if (!dados.nome || dados.nome.trim().length < 3) return 'informe um nome com pelo menos 3 letras.';
@@ -15,8 +20,6 @@ async function validar(dados, id) {
   if (!Number.isInteger(Number(dados.quadraId))) return 'escolha uma quadra.';
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dados.data || '')) return 'informe uma data válida.';
   if (!Array.isArray(dados.horarios) || dados.horarios.length === 0) return 'escolha pelo menos um horário.';
-  if (!Number.isInteger(dados.jogadores) || dados.jogadores < 2 || dados.jogadores > 22) return 'informe de 2 a 22 jogadores.';
-  if (!PAGAMENTOS.includes(dados.pagamento)) return 'escolha a forma de pagamento.';
 
   const quadra = await prisma.quadra.findUnique({ where: { id: Number(dados.quadraId) } });
   if (!quadra) return 'quadra inexistente.';
@@ -41,16 +44,13 @@ function dadosAgendamento(dados) {
     telefone: dados.telefone || null,
     quadraId: Number(dados.quadraId),
     data: dados.data,
-    horarios: dados.horarios,
-    jogadores: dados.jogadores,
-    pagamento: dados.pagamento,
-    observacoes: dados.observacoes || null
+    horarios: dados.horarios
   };
 }
 
 async function buscarAgendamento(id) {
   if (!Number.isInteger(id)) return null;
-  return prisma.agendamento.findUnique({ where: { id } });
+  return prisma.agendamento.findUnique({ where: { id }, include: { quadra: true } });
 }
 
 app.get('/api/quadras', async (req, res) => {
@@ -59,6 +59,12 @@ app.get('/api/quadras', async (req, res) => {
 
 app.get('/api/agendamentos', async (req, res) => {
   res.json(await prisma.agendamento.findMany({ include: { quadra: true }, orderBy: { id: 'desc' } }));
+});
+
+app.get('/api/agendamentos/:id', async (req, res) => {
+  const agendamento = await buscarAgendamento(Number(req.params.id));
+  if (!agendamento) return res.status(404).json({ mensagem: 'agendamento não encontrado.' });
+  res.json(agendamento);
 });
 
 app.post('/api/agendamentos', async (req, res) => {

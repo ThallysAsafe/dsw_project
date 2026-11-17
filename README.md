@@ -16,10 +16,12 @@ dsw_project/
 ├── arena-hub/                # Frontend
 │   ├── index.html            # Início
 │   ├── quadras.html          # Catálogo de quadras (GET /api/quadras)
-│   ├── agendamentos.html     # Formulário e lista de reservas (CRUD)
+│   ├── agendamento.html      # Formulário de criação e edição de reserva
+│   ├── agendamentos.html     # Lista, busca e exclusão de reservas
 │   ├── css/style.css         # Estilos (mobile first, Grid, Flexbox)
 │   ├── js/quadras.js         # Monta os cards do catálogo
-│   ├── js/agendamentos.js    # Formulário, busca, edição e exclusão
+│   ├── js/agendamento.js     # Formulário de reserva e cálculo do valor total
+│   ├── js/agendamentos.js    # Listagem, busca e exclusão
 │   └── images/               # Fotos das quadras
 ├── prisma/
 │   ├── schema.prisma         # Tabelas quadras e agendamentos
@@ -34,6 +36,7 @@ dsw_project/
 |---|---|---|---|
 | `GET` | `/api/quadras` | Lista as quadras | 200 |
 | `GET` | `/api/agendamentos` | Lista os agendamentos | 200 |
+| `GET` | `/api/agendamentos/:id` | Busca um agendamento por ID | 200, 404 |
 | `POST` | `/api/agendamentos` | Cadastra um agendamento | 201, 400 |
 | `PUT` | `/api/agendamentos/:id` | Atualiza um agendamento | 200, 400, 404 |
 | `DELETE` | `/api/agendamentos/:id` | Exclui um agendamento | 204, 404 |
@@ -44,18 +47,15 @@ Corpo JSON do `POST` e do `PUT`:
 {
   "nome": "Ana Souza",
   "email": "ana@email.com",
-  "telefone": "(82) 99999-0000",
+  "telefone": "82999990000",
   "quadraId": 1,
   "data": "2026-12-01",
-  "horarios": ["18:00", "19:00"],
-  "jogadores": 10,
-  "pagamento": "Pix",
-  "observacoes": "Opcional"
+  "horarios": ["18:00", "19:00"]
 }
 ```
 
 Regras de validação no servidor: nome com 3 letras ou mais, e-mail com `@`, quadra existente,
-data `AAAA-MM-DD`, pelo menos um horário, de 2 a 22 jogadores e pagamento `Pix`, `Cartão` ou `Dinheiro`.
+data `AAAA-MM-DD` e pelo menos um horário.
 Também não é permitido reservar a mesma quadra, na mesma data, em um horário que já esteja ocupado.
 Se um dado for inválido, a API devolve `400` com `{ "mensagem": "..." }`.
 

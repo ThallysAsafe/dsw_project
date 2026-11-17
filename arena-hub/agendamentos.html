@@ -23,58 +23,9 @@
 
   <main>
     <section>
-      <h1 id="titulo-form">Novo agendamento</h1>
-      <form id="form" novalidate>
-        <input type="hidden" id="id">
-
-        <label for="nome">Nome *</label>
-        <input type="text" id="nome" required minlength="3" maxlength="80">
-
-        <label for="email">E-mail *</label>
-        <input type="email" id="email" required>
-
-        <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" pattern="\(\d{2}\) \d{4,5}-\d{4}" placeholder="(82) 90000-0000">
-
-        <label for="quadraId">Quadra *</label>
-        <select id="quadraId" required></select>
-
-        <label for="data">Data *</label>
-        <input type="date" id="data" required>
-
-        <fieldset>
-          <legend>Horários *</legend>
-          <div class="opcoes" id="horarios"></div>
-        </fieldset>
-
-        <label for="jogadores">Número de jogadores *</label>
-        <input type="number" id="jogadores" required min="2" max="22" value="10">
-
-        <fieldset>
-          <legend>Pagamento *</legend>
-          <div class="opcoes">
-            <label><input type="radio" name="pagamento" value="Pix" required> Pix</label>
-            <label><input type="radio" name="pagamento" value="Cartão"> Cartão</label>
-            <label><input type="radio" name="pagamento" value="Dinheiro"> Dinheiro</label>
-          </div>
-        </fieldset>
-
-        <label for="observacoes">Observações</label>
-        <textarea id="observacoes" rows="3" maxlength="300"></textarea>
-
-        <p>
-          <button type="submit" class="btn" id="btn-salvar">Cadastrar</button>
-          <button type="button" class="btn btn-secundario" id="btn-cancelar" style="display: none">Cancelar
-            edição</button>
-        </p>
-        <p id="mensagem" role="status"></p>
-      </form>
-    </section>
-
-    <section>
-      <h2>Reservas cadastradas</h2>
-      <label for="busca">Buscar</label>
-      <input type="search" id="busca" placeholder="Nome ou quadra">
+      <h1>Reservas cadastradas</h1>
+      <p><a class="btn" href="quadras.html">Novo agendamento</a></p>
+      <p id="mensagem" role="status"></p>
       <p id="status">carregando...</p>
       <div class="grade" id="lista"></div>
     </section>

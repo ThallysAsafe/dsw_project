@@ -1,3 +1,5 @@
+const API_URL = location.port === '3000' ? '' : 'http://localhost:3000';
+
 const lista = document.getElementById('lista-quadras');
 const estado = document.getElementById('status');
 
@@ -5,11 +7,12 @@ const imagens = ['futebol-society', 'volei-de-praia', 'beach-tennis', 'basquete-
 
 async function carregarQuadras() {
   try {
-    const resposta = await fetch('/api/quadras');
+    const resposta = await fetch(`${API_URL}/api/quadras`);
     if (!resposta.ok) throw new Error();
     const quadras = await resposta.json();
 
     estado.textContent = quadras.length === 0 ? 'nenhuma quadra cadastrada.' : '';
+    lista.innerHTML = '';
     quadras.forEach((quadra, i) => {
       lista.innerHTML += `
         <article class="card">
@@ -19,10 +22,11 @@ async function carregarQuadras() {
           <p>${quadra.endereco}</p>
           <p>${quadra.descricao}</p>
           <p>R$ ${quadra.precoHora} por hora</p>
-          <a class="btn" href="agendamentos.html?quadraId=${quadra.id}">Agendar</a>
+          <a class="btn" href="agendamento.html?quadraId=${quadra.id}">Agendar</a>
         </article>`;
     });
-  } catch {
+  } catch (err) {
+    console.error(err);
     estado.textContent = 'erro ao carregar as quadras. tente novamente.';
   }
 }
