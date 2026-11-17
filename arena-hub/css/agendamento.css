@@ -1,70 +1,63 @@
-/* Formulário */
+/* ==========================================================
+   agendamento.css — só a página de agendamento (formulário)
+   ========================================================== */
+
+
+/* Caixa do formulário */
 .formulario {
-  padding: var(--espaco-md);
-  border: var(--borda-forte);
+  padding: 1.25rem;
+  border: var(--borda);
   border-radius: var(--raio);
-  background-color: var(--cor-superficie);
+  background-color: var(--cor-branco);
 }
 
 .formulario fieldset {
+  margin-bottom: 2rem;
   border: none;
-  margin-bottom: var(--espaco-lg);
 }
 
 .formulario legend {
-  display: block;
-  width: 100%;
-  padding: var(--espaco-md) 0 var(--espaco-xs);
-  border-top: var(--borda-forte);
-  font-family: var(--fonte-display);
-  font-size: var(--tamanho-h3);
+  margin-bottom: 0.5rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.125rem;
   text-transform: uppercase;
-  color: var(--cor-tinta);
 }
 
-.formulario fieldset:first-of-type > legend {
-  padding-top: 0;
-  border-top: none;
-}
-
+/* o parágrafo logo depois do título do grupo */
 .formulario legend + p {
-  margin-bottom: var(--espaco-md);
-  font-size: var(--tamanho-pequeno);
+  margin-bottom: 1.25rem;
   color: var(--cor-tinta-media);
+  font-size: 0.9rem;
 }
 
+/* grupo dentro de grupo (tipo de agendamento).
+   Precisa de .formulario na frente para vencer ".formulario fieldset". */
 .formulario .subgrupo {
   margin-bottom: 0;
 }
 
 .formulario .subgrupo legend {
-  padding-top: 0;
-  border-top: none;
-  font-size: var(--tamanho-micro);
-  letter-spacing: var(--espacamento-rotulo);
   color: var(--cor-tinta-media);
+  font-size: 0.875rem;
 }
 
 
-/* Campos do formulário */
+/* Campo: rótulo, controle e dica empilhados (Flexbox em coluna) */
 .campo {
   display: flex;
   flex-direction: column;
-  gap: var(--espaco-xs);
-  margin-bottom: var(--espaco-md);
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
 }
 
 .campo label {
-  font-family: var(--fonte-display);
-  font-size: var(--tamanho-micro);
-  text-transform: uppercase;
-  letter-spacing: var(--espacamento-rotulo);
-  color: var(--cor-tinta);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .campo__dica {
-  font-size: var(--tamanho-micro);
   color: var(--cor-tinta-media);
+  font-size: 0.8rem;
 }
 
 .obrigatorio {
@@ -75,29 +68,25 @@
 .campo select,
 .campo textarea {
   width: 100%;
-  padding: var(--espaco-sm);
-  border: var(--borda-fina);
-  border-bottom: var(--borda-forte);
+  padding: 0.75rem;
+  border: 1px solid var(--cor-tinta-media);
   border-radius: var(--raio);
-  background-color: var(--cor-superficie);
+  background-color: var(--cor-branco);
   color: var(--cor-tinta);
-  font-family: inherit;
-  font-size: var(--tamanho-base);
-  transition: var(--transicao);
+  font-family: inherit; /* campos não herdam a fonte do site por padrão */
+  font-size: 1rem;
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
+/* só deixa aumentar a altura: aumentar a largura quebraria o layout */
 .campo textarea {
-  min-height: 130px;
   resize: vertical;
 }
 
-.campo input:hover,
-.campo select:hover,
-.campo textarea:hover {
-  border-color: var(--cor-tinta-media);
-  border-bottom-color: var(--cor-tinta);
-}
 
+/* Estados dos campos */
+
+/* :focus — o campo que está sendo preenchido */
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
@@ -105,20 +94,9 @@
   background-color: var(--cor-primaria-clara);
 }
 
-
-/* Validação dos campos */
-
-.campo input[placeholder]:invalid:not(:placeholder-shown),
-.campo textarea[placeholder]:invalid:not(:placeholder-shown) {
-  border-color: var(--cor-erro);
-  background-color: var(--cor-destaque-clara);
-}
-
-.campo input[placeholder]:valid:not(:placeholder-shown),
-.campo textarea[placeholder]:valid:not(:placeholder-shown) {
-  border-bottom-color: var(--cor-sucesso);
-}
-
+/* :invalid — campo com valor que não passa na validação do HTML.
+   Junto com :focus, o erro aparece só no campo que está sendo preenchido.
+   Com :invalid sozinho, todos os campos obrigatórios abririam vermelhos. */
 .campo input:focus:invalid,
 .campo select:focus:invalid,
 .campo textarea:focus:invalid {
@@ -126,158 +104,107 @@
   background-color: var(--cor-destaque-clara);
 }
 
-.campo input:user-invalid,
-.campo select:user-invalid,
-.campo textarea:user-invalid {
-  border-color: var(--cor-erro);
-  background-color: var(--cor-destaque-clara);
-}
-
-.campo input:user-valid,
-.campo select:user-valid,
-.campo textarea:user-valid {
-  border-bottom-color: var(--cor-sucesso);
-}
-
-.campo input:disabled,
-.campo select:disabled,
-.campo textarea:disabled {
-  background-color: var(--cor-papel);
+/* :disabled — campo indisponível (cupom) */
+.campo input:disabled {
   border-color: var(--cor-linha);
-  border-bottom-color: var(--cor-linha);
+  background-color: var(--cor-papel);
   color: var(--cor-tinta-media);
   cursor: not-allowed;
 }
 
 
-/* Rádio e checkbox */
+/* Opções de rádio e checkbox (Grid: 1 coluna no celular, 2 no tablet) */
 .grupo-opcoes {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espaco-xs);
-  margin-bottom: var(--espaco-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
+/* Flexbox: bolinha/quadradinho ao lado do texto */
 .opcao {
   display: flex;
   align-items: flex-start;
-  gap: var(--espaco-sm);
-  padding: var(--espaco-sm);
-  border: var(--borda-fina);
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--cor-linha);
   border-radius: var(--raio);
-  cursor: pointer;
-  transition: var(--transicao);
+  transition: background-color 0.2s;
 }
 
 .opcao:hover {
-  border-color: var(--cor-tinta);
   background-color: var(--cor-primaria-clara);
 }
 
-.opcao input[type="radio"],
-.opcao input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  flex-shrink: 0;
-  accent-color: var(--cor-primaria);
-  cursor: pointer;
+.opcao input {
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  flex-shrink: 0; /* não deixa o flex encolher a caixinha quando o texto é longo */
 }
 
 .opcao label {
-  font-family: var(--fonte-base);
-  font-size: var(--tamanho-pequeno);
+  font-size: 0.9rem;
   font-weight: 600;
-  text-transform: none;
-  letter-spacing: 0;
   cursor: pointer;
 }
 
-.opcao label small {
+.opcao small {
   display: block;
-  margin-top: 2px;
+  color: var(--cor-tinta-media);
   font-weight: 400;
-  font-size: var(--tamanho-micro);
-  color: var(--cor-tinta-media);
 }
 
-.opcao input:disabled,
 .opcao input:disabled + label {
-  cursor: not-allowed;
   color: var(--cor-tinta-media);
-}
-
-.opcao:has(input:disabled) {
-  background-color: var(--cor-papel);
-  border-style: dashed;
+  cursor: not-allowed;
 }
 
 
-/* Botões do formulário */
+/* Lista de reservas (preenchida pelo JavaScript).
+   Seletor de ID: é um elemento único, que o JS também encontra pelo id.
+   A altura mínima evita que a seção "pule" enquanto os dados carregam. */
+#lista-reservas {
+  min-height: 120px;
+}
+
+
+/* Botões no fim do formulário */
 .formulario__acoes {
   display: flex;
-  flex-direction: column;
-  gap: var(--espaco-sm);
-  padding-top: var(--espaco-md);
-  border-top: var(--borda-forte);
-}
-
-.formulario__acoes p {
-  font-size: var(--tamanho-micro);
-  color: var(--cor-tinta-media);
-}
-
-
-/* Lista de etapas do aside */
-.lista-etapas {
-  counter-reset: etapa;
-}
-
-.lista-etapas li {
-  counter-increment: etapa;
-  display: flex;
-  gap: var(--espaco-xs);
-}
-
-.lista-etapas li::before {
-  content: counter(etapa) ".";
-  flex-shrink: 0;
-  font-family: var(--fonte-display);
-  color: var(--cor-primaria);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: var(--borda);
 }
 
 
 /* Tablet */
 @media (min-width: 768px) {
   .formulario {
-    padding: var(--espaco-lg);
+    padding: 2rem;
   }
 
-  .campo-duplo,
-  .grupo-opcoes {
+  /* dois campos lado a lado (e-mail + telefone, data + horário...) */
+  .campo-duplo {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0 var(--espaco-md);
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.25rem; /* 0 entre linhas, 1.25rem entre colunas */
   }
 
   .grupo-opcoes {
-    gap: var(--espaco-xs) var(--espaco-md);
-  }
-
-  .formulario__acoes {
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 
 /* Desktop */
 @media (min-width: 1024px) {
+  /* Grid: formulário à esquerda (2 partes) e aside à direita (1 parte) */
   .area-formulario {
     display: grid;
-    grid-template-columns: 1.7fr 1fr;
-    gap: var(--espaco-lg);
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
     align-items: start;
   }
 }

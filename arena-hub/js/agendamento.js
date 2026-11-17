@@ -50,8 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return `
         <article class="cartao" data-id="${item.id}">
           <div class="cartao__corpo">
-            <p class="etiqueta etiqueta--verde">${item.tipoReserva === 'mensalista' ? 'Plano Mensalista' : 'Horário Avulso'}</p>
-            <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">${nomeQuadra}</h3>
+            <div class="cartao__cabecalho">
+              <p class="etiqueta">${item.tipoReserva === 'mensalista' ? 'Plano Mensalista' : 'Horário Avulso'}</p>
+            </div>
+            <h3>${nomeQuadra}</h3>
             
             <ul class="cartao__detalhes">
               <li><strong>Solicitante</strong> <span>${item.nome} (${item.email})</span></li>
@@ -61,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
               ${item.observacoes ? `<li><strong>Obs</strong> <span>${item.observacoes}</span></li>` : ''}
             </ul>
 
-            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+            <div class="cartao__acoes">
               <button type="button" class="botao botao--secundario btn-editar" data-id="${item.id}">
                 Editar
               </button>
-              <button type="button" class="botao botao--secundario btn-cancelar" data-id="${item.id}" style="border-color: var(--cor-destaque); color: var(--cor-destaque);">
+              <button type="button" class="botao botao--secundario botao--perigo btn-cancelar" data-id="${item.id}">
                 Cancelar Reserva
               </button>
             </div>
