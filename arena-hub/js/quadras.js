@@ -9,7 +9,7 @@ async function carregarQuadras() {
     if (!resposta.ok) throw new Error();
     const quadras = await resposta.json();
 
-    estado.textContent = quadras.length === 0 ? 'Nenhuma quadra cadastrada.' : '';
+    estado.textContent = quadras.length === 0 ? 'nenhuma quadra cadastrada.' : '';
     quadras.forEach((quadra, i) => {
       lista.innerHTML += `
         <article class="card">

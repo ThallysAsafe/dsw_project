@@ -129,15 +129,15 @@ function limparFormulario() {
 }
 
 async function excluir(id) {
-  if (!confirm('Deseja excluir este agendamento?')) return;
+  if (!confirm('deseja excluir este agendamento?')) return;
   try {
     const resposta = await fetch(`/api/agendamentos/${id}`, { method: 'DELETE' });
     if (!resposta.ok) throw new Error((await resposta.json()).mensagem);
     if (campoId.value == id) limparFormulario();
-    mostrarMensagem('Agendamento excluído.', 'sucesso');
+    mostrarMensagem('agendamento excluído.', 'sucesso');
     carregarAgendamentos();
   } catch (erro) {
-    mostrarMensagem(erro.message || 'Erro ao excluir.', 'erro');
+    mostrarMensagem(erro.message || 'erro ao excluir.', 'erro');
   }
 }
 
@@ -150,8 +150,8 @@ form.addEventListener('submit', async (evento) => {
     horarios.push(checkbox.value);
   }
 
-  if (!form.checkValidity()) return mostrarMensagem('Corrija os campos destacados.', 'erro');
-  if (horarios.length === 0) return mostrarMensagem('Escolha pelo menos um horário.', 'erro');
+  if (!form.checkValidity()) return mostrarMensagem('corrija os campos destacados.', 'erro');
+  if (horarios.length === 0) return mostrarMensagem('escolha pelo menos um horário.', 'erro');
 
   const dados = {
     nome: form.nome.value.trim(),
@@ -177,10 +177,10 @@ form.addEventListener('submit', async (evento) => {
     if (!resposta.ok) throw new Error(corpo.mensagem);
 
     limparFormulario();
-    mostrarMensagem(id ? 'Agendamento atualizado.' : 'Agendamento cadastrado.', 'sucesso');
+    mostrarMensagem(id ? 'agendamento atualizado.' : 'agendamento cadastrado.', 'sucesso');
     carregarAgendamentos();
   } catch (erro) {
-    mostrarMensagem(erro.message || 'Erro ao salvar.', 'erro');
+    mostrarMensagem(erro.message || 'erro ao salvar.', 'erro');
   } finally {
     btnSalvar.disabled = false;
   }
